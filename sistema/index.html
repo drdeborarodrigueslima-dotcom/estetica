@@ -160,7 +160,7 @@ h3{font-size:15px;margin:0 0 8px}
 .fl i{width:12px;height:12px;border-radius:4px;flex:none}
 .fl .fk{flex:1;font-weight:600}.fl small{display:block;font-weight:400;color:var(--mute);font-size:12px}
 .fl .fv{text-align:right;font-weight:700}
-.card.mini{padding:16px 18px}.card.mini .rot{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-bottom:6px}.card.mini .rot svg{width:18px;height:18px;color:var(--rose)}
+.card.mini{padding:16px 18px}.mini-formas{gap:10px}.mini-formas .card.mini{padding:12px 16px}.mini-formas .val{font-size:20px}.card.mini .rot{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-bottom:6px}.card.mini .rot svg{width:18px;height:18px;color:var(--rose)}
 .card.mini .val{font-size:22px;font-weight:700}.card.mini .det{font-size:12px;color:var(--mute);margin-top:2px}
 .pilhas{display:flex;align-items:flex-end;gap:10px;height:220px;padding-top:24px;margin-top:8px}
 .pilhas .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0;gap:6px}
@@ -1498,7 +1498,7 @@ VIEWS.financeiro = function (p) {
   // Por forma
   h += '<div class="grid fin-formas"><div class="card"><h2>Entradas por forma de pagamento</h2><div class="formas-wrap">' + donut(ordemF.map(function (k) { return { k: k, v: formas[k].v, cor: COR_FORMA[k] || '#ccc' }; }), rec) +
     '<div class="formas-lista">' + (ordemF.length ? ordemF.map(function (k) { var f = formas[k]; return '<div class="fl"><i style="background:' + (COR_FORMA[k] || '#ccc') + '"></i><span class="fk">' + esc(k) + '<small>' + f.n + ' pagamento(s)</small></span><span class="fv">' + brl(f.v) + '<small>' + (rec ? (f.v / rec * 100).toFixed(0) : 0) + '%</small></span></div>'; }).join('') : '<div class="vazio">Nenhum pagamento no período.</div>') + '</div></div></div>' +
-    '<div class="stack"><div class="card mini"><div class="rot">' + ICON.pix + ' Pix</div><div class="val">' + brl((formas['Pix'] || { v: 0 }).v) + '</div></div><div class="card mini"><div class="rot">' + ICON.cartao + ' Cartão (crédito + débito)</div><div class="val">' + brl(cartao) + '</div><div class="det">crédito ' + brl((formas['Cartão de crédito'] || { v: 0 }).v) + ' · débito ' + brl((formas['Cartão de débito'] || { v: 0 }).v) + '</div></div><div class="card mini"><div class="rot">' + ICON.dinheiro + ' Dinheiro</div><div class="val">' + brl((formas['Dinheiro'] || { v: 0 }).v) + '</div></div></div></div>';
+    '<div class="stack mini-formas">' + [['Pix', ICON.pix], ['Cartão de crédito', ICON.cartao], ['Cartão de débito', ICON.cartao], ['Dinheiro', ICON.dinheiro]].map(function (f) { var v = (formas[f[0]] || { v: 0, n: 0 }); return '<div class="card mini" style="border-left:4px solid ' + COR_FORMA[f[0]] + '"><div class="rot">' + f[1] + ' ' + f[0] + '</div><div class="val">' + brl(v.v) + '</div><div class="det">' + v.n + ' pagamento(s) · ' + (rec ? (v.v / rec * 100).toFixed(0) : 0) + '%</div></div>'; }).join('') + '</div></div>';
   // Gráfico 12 meses empilhado por forma
   var m12 = ultimosMeses(12), grupos = ['Pix', 'Cartão de crédito', 'Cartão de débito', 'Dinheiro', 'Outros'], corG = { 'Outros': '#9aa3ad' };
   var serie = m12.map(function (m) { var o = { m: m, t: 0 }; grupos.forEach(function (g) { o[g] = 0; }); DB.pagamentos.forEach(function (x) { if (String(x.data).slice(0, 7) !== m) return; var g = grupos.indexOf(formaDe(x)) >= 0 ? formaDe(x) : 'Outros'; o[g] += num(x.valor); o.t += num(x.valor); }); return o; });
@@ -1520,7 +1520,7 @@ VIEWS.financeiro = function (p) {
   // Pagamentos com filtro
   var fil = p.forma || '';
   var lista = fil ? pags.filter(function (x) { return formaDe(x) === fil || (fil === 'Cartão' && /^Cartão/.test(formaDe(x))); }) : pags;
-  h += '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">Pagamentos — ' + P.rot.toLowerCase() + '</h2><div class="filtros">' + [['', 'Todos'], ['Pix', 'Pix'], ['Cartão', 'Cartão'], ['Dinheiro', 'Dinheiro'], ['Transferência', 'Transferência'], ['Boleto', 'Boleto']].map(function (f) { return '<button class="filtro' + (f[0] === fil ? ' ativo' : '') + '" data-forma="' + f[0] + '">' + f[1] + '</button>'; }).join('') + '</div></div>' +
+  h += '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">Pagamentos — ' + P.rot.toLowerCase() + '</h2><div class="filtros">' + [['', 'Todos'], ['Pix', 'Pix'], ['Cartão de crédito', 'Crédito'], ['Cartão de débito', 'Débito'], ['Dinheiro', 'Dinheiro'], ['Transferência', 'Transferência'], ['Boleto', 'Boleto']].map(function (f) { return '<button class="filtro' + (f[0] === fil ? ' ativo' : '') + '" data-forma="' + f[0] + '">' + f[1] + '</button>'; }).join('') + '</div></div>' +
     tabelaPagamentos(lista) + (lista.length ? '<div class="total-lista">' + lista.length + ' pagamento(s) · total <b>' + brl(lista.reduce(function (s, x) { return s + num(x.valor); }, 0)) + '</b></div>' : '') + '</div>';
   return h;
 };
