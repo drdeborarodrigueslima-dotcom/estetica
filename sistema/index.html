@@ -253,6 +253,12 @@ iframe.previa{width:100%;height:70vh;border:1px solid var(--line);border-radius:
 @media (max-width:1100px){.fid-card{grid-template-columns:1fr}.fid-dados{grid-template-columns:1fr 1fr}}
 .medalhas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.med{border-radius:12px;padding:10px;text-align:center;display:flex;flex-direction:column;align-items:center}.med span{font-size:22px}.med b{font-size:22px;line-height:1.1}.med small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.med.n-Ouro{background:linear-gradient(135deg,#fbf1d8,#efd89f);color:#7a5714}.med.n-Prata{background:linear-gradient(135deg,#f4f5f7,#dfe2e6);color:#4f5864}.med.n-Bronze{background:linear-gradient(135deg,#f8e8dc,#e8c3a6);color:#7d4a26}
 .saudade{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--rose-ll);font-size:13px}.saudade span{flex:1}
+.fsels{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}.fsel{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;font-weight:600}.fsel select{font:inherit;font-size:14px;text-transform:none;letter-spacing:0;font-weight:400;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;min-width:150px}
+.res-filtro{font-size:13px;margin:0 0 6px;color:var(--ink)}
+.at-tab th.ordena{cursor:pointer;user-select:none;white-space:nowrap}.at-tab th.ordena span{color:#c9b5b9;font-size:10px}.at-tab th.ordena.at{color:var(--rose-d)}.at-tab th.ordena.at span{color:var(--rose-d)}
+.at-tab tr.grupo td{background:var(--rose-ll);color:var(--rose-d);font-weight:700;font-size:13px;padding-top:10px;padding-bottom:10px}.at-tab tr.grupo td span{font-weight:500;color:var(--mute);font-size:12px;margin-left:8px}
+.at-tab .feito{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chip-proc{display:inline-block;background:#f6ecee;color:var(--rose-d);border-radius:99px;padding:3px 10px;font-size:13px;white-space:nowrap}
+@media (max-width:640px){.fsel{flex:1 1 45%}.fsel select{min-width:0;width:100%}}
 /* Acompanhamento: coluna academia / ocorrências */
 .td-ocorr{min-width:210px}.oc-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.oc{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;line-height:1.4}.oc.gym{background:#eef6f0;color:#3f7a52}.oc.int{background:#fbe5e5;color:var(--bad);white-space:normal;max-width:240px;border-radius:10px;align-items:flex-start}.tabela td.num{white-space:nowrap}
 </style>
@@ -515,14 +521,14 @@ function docBase(titulo, corpo) {
   var c = DB.config || {};
   var contato = [c.endereco, c.telefone, c.instagram, c.email].filter(Boolean).map(esc).join(' &nbsp;·&nbsp; ');
   return '<!DOCTYPE html><html><head><meta charset="utf-8"><style>' +
-    '@page{size:A4;margin:16mm 16mm 18mm}body{font-family:Georgia,"Times New Roman",serif;color:#2f2a2b;font-size:12.5px;line-height:1.45;margin:0}' +
+    '@page{size:A4;margin:16mm 16mm 18mm}body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;color:#2f2a2b;font-size:12.5px;line-height:1.5;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
     '.cab{text-align:center;border-bottom:1.5px solid #d9b7bd;padding-bottom:10px;margin-bottom:16px}.nome{font-size:28px;font-style:italic;color:#94525e;letter-spacing:.02em}' +
     '.sub{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#7a7072;margin-top:2px}.ctt{font-size:10px;color:#7a7072;margin-top:6px}' +
-    'h1{font-size:16px;text-align:center;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}' +
-    'h2{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#94525e;margin:16px 0 6px;border-bottom:1px solid #eadfe1;padding-bottom:3px}' +
+    'h1{font-family:Georgia,"Times New Roman",serif;font-weight:normal;font-size:22px;text-align:center;color:#94525e;letter-spacing:.04em;margin:0 0 16px}' +
+    'h2{font-size:11px;font-weight:bold;letter-spacing:.14em;text-transform:uppercase;color:#94525e;margin:20px 0 8px;border-bottom:1px solid #eadfe1;padding-bottom:4px}' +
     'table{width:100%;border-collapse:collapse}td,th{padding:5px 6px;vertical-align:top;text-align:left}' +
     '.kv td{border-bottom:1px solid #f0e8e9}.kv td.k{width:38%;color:#5c5254}' +
-    '.itens th{background:#f6ecee;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}.itens td{border-bottom:1px solid #eadfe1}.n{text-align:right;white-space:nowrap}' +
+    '.itens th{background:#f6ecee;color:#6b4a50;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.06em;padding:7px 8px}.itens td{padding:7px 8px}.itens td{border-bottom:1px solid #eadfe1}.n{text-align:right;white-space:nowrap}' +
     '.tot td{font-size:13px}.tot .g{font-size:16px;font-weight:bold;color:#94525e}' +
     '.decl{border:1px solid #e3cdd1;background:#fbf4f5;padding:10px 12px;font-weight:bold;margin-top:16px}' +
     '.ass{margin-top:22px;text-align:center}.ass img{max-height:90px;max-width:320px}.ass .l{border-top:1px solid #2f2a2b;width:320px;margin:4px auto 0;padding-top:4px;font-size:11px}' +
@@ -1188,15 +1194,64 @@ function tabelaSessoes(lista, semCliente) {
   return '<div class="rolagem"><table class="tabela"><thead><tr><th>Data</th>' + (semCliente ? '' : '<th>Cliente</th>') + '<th>Procedimento</th><th>Área</th><th>Assinatura</th></tr></thead><tbody>' +
     lista.map(function (s) { return '<tr class="click" data-abrir="sessaoDet:' + s.id + '"><td>' + dataBR(s.data) + '</td>' + (semCliente ? '' : '<td><b>' + esc(s.clienteNome) + '</b></td>') + '<td>' + esc(s.procedimento) + '</td><td>' + esc(s.area || '—') + '</td><td>' + (s.assinaturaId ? '<span class="selo s-Aprovado">Assinado</span>' : '<span class="selo s-Enviado">Pendente</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>';
 }
+var FILTRO_AT = { q: '', proc: '', area: '', per: '', ass: '', ord: 'data', dir: -1, grp: '' };
+function opcoesUnicas(campo) { var o = {}; DB.sessoes.forEach(function (s) { var v = String(s[campo] || '').trim(); if (v) o[v] = (o[v] || 0) + 1; }); return Object.keys(o).sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); }).map(function (k) { return { k: k, n: o[k] }; }); }
 VIEWS.sessoes = function () {
+  var F = FILTRO_AT;
+  function sel(id, rot, opts, val) { return '<label class="fsel"><span>' + rot + '</span><select id="' + id + '">' + opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === val ? ' selected' : '') + '>' + esc(o[1]) + '</option>'; }).join('') + '</select></label>'; }
+  var ym = hoje().slice(0, 7);
   return cabec('Atendimentos', 'Cada atendimento é assinado pela cliente no tablet', '<button class="btn pri" id="novo">' + ICON.caneta + ' Novo atendimento</button>') +
-    '<div class="card"><input class="busca" id="busca" placeholder="Buscar por cliente ou procedimento…" style="margin-bottom:10px"><div id="lista"></div></div>';
+    '<div class="card"><input class="busca" id="busca" value="' + esc(F.q) + '" placeholder="Buscar por cliente, procedimento, área ou produto utilizado…" style="margin-bottom:12px">' +
+    '<div class="fsels">' +
+    sel('fPer', 'Período', [['', 'Todo o período'], ['hoje', 'Hoje'], ['sem', 'Últimos 7 dias'], ['m:' + ym, 'Este mês'], ['m:' + addMeses(ym + '-01', -1).slice(0, 7), 'Mês passado'], ['tri', 'Últimos 3 meses'], ['a:' + ym.slice(0, 4), 'Este ano']], F.per) +
+    sel('fProc', 'Procedimento', [['', 'Todos']].concat(opcoesUnicas('procedimento').map(function (o) { return [o.k, o.k + ' (' + o.n + ')']; })), F.proc) +
+    sel('fArea', 'Área tratada', [['', 'Todas']].concat(opcoesUnicas('area').map(function (o) { return [o.k, o.k + ' (' + o.n + ')']; })), F.area) +
+    sel('fAss', 'Assinatura', [['', 'Todas'], ['s', 'Assinadas'], ['p', 'Pendentes']], F.ass) +
+    sel('fGrp', 'Agrupar por', [['', 'Não agrupar'], ['dia', 'Dia'], ['mes', 'Mês'], ['clienteNome', 'Cliente'], ['procedimento', 'Procedimento'], ['area', 'Área tratada']], F.grp) +
+    '<button class="btn peq" id="limparF" style="align-self:flex-end">Limpar filtros</button></div>' +
+    '<div class="res-filtro" id="resF"></div><div id="lista"></div></div>';
 };
 ACOES.sessoes = function (m) {
+  var F = FILTRO_AT;
   m.querySelector('#novo').onclick = function () { ir('sessaoForm', {}); };
-  var b = m.querySelector('#busca');
-  function d() { var q = b.value.toLowerCase(); m.querySelector('#lista').innerHTML = tabelaSessoes(DB.sessoes.filter(function (s) { return !q || (s.clienteNome + ' ' + s.procedimento).toLowerCase().indexOf(q) >= 0; }).sort(porData)); ligarLinks(m); }
-  b.oninput = d; d();
+  function filtrar() {
+    var q = F.q.toLowerCase(), H0 = hoje(), P = F.per && F.per !== 'hoje' && F.per !== 'sem' ? periodo(F.per) : null;
+    return DB.sessoes.filter(function (s) {
+      var d = String(s.data).slice(0, 10);
+      if (q && (s.clienteNome + ' ' + s.procedimento + ' ' + (s.area || '') + ' ' + (s.produtos || '') + ' ' + (s.obs || '')).toLowerCase().indexOf(q) < 0) return false;
+      if (F.proc && s.procedimento !== F.proc) return false;
+      if (F.area && String(s.area || '').trim() !== F.area) return false;
+      if (F.ass === 's' && !s.assinaturaId) return false; if (F.ass === 'p' && s.assinaturaId) return false;
+      if (F.per === 'hoje' && d !== H0) return false; if (F.per === 'sem' && (d > H0 || diasEntre(d, H0) > 7)) return false;
+      if (P && !noPeriodo(d, P)) return false;
+      return true;
+    }).sort(function (a, b) {
+      var k = F.ord, va = k === 'data' ? String(a.data) : String(a[k] || '').toLowerCase(), vb = k === 'data' ? String(b.data) : String(b[k] || '').toLowerCase();
+      var r = va.localeCompare(vb, 'pt-BR') * F.dir; return r || String(b.data).localeCompare(String(a.data));
+    });
+  }
+  function chaveGrupo(s) { return F.grp === 'dia' ? String(s.data).slice(0, 10) : F.grp === 'mes' ? String(s.data).slice(0, 7) : String(s[F.grp] || '').trim() || '(sem informação)'; }
+  function rotGrupo(k) { return F.grp === 'dia' ? (k.length === 10 ? dataExtenso(k) : k) : F.grp === 'mes' ? mesNome(k) : k; }
+  function linha(s) { var c = porId(DB.clientes, s.clienteId); return '<tr class="click" data-abrir="sessaoDet:' + s.id + '"><td style="white-space:nowrap">' + dataBR(s.data) + '</td><td><div class="cli-linha">' + avatar(c || { nome: s.clienteNome }, 30) + '<b>' + esc(s.clienteNome) + '</b></div></td><td><span class="chip-proc">' + esc(s.procedimento) + '</span></td><td>' + esc(s.area || '—') + '</td><td class="small mute feito" title="' + esc(s.produtos || '') + '">' + esc(s.produtos || '—') + '</td><td>' + (s.assinaturaId ? '<span class="selo s-Aprovado">Assinado</span>' : '<span class="selo s-Enviado">Pendente</span>') + '</td></tr>'; }
+  function th(k, rot) { var at = F.ord === k; return '<th class="ordena' + (at ? ' at' : '') + '" data-ord="' + k + '">' + rot + ' <span>' + (at ? (F.dir > 0 ? '▲' : '▼') : '↕') + '</span></th>'; }
+  function desenhar() {
+    var l = filtrar(), cli = {}; l.forEach(function (s) { cli[s.clienteId] = 1; });
+    m.querySelector('#resF').innerHTML = '<b>' + l.length + '</b> atendimento(s) · <b>' + Object.keys(cli).length + '</b> cliente(s)' + (l.length !== DB.sessoes.length ? ' <span class="mute">de ' + DB.sessoes.length + ' no total</span>' : '');
+    if (!l.length) { m.querySelector('#lista').innerHTML = '<div class="vazio">Nenhum atendimento com esses filtros.</div>'; return; }
+    var corpo = '';
+    if (F.grp) {
+      var g = {}, ordem = []; l.forEach(function (s) { var k = chaveGrupo(s); if (!g[k]) { g[k] = []; ordem.push(k); } g[k].push(s); });
+      if (F.grp !== 'dia' && F.grp !== 'mes') ordem.sort(function (a, b) { return g[b].length - g[a].length || a.localeCompare(b, 'pt-BR'); });
+      corpo = ordem.map(function (k) { return '<tr class="grupo"><td colspan="6">' + esc(rotGrupo(k)) + ' <span>' + g[k].length + ' atendimento(s)</span></td></tr>' + g[k].map(linha).join(''); }).join('');
+    } else corpo = l.map(linha).join('');
+    m.querySelector('#lista').innerHTML = '<div class="rolagem"><table class="tabela at-tab"><thead><tr>' + th('data', 'Data') + th('clienteNome', 'Cliente') + th('procedimento', 'Procedimento') + th('area', 'Área tratada') + '<th>O que foi feito</th>' + th('assinaturaId', 'Assinatura') + '</tr></thead><tbody>' + corpo + '</tbody></table></div>';
+    m.querySelectorAll('th[data-ord]').forEach(function (t) { t.onclick = function () { var k = t.dataset.ord; if (F.ord === k) F.dir = -F.dir; else { F.ord = k; F.dir = k === 'data' ? -1 : 1; } desenhar(); }; });
+    ligarLinks(m);
+  }
+  m.querySelector('#busca').oninput = function (e) { F.q = e.target.value; desenhar(); };
+  [['fPer', 'per'], ['fProc', 'proc'], ['fArea', 'area'], ['fAss', 'ass'], ['fGrp', 'grp']].forEach(function (x) { m.querySelector('#' + x[0]).onchange = function (e) { F[x[1]] = e.target.value; desenhar(); }; });
+  m.querySelector('#limparF').onclick = function () { FILTRO_AT = { q: '', proc: '', area: '', per: '', ass: '', ord: 'data', dir: -1, grp: '' }; recarregar(); };
+  desenhar();
 };
 VIEWS.sessaoForm = function (p) {
   var s = p.id ? porId(DB.sessoes, p.id) : { clienteId: p.clienteId, orcamentoId: p.orcamentoId, data: hoje() };
@@ -1811,14 +1866,28 @@ function referenciaPag(x) {
   return x.obs || 'Avulso';
 }
 function docRelatorio(ym) {
-  var r = dadosRelatorio(ym);
-  var corpo = '<p>Período: <b>' + mesNome(ym) + '</b> &nbsp;·&nbsp; Emitido em ' + dataBR(hoje()) + (cfg('documento') ? ' &nbsp;·&nbsp; CPF/CNPJ: ' + esc(cfg('documento')) : '') + '</p>' +
-    '<h2>Resumo por forma de pagamento</h2><table class="itens"><tr><th>Forma</th><th class="n">Qtde</th><th class="n">Valor</th></tr>' +
-    Object.keys(r.porForma).sort().map(function (k) { return '<tr><td>' + esc(k) + '</td><td class="n">' + r.lista.filter(function (x) { return (x.forma || 'Não informado') === k; }).length + '</td><td class="n">' + brl(r.porForma[k]) + '</td></tr>'; }).join('') +
-    '<tr><td><b>Total</b></td><td class="n"><b>' + r.lista.length + '</b></td><td class="n"><b>' + brl(r.total) + '</b></td></tr></table>' +
-    '<h2>Recebimentos do mês</h2><table class="itens"><tr><th>Data</th><th>Cliente</th><th>CPF</th><th>Referente a</th><th>Forma</th><th class="n">Valor</th></tr>' +
-    r.lista.map(function (x) { var c = porId(DB.clientes, x.clienteId) || {}; return '<tr><td>' + dataBR(x.data) + '</td><td>' + esc(x.clienteNome) + '</td><td>' + esc(c.cpf || '') + '</td><td>' + esc(referenciaPag(x)) + '</td><td>' + esc(x.forma || '—') + '</td><td class="n">' + brl(x.valor) + '</td></tr>'; }).join('') +
-    (r.lista.length ? '' : '<tr><td colspan="6">Nenhum recebimento no período.</td></tr>') + '</table>';
+  var r = dadosRelatorio(ym), n = r.lista.length, ticket = n ? r.total / n : 0;
+  var formas = Object.keys(r.porForma).map(function (k) { return { k: k, v: r.porForma[k], q: r.lista.filter(function (x) { return (x.forma || 'Não informado') === k; }).length }; }).sort(function (a, b) { return b.v - a.v; });
+  var anteriorYm = addMeses(ym + '-01', -1).slice(0, 7), ant = dadosRelatorio(anteriorYm).total;
+  var vari = ant ? (r.total - ant) / ant * 100 : null;
+  var css = '<style>.rel-info{width:100%;margin:0 0 16px;font-size:11.5px;color:#5c5254}.rel-info td{padding:2px 0}.rel-info b{color:#2f2a2b}' +
+    '.resumo{width:100%;border-collapse:separate;border-spacing:8px 0;margin:0 -8px 6px;width:calc(100% + 16px)}.resumo td{background:#faf3f4;border:1px solid #efdfe2;border-radius:8px;padding:12px 14px;vertical-align:top;width:25%}' +
+    '.resumo td.dest{background:#94525e;border-color:#94525e;color:#fff}.resumo .r{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#8a7d80;font-weight:bold}.resumo td.dest .r{color:#f3dde1}' +
+    '.resumo .v{font-size:19px;font-weight:bold;margin-top:4px;white-space:nowrap}.resumo .d{font-size:10px;color:#8a7d80;margin-top:2px}.resumo td.dest .d{color:#f3dde1}' +
+    '.formas td{padding:8px;border-bottom:1px solid #f0e6e8}.formas .cor{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;vertical-align:-1px}.barra{background:#f4ecee;height:8px;border-radius:99px;width:100%}.barra i{display:block;height:8px;border-radius:99px}' +
+    '.det tr:nth-child(even) td{background:#fcf8f8}.det td{font-size:11.5px}.det .cli{font-weight:bold}.det .cpf{color:#8a7d80;font-size:10.5px}.forma{display:inline-block;padding:1px 8px;border-radius:99px;font-size:10px;font-weight:bold;color:#fff;white-space:nowrap}' +
+    '.totfinal td{background:#f6ecee!important;font-weight:bold;font-size:13px;border-top:1.5px solid #d9b7bd}.totfinal .g{color:#94525e;font-size:15px}' +
+    '.rod2{margin-top:24px;padding-top:8px;border-top:1px solid #eadfe1;font-size:9.5px;color:#9a9092;text-align:center}</style>';
+  var corpo = css + '<table class="rel-info"><tr><td>Período: <b>' + mesNome(ym) + '</b></td><td style="text-align:center">Profissional: <b>' + esc(cfg('nome', 'Débora Rodrigues')) + '</b>' + (cfg('documento') ? ' · CPF/CNPJ ' + esc(cfg('documento')) : '') + '</td><td style="text-align:right">Emitido em <b>' + dataBR(hoje()) + '</b></td></tr></table>' +
+    '<table class="resumo"><tr><td class="dest"><div class="r">Total recebido</div><div class="v">' + brl(r.total) + '</div><div class="d">' + (vari === null ? 'no mês' : (vari >= 0 ? '▲ ' : '▼ ') + Math.abs(vari).toFixed(0) + '% vs ' + mesNome(anteriorYm, true)) + '</div></td>' +
+    '<td><div class="r">Recebimentos</div><div class="v">' + n + '</div><div class="d">pagamentos registrados</div></td>' +
+    '<td><div class="r">Valor médio</div><div class="v">' + brl(ticket) + '</div><div class="d">por recebimento</div></td>' +
+    '<td><div class="r">Principal forma</div><div class="v" style="font-size:15px;white-space:normal">' + (formas[0] ? esc(formas[0].k) : '—') + '</div><div class="d">' + (formas[0] && r.total ? Math.round(formas[0].v / r.total * 100) + '% do total' : '') + '</div></td></tr></table>' +
+    '<h2>Por forma de pagamento</h2><table class="formas">' + (formas.length ? formas.map(function (f) { var p = r.total ? f.v / r.total * 100 : 0, cor = COR_FORMA[f.k] || '#b5707c'; return '<tr><td style="width:30%"><span class="cor" style="background:' + cor + '"></span><b>' + esc(f.k) + '</b></td><td style="width:14%;color:#8a7d80">' + f.q + ' pagamento(s)</td><td><div class="barra"><i style="width:' + p.toFixed(1) + '%;background:' + cor + '"></i></div></td><td class="n" style="width:9%;color:#8a7d80">' + p.toFixed(0) + '%</td><td class="n" style="width:16%"><b>' + brl(f.v) + '</b></td></tr>'; }).join('') : '<tr><td>Nenhum recebimento no período.</td></tr>') + '</table>' +
+    '<h2>Recebimentos do mês</h2><table class="itens det"><tr><th style="width:11%">Data</th><th>Cliente</th><th>Referente a</th><th style="width:15%">Forma</th><th class="n" style="width:14%">Valor</th></tr>' +
+    r.lista.map(function (x) { var c = porId(DB.clientes, x.clienteId) || {}, cor = COR_FORMA[x.forma || 'Não informado'] || '#b5707c'; return '<tr><td>' + dataBR(x.data) + '</td><td><div class="cli">' + esc(x.clienteNome) + '</div>' + (c.cpf ? '<div class="cpf">CPF ' + esc(c.cpf) + '</div>' : '') + '</td><td>' + esc(referenciaPag(x)) + '</td><td><span class="forma" style="background:' + cor + '">' + esc(x.forma || '—') + '</span></td><td class="n"><b>' + brl(x.valor) + '</b></td></tr>'; }).join('') +
+    (n ? '<tr class="totfinal"><td colspan="3">Total do mês · ' + n + ' recebimento(s)</td><td></td><td class="n g">' + brl(r.total) + '</td></tr>' : '<tr><td colspan="5">Nenhum recebimento no período.</td></tr>') + '</table>' +
+    '<div class="rod2">Relatório gerado pelo sistema de gestão · ' + esc(cfg('nome', 'Débora Rodrigues')) + ' · ' + esc(new Date().toLocaleString('pt-BR')) + '</div>';
   return docBase('Relatório de recebimentos', corpo);
 }
 function csvRelatorio(ym) {
