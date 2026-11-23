@@ -169,6 +169,10 @@ h3{font-size:15px;margin:0 0 8px}
 .hbar .hb{display:grid;grid-template-columns:minmax(120px,1.1fr) 2fr auto;gap:12px;align-items:center;padding:7px 0}
 .hbar .hk{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hbar .ht{height:10px;background:var(--rose-ll);border-radius:99px;overflow:hidden}.hbar .ht i{display:block;height:100%;background:linear-gradient(90deg,#c9a063,#b5707c);border-radius:99px}
+.destaques-dem{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 16px}.dd{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:3px}.dd .rot{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}.dd b{font-size:16px}.dd.alta{background:#fff7ec;border-color:#f1dcb8}
+.tabela.dem .ht{display:block;height:10px;background:var(--rose-ll);border-radius:99px;overflow:hidden}.tabela.dem .ht i{display:block;height:100%;background:linear-gradient(90deg,#c9a063,#b5707c);border-radius:99px}
+.spark{display:flex;align-items:flex-end;gap:3px;height:26px;width:72px}.spark i{flex:1;background:var(--rose);border-radius:2px 2px 0 0}
+@media (max-width:760px){.destaques-dem{grid-template-columns:1fr}}
 .pos{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--rose-ll);color:var(--rose-d);font-size:12px;font-weight:700;margin-right:8px}
 .filtros{display:flex;gap:6px;flex-wrap:wrap}
 .filtro{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer}.filtro.ativo{background:var(--rose);border-color:var(--rose);color:#fff}
@@ -287,7 +291,7 @@ function chamar(acao, payload) {
 }
 
 var Demo = {
-  chave: 'debora_demo_v5',
+  chave: 'debora_demo_v6',
   ler: function () { try { var s = localStorage.getItem(this.chave); if (s) return JSON.parse(s); } catch (e) {} return this.semente(); },
   gravar: function (d) { try { localStorage.setItem(this.chave, JSON.stringify(d)); } catch (e) {} this._mem = d; },
   dados: function () { if (!this._mem) this._mem = this.ler(); return this._mem; },
@@ -330,6 +334,8 @@ var Demo = {
     pg.push({ id: 'g11', clienteId: 'c4', clienteNome: c4.nome, orcamentoId: 'o6', data: dt(1, 15), valor: 700, forma: 'Pix', obs: '1/3' });
     var av = [['Limpeza de pele', 150, 'Pix'], ['Peeling químico', 200, 'Cartão de débito'], ['Limpeza de pele', 150, 'Dinheiro'], ['Toxina botulínica', 1200, 'Cartão de crédito'], ['Microagulhamento', 300, 'Pix'], ['Mesoterapia capilar', 250, 'Pix'], ['Preenchimento', 1400, 'Cartão de crédito'], ['Limpeza de pele', 150, 'Cartão de débito']];
     for (var k = 0; k < 11; k++) for (var q = 0; q < 2 + (k % 3); q++) { var a = av[(k * 3 + q) % av.length]; var cc = [c1, c2, c3, c4][(k + q) % 4]; pg.push({ id: 'ga' + k + '_' + q, clienteId: cc.id, clienteNome: cc.nome, orcamentoId: '', data: dt(k, 3 + q * 7), valor: a[1], forma: a[2], obs: a[0] }); }
+    var dem = [['Toxina botulínica', 'Testa e glabela'], ['Limpeza de pele', 'Face'], ['Bioestimuladores', 'Face'], ['Preenchimento', 'Lábios'], ['Skinbooster', 'Face'], ['Toxina botulínica', 'Pés de galinha'], ['Microagulhamento', 'Face'], ['Harmonização facial', 'Face'], ['Limpeza de pele', 'Face'], ['Toxina botulínica', 'Testa']];
+    for (var mz = 0; mz < 6; mz++) for (var qz = 0; qz < 3 + ((mz * 2) % 4) - (mz > 3 ? 1 : 0); qz++) { var dz = dem[(mz * 4 + qz * 3) % dem.length], cz = ['c1', 'c2', 'c3', 'c4'][(mz + qz) % 4]; ss.push({ id: 'sd' + mz + '_' + qz, clienteId: cz, clienteNome: { c1: c1.nome, c2: c2.nome, c3: c3.nome, c4: c4.nome }[cz], orcamentoId: '', data: dt(mz, mz === 0 ? 2 + qz * 3 : 2 + qz * 5), procedimento: mz === 0 && qz < 3 ? 'Toxina botulínica' : dz[0], area: dz[1], produtos: '', obs: '', assinaturaId: 'demo' }); }
     ss.push({ id: 's4', clienteId: 'c3', clienteNome: c3.nome, orcamentoId: 'o4', data: dt(3, 3), procedimento: 'Harmonização facial', area: 'Face', produtos: 'Ácido hialurônico 3 mL', obs: '' });
     // Acompanhamento semanal de exemplo (tirzepatida + bioimpedância)
     var c5 = { id: 'c5', nome: 'Sandra Oliveira (exemplo)', cpf: '321.654.987-00', telefone: '(14) 99999-0005', email: '', endereco: 'Rua Aimorés, 250 - Centro, Tupã', nascimento: '1982-11-28', profissao: 'Empresária', fichaData: dt(2, 20), assinaturaId: 'demo', anamnese: { gravida: 'Não', lactante: 'Não', diabetes: 'Não', anemia: 'Não', hipertensao: 'Sim', hipertensao_det: 'Losartana 50 mg', cardiaco: 'Não', tireoide: 'Não', neoplasia: 'Não', sol: 'Pouco', fumante: 'Não', alcool: 'Pouco', tratamento12m: 'Sim', cirurgia: 'Não' }, obs: '' };
@@ -1427,6 +1433,40 @@ function receitaPorProcedimento(pags) {
   return Object.keys(r).map(function (k) { return { k: k, v: r[k] }; }).sort(function (a, b) { return b.v - a.v; });
 }
 
+
+// Demanda por procedimento: atendimentos feitos, clientes, sessões vendidas e receita
+var NOME_INJ = 'Aplicação de injetável com receita';
+function eventosProc() {
+  var ev = [];
+  DB.sessoes.forEach(function (x) { ev.push({ k: x.procedimento, d: x.data, c: x.clienteId }); });
+  (DB.acompanhamentos || []).forEach(function (x) { if (x.medicamento || x.dose) ev.push({ k: NOME_INJ, d: x.data, c: x.clienteId }); });
+  DB.pagamentos.forEach(function (p) { if (p.orcamentoId || p.sessaoId) return; var ob = String(p.obs || '').trim().toLowerCase(), pr = DB.procedimentos.filter(function (x) { return x.nome.toLowerCase() === ob; })[0]; if (pr) ev.push({ k: pr.nome, d: p.data, c: p.clienteId }); });
+  return ev.filter(function (e) { return e.k; });
+}
+function demandaProc(P, pags) {
+  var r = {}, ev = eventosProc();
+  function g(k) { return r[k] = r[k] || { k: k, atend: 0, ant: 0, cli: {}, vend: 0, rec: 0, meses: {} }; }
+  ev.forEach(function (e) { if (noPeriodo(e.d, P)) { var o = g(e.k); o.atend++; o.cli[e.c] = 1; } if (noPeriodo(e.d, P.ant)) g(e.k).ant++; var m = String(e.d).slice(0, 7); g(e.k).meses[m] = (g(e.k).meses[m] || 0) + 1; });
+  aprovados().forEach(function (o) { if (!noPeriodo(o.aprovadoEm, P)) return; (o.itens || []).forEach(function (i) { var x = g(i.nome); x.vend += num(i.qtd); x.cli[o.clienteId] = 1; }); });
+  receitaPorProcedimento(pags).forEach(function (x) { if (x.k !== 'Avulso / outros') g(x.k).rec += x.v; });
+  return Object.keys(r).map(function (k) { var o = r[k]; o.nCli = Object.keys(o.cli).length; o.score = o.atend + o.vend; return o; }).filter(function (o) { return o.score || o.rec; }).sort(function (a, b) { return b.atend - a.atend || b.vend - a.vend || b.rec - a.rec; });
+}
+function blocoDemanda(P, pags) {
+  var l = demandaProc(P, pags); if (!l.length) return '<div class="card" style="margin-bottom:16px"><h2>Procedimentos mais procurados</h2><div class="vazio">Sem atendimentos no período.</div></div>';
+  var m6 = ultimosMeses(6), mx = Math.max.apply(null, l.map(function (x) { return x.atend; }).concat([1])), total = l.reduce(function (s, x) { return s + x.atend; }, 0);
+  var alta = l.filter(function (x) { return x.atend >= 2 && x.atend > x.ant; }).sort(function (a, b) { return (b.atend - b.ant) / Math.max(1, b.ant) - (a.atend - a.ant) / Math.max(1, a.ant); })[0];
+  var h = '<div class="card" style="margin-bottom:16px"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="margin:0">Procedimentos mais procurados</h2><span class="small mute">' + total + ' atendimento(s) no período</span></div>';
+  h += '<div class="destaques-dem"><div class="dd"><span class="rot">Mais procurado</span><b>' + esc(l[0].k) + '</b><span class="small mute">' + l[0].atend + ' atendimento(s) · ' + l[0].nCli + ' cliente(s)</span></div>' +
+    (alta ? '<div class="dd alta"><span class="rot">🔥 Em alta</span><b>' + esc(alta.k) + '</b><span class="small mute">' + alta.atend + ' no período · ' + (alta.ant ? '+' + Math.round((alta.atend - alta.ant) / alta.ant * 100) + '% vs anterior' : 'novo no período') + '</span></div>' : '') +
+    (function () { var t = l.slice().sort(function (a, b) { return b.rec - a.rec; })[0]; return t && t.rec ? '<div class="dd"><span class="rot">Maior faturamento</span><b>' + esc(t.k) + '</b><span class="small mute">' + brl(t.rec) + ' recebidos</span></div>' : ''; })() + '</div>';
+  h += '<div class="rolagem"><table class="tabela dem"><thead><tr><th>#</th><th>Procedimento</th><th>Procura</th><th class="num">Atendimentos</th><th class="num">Sessões vendidas</th><th class="num">Clientes</th><th class="num">Receita</th><th class="num">Tendência</th><th>Últimos 6 meses</th></tr></thead><tbody>' +
+    l.slice(0, 12).map(function (x, i) {
+      var var_ = x.ant ? Math.round((x.atend - x.ant) / x.ant * 100) : null, mmx = Math.max.apply(null, m6.map(function (m) { return x.meses[m] || 0; }).concat([1]));
+      return '<tr><td><span class="pos">' + (i + 1) + '</span></td><td><b>' + esc(x.k) + '</b>' + (alta && alta.k === x.k ? ' <span class="chip">em alta</span>' : '') + '</td><td style="min-width:120px"><span class="ht"><i style="width:' + (x.atend / mx * 100) + '%"></i></span></td><td class="num"><b>' + x.atend + '</b></td><td class="num">' + (x.vend || '—') + '</td><td class="num">' + x.nCli + '</td><td class="num">' + (x.rec ? brl(x.rec) : '—') + '</td><td class="num">' + (var_ === null ? (x.atend ? '<span class="var up">novo</span>' : '—') : (var_ === 0 ? '<span class="mute">estável</span>' : '<span class="var ' + (var_ > 0 ? 'up' : 'down') + '">' + (var_ > 0 ? '▲ ' : '▼ ') + Math.abs(var_) + '%</span>')) + '</td><td><div class="spark" title="' + m6.map(function (m) { return mesNome(m, true) + ': ' + (x.meses[m] || 0); }).join(' · ') + '">' + m6.map(function (m) { return '<i style="height:' + Math.max(6, (x.meses[m] || 0) / mmx * 100) + '%;opacity:' + (x.meses[m] ? 1 : .25) + '"></i>'; }).join('') + '</div></td></tr>';
+    }).join('') + '</tbody></table></div><p class="small mute" style="margin:10px 0 0">Ordenado pelos atendimentos realizados no período (registros de atendimento, aplicações do acompanhamento e pagamentos avulsos). Sessões vendidas = sessões contratadas em orçamentos aprovados no período. Tendência compara com o período anterior.</p></div>';
+  return h;
+}
+
 VIEWS.financeiro = function (p) {
   var P = periodo(p.per), h0 = hoje();
   var pags = DB.pagamentos.filter(function (x) { return noPeriodo(x.data, P); }).sort(porData);
@@ -1470,6 +1510,7 @@ VIEWS.financeiro = function (p) {
     cliAtr.map(function (c) { var cli = porId(DB.clientes, c.id) || {}; return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><b>' + esc(c.nome) + '</b><br><span class="small mute">' + c.n + ' parcela(s) vencida(s)</span></td><td>' + dataBR(c.desde) + '</td><td class="num"><span class="selo ' + (c.dias > 30 ? 's-Recusado' : 's-Enviado') + '">' + c.dias + ' dias</span></td><td class="num"><b style="color:var(--bad)">' + brl(c.valor) + '</b></td><td class="num">' + (cli.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(cli.telefone, textoCobranca(c))) + '">' + ICON.zap + ' Lembrar</a>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<div class="vazio">Nenhuma cliente em atraso. 🎉</div>') + '</div>' +
     '<div class="card"><h2>Próximos vencimentos (30 dias)</h2>' + (prox.length ? '<div class="lista-simples">' + prox.slice(0, 8).map(function (x) { return '<div data-abrir="orcamentoDet:' + x.o.id + '" style="cursor:pointer"><span><b>' + esc(x.o.clienteNome) + '</b><br><span class="small mute">' + x.rot + ' · orçamento nº ' + nOrc(x.o.numero) + '</span></span><span style="text-align:right"><b>' + brl(x.falta) + '</b><br><span class="small mute">' + (x.dias === 0 ? 'vence hoje' : 'em ' + x.dias + ' dia(s) · ' + dataBR(x.venc)) + '</span></span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhum vencimento nos próximos 30 dias.</div>') +
     (semPlano.length ? '<p class="small mute" style="margin:14px 0 0">Além disso, ' + brl(semPlano.reduce(function (s, x) { return s + x.falta; }, 0)) + ' a receber em ' + semPlano.length + ' orçamento(s) pagos por sessão (sem data de vencimento).</p>' : '') + '</div></div>';
+  h += blocoDemanda(P, pags);
   // Procedimentos e melhores clientes
   var porProc = receitaPorProcedimento(pags), mxp = porProc.length ? porProc[0].v : 1;
   var porCli = {}; pags.forEach(function (x) { porCli[x.clienteId] = porCli[x.clienteId] || { nome: x.clienteNome, v: 0, n: 0 }; porCli[x.clienteId].v += num(x.valor); porCli[x.clienteId].n++; });
