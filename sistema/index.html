@@ -244,6 +244,15 @@ iframe.previa{width:100%;height:70vh;border:1px solid var(--line);border-radius:
 @media (max-width:640px){.hero{padding:22px 18px}.hero-nome{font-size:46px}.mini-donut{flex-direction:column;align-items:stretch}.mini-donut .donut{margin:0 auto}}
 .pac-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.pac{border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:linear-gradient(180deg,#fff,#fbf7f2);transition:transform .15s,box-shadow .15s}.pac:hover{transform:translateY(-2px);box-shadow:0 10px 24px -18px #94525e}.pac-top{display:flex;gap:12px;align-items:center}.pac-num{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0 10px}.pac-num b{font-size:26px;letter-spacing:-.02em;display:block}.pac-num span{font-size:12px;color:var(--mute)}.pac-num .spk{width:45%;max-width:220px;height:44px}.pac-bar{position:relative;height:8px;background:var(--rose-ll);border-radius:99px}.pac-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#a9c7b1,#5f8f6c)}.pac-bar em{position:absolute;top:-2px;width:2px;height:12px;background:#fff}.pac-marcos{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin-top:4px}.pac-marcos .ok{color:var(--ok);font-weight:700}.pac-info{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:12px}.pac-info b{color:var(--ink)}.pac-prox{margin-top:12px;font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;background:#f4efe9;color:#8a6d3b}.pac-prox.hj{background:var(--rose);color:#fff}.pac-prox.atr{background:#fbe5e5;color:var(--bad)}
 .pac-resumo{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.pac-resumo span{font-size:12px;background:#eef6f0;color:#3f7a52;padding:4px 10px;border-radius:99px}.pac-resumo b{color:#2f6440}
+.nivel{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;white-space:nowrap}.n-Ouro.nivel{background:linear-gradient(135deg,#f9ecc8,#ecd08f);color:#7a5714}.n-Prata.nivel{background:linear-gradient(135deg,#f1f2f4,#d9dde2);color:#4f5864}.n-Bronze.nivel{background:linear-gradient(135deg,#f6e2d3,#e3b896);color:#7d4a26}.n-Nova.nivel{background:#eef6f0;color:#3f7a52}
+.filtro-nivel{display:flex;gap:6px;flex-wrap:wrap}.filtro-nivel button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}.filtro-nivel button small{color:var(--mute);margin-left:2px}.filtro-nivel button.on{background:var(--rose);border-color:var(--rose);color:#fff}.filtro-nivel button.on small{color:#f6dfe3}
+.fid-card{display:grid;grid-template-columns:auto 1.4fr 1fr;gap:22px;align-items:center}.fid-card.n-Ouro{background:linear-gradient(120deg,#fffaf0,#fbf0d6);border-color:#ecd8a8}.fid-card.n-Prata{background:linear-gradient(120deg,#fff,#f2f3f5);border-color:#dcdfe4}.fid-card.n-Bronze{background:linear-gradient(120deg,#fff,#f9ece2);border-color:#ebd0bb}
+.fid-esq{display:flex;align-items:center;gap:12px}.fid-medalha{font-size:40px;line-height:1}.fid-tit{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.fid-dados{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.fid-dados span{display:block;font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}.fid-dados b{font-size:15px}
+.fid-benef ul{margin:4px 0 0;padding-left:18px;font-size:13px}.fid-benef li{margin:2px 0}
+@media (max-width:1100px){.fid-card{grid-template-columns:1fr}.fid-dados{grid-template-columns:1fr 1fr}}
+.medalhas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.med{border-radius:12px;padding:10px;text-align:center;display:flex;flex-direction:column;align-items:center}.med span{font-size:22px}.med b{font-size:22px;line-height:1.1}.med small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.med.n-Ouro{background:linear-gradient(135deg,#fbf1d8,#efd89f);color:#7a5714}.med.n-Prata{background:linear-gradient(135deg,#f4f5f7,#dfe2e6);color:#4f5864}.med.n-Bronze{background:linear-gradient(135deg,#f8e8dc,#e8c3a6);color:#7d4a26}
+.saudade{display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--rose-ll);font-size:13px}.saudade span{flex:1}
 /* Acompanhamento: coluna academia / ocorrências */
 .td-ocorr{min-width:210px}.oc-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.oc{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;line-height:1.4}.oc.gym{background:#eef6f0;color:#3f7a52}.oc.int{background:#fbe5e5;color:var(--bad);white-space:normal;max-width:240px;border-radius:10px;align-items:flex-start}.tabela td.num{white-space:nowrap}
 </style>
@@ -779,9 +788,15 @@ VIEWS.painel = function () {
   var partes = Object.keys(porForma).map(function (k) { return { k: k, v: porForma[k], cor: COR_FORMA[k] || '#ccc' }; }).sort(function (a, b) { return b.v - a.v; });
   var dem = demandaProc(P, pagsMes).slice(0, 4), mxd = Math.max.apply(null, dem.map(function (x) { return x.atend; }).concat([1]));
   var pacs = Object.keys(ultAc).map(function (k) { return resumoAcomp(k); }).filter(Boolean), kgTot = pacs.reduce(function (s, r) { return s + Math.max(0, r.perdido); }, 0);
-  h += '<div class="grid g2" style="margin-bottom:16px">' +
+  h += '<div class="grid g3" style="margin-bottom:16px">' +
     '<div class="card"><h2>Como entrou em ' + mesNome(ym, true) + '</h2>' + (partes.length ? '<div class="mini-donut">' + donut(partes, recMes) + '<div class="md-leg">' + partes.map(function (p) { return '<div><i style="background:' + p.cor + '"></i><span>' + esc(p.k.replace('Cartão de ', '')) + '</span><b>' + Math.round(p.v / recMes * 100) + '%</b></div>'; }).join('') + '</div></div>' : '<div class="vazio">Sem entradas este mês.</div>') + '</div>' +
-    '<div class="card"><h2>Mais procurados no mês</h2>' + (dem.length ? '<div class="top-proc">' + dem.map(function (x, i) { return '<div class="tp"><span class="tp-n">' + (i + 1) + '</span><div class="tp-c"><div class="tp-l"><b>' + esc(x.k) + '</b><span class="small mute">' + x.atend + '</span></div><div class="tp-bar"><i style="width:' + Math.max(6, x.atend / mxd * 100) + '%"></i></div></div></div>'; }).join('') + '</div>' : '<div class="vazio">Sem atendimentos este mês.</div>') + '<button class="btn peq" data-ir="financeiro" style="margin-top:12px">Ver ranking completo</button></div>' +
+    '<div class="card"><h2>Mais procurados no mês</h2>' + (dem.length ? '<div class="top-proc">' + dem.map(function (x, i) { return '<div class="tp"><span class="tp-n">' + (i + 1) + '</span><div class="tp-c"><div class="tp-l"><b>' + esc(x.k) + '</b><span class="small mute">' + x.atend + '</span></div><div class="tp-bar"><i style="width:' + Math.max(6, x.atend / mxd * 100) + '%"></i></div></div></div>'; }).join('') + '</div>' : '<div class="vazio">Sem atendimentos este mês.</div>') + '<button class=\"btn peq\" data-ir=\"financeiro\" style=\"margin-top:12px\">Ver ranking completo</button></div>' +
+    (function () { var fs = DB.clientes.map(function (c) { return { c: c, f: fidelidade(c) }; }), cnt = { Ouro: 0, Prata: 0, Bronze: 0 }; fs.forEach(function (x) { if (cnt[x.f.nivel] !== undefined) cnt[x.f.nivel]++; });
+      var top = fs.filter(function (x) { return x.f.nivel !== 'Nova'; }).sort(function (a, b) { return b.f.pts - a.f.pts || b.f.gasto - a.f.gasto; }).slice(0, 3);
+      var falta = fs.filter(function (x) { return (x.f.nivel === 'Ouro' || x.f.nivel === 'Prata') && x.f.diasSem !== null && x.f.diasSem > 45; }).sort(function (a, b) { return b.f.diasSem - a.f.diasSem; })[0];
+      return '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">Clientes fiéis</h2><button class="btn peq" data-ir="clientes">Ver clientes</button></div><div class="medalhas">' + ['Ouro', 'Prata', 'Bronze'].map(function (k) { return '<div class="med n-' + k + '"><span>' + NIVEIS[k].ico + '</span><b>' + cnt[k] + '</b><small>' + k + '</small></div>'; }).join('') + '</div>' +
+        (top.length ? '<div class="tarefas" style="margin-top:8px">' + top.map(function (x) { return '<div class="tf" data-abrir="clienteDet:' + x.c.id + '">' + avatar(x.c, 32) + '<span class="tf-t"><b>' + esc(x.c.nome) + '</b><span class="small mute">há ' + tempoCasa(x.f.meses) + ' · ' + brl(x.f.gasto) + '</span></span>' + seloNivel(x.c) + '</div>'; }).join('') + '</div>' : '') +
+        (falta ? '<div class="saudade">💌 <span><b>' + esc(falta.c.nome.split(' ')[0]) + '</b> (' + falta.f.nivel + ') não vem há ' + falta.f.diasSem + ' dias.</span>' + (falta.c.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(falta.c.telefone, 'Oi, ' + falta.c.nome.split(' ')[0] + '! Que saudade de você por aqui 💕 Vamos agendar seu próximo cuidado?')) + '">' + ICON.zap + ' Chamar</a>' : '') + '</div>' : '') + '</div>'; })() +
     '</div>';
   // Pacientes em acompanhamento: evolução individual
   if (pacs.length) {
@@ -806,24 +821,52 @@ VIEWS.painel = function () {
 };
 ACOES.painel = function (m) { m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); m.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { ir(b.dataset.ir, {}); }; }); ligarLinks(m); };
 
+/* ---------- Fidelidade: Ouro, Prata, Bronze ---------- */
+var NIVEIS = {
+  Ouro: { ico: '🥇', txt: 'Cliente Ouro', benef: ['Prioridade na agenda e nos encaixes', 'Mimo especial no aniversário', 'Condição exclusiva em pacotes (ex.: 10%)', 'Primeira a saber das novidades e lançamentos', 'Ligação ou mensagem pessoal no pós-procedimento'] },
+  Prata: { ico: '🥈', txt: 'Cliente Prata', benef: ['Lembrete personalizado do próximo retorno', 'Brinde ou condição especial em pacote', 'Mensagem carinhosa no aniversário'] },
+  Bronze: { ico: '🥉', txt: 'Cliente Bronze', benef: ['Mensagem de acompanhamento pós-procedimento', 'Convite para o próximo retorno'] },
+  Nova: { ico: '🌱', txt: 'Cliente nova', benef: ['Boas-vindas e explicação dos cuidados', 'Retorno combinado para criar o vínculo'] }
+};
+var CRIT_FID = 'Pontos: tempo de casa (3+ meses 1, 6+ meses 2, 12+ meses 3) · total gasto (R$ 500+ 1, R$ 1.500+ 2, R$ 3.000+ 3) · visitas no último ano (2+ 1, 4+ 2, 8+ 3). Ouro 8+ pontos · Prata 5–7 · Bronze 2–4.';
+function fidelidade(c) {
+  var H0 = hoje(), datas = [], visitas = {};
+  DB.sessoes.forEach(function (x) { if (x.clienteId === c.id && x.data) { datas.push(String(x.data).slice(0, 10)); visitas[String(x.data).slice(0, 10)] = 1; } });
+  (DB.acompanhamentos || []).forEach(function (x) { if (x.clienteId === c.id && x.data) { datas.push(String(x.data).slice(0, 10)); visitas[String(x.data).slice(0, 10)] = 1; } });
+  DB.pagamentos.forEach(function (x) { if (x.clienteId === c.id && x.data) datas.push(String(x.data).slice(0, 10)); });
+  DB.orcamentos.forEach(function (x) { if (x.clienteId === c.id && x.status === 'Aprovado' && x.aprovadoEm) datas.push(String(x.aprovadoEm).slice(0, 10)); });
+  if (c.fichaData) datas.push(String(c.fichaData).slice(0, 10));
+  datas.sort();
+  var ini = datas[0] || H0, meses = Math.max(0, diasEntre(ini, H0) / 30.4), gasto = recebidoCliente(c.id);
+  var vk = Object.keys(visitas).sort(), v12 = vk.filter(function (d) { return diasEntre(d, H0) <= 365; }).length, ult = vk[vk.length - 1];
+  var pT = meses >= 12 ? 3 : meses >= 6 ? 2 : meses >= 3 ? 1 : 0, pG = gasto >= 3000 ? 3 : gasto >= 1500 ? 2 : gasto >= 500 ? 1 : 0, pV = v12 >= 8 ? 3 : v12 >= 4 ? 2 : v12 >= 2 ? 1 : 0, pts = pT + pG + pV;
+  var nivel = pts >= 8 ? 'Ouro' : pts >= 5 ? 'Prata' : pts >= 2 ? 'Bronze' : 'Nova';
+  var prox = nivel === 'Ouro' ? 0 : (nivel === 'Prata' ? 8 : nivel === 'Bronze' ? 5 : 2) - pts;
+  return { nivel: nivel, pts: pts, pT: pT, pG: pG, pV: pV, meses: meses, desde: ini, gasto: gasto, visitas: v12, ultima: ult, diasSem: ult ? diasEntre(ult, H0) : null, falta: prox };
+}
+function tempoCasa(m) { m = Math.floor(m); return m < 1 ? 'menos de 1 mês' : m < 12 ? m + (m === 1 ? ' mês' : ' meses') : Math.floor(m / 12) + (Math.floor(m / 12) === 1 ? ' ano' : ' anos') + (m % 12 ? ' e ' + (m % 12) + (m % 12 === 1 ? ' mês' : ' meses') : ''); }
+function seloNivel(c, grande) { var f = fidelidade(c), n = NIVEIS[f.nivel]; return '<span class="nivel n-' + f.nivel + (grande ? ' g' : '') + '" title="' + f.pts + ' ponto(s) de fidelidade">' + n.ico + ' ' + f.nivel + '</span>'; }
+
 /* ---------- Clientes ---------- */
 VIEWS.clientes = function () {
   return cabec('Clientes', DB.clientes.length + ' cadastrada(s)', '<button class="btn pri" id="nova">' + ICON.mais + ' Nova cliente</button>') +
-    '<div class="card"><input class="busca" id="busca" placeholder="Buscar por nome, telefone ou CPF…" style="margin-bottom:10px"><div class="rolagem"><table class="tabela"><thead><tr><th>Nome</th><th>Telefone</th><th>Atenção</th><th class="num">Combinado</th><th class="num">Recebido</th><th class="num">Saldo</th></tr></thead><tbody id="lista"></tbody></table></div></div>';
+    '<div class="card"><div class="row" style="gap:10px;margin-bottom:10px;flex-wrap:wrap"><input class="busca" id="busca" placeholder="Buscar por nome, telefone ou CPF…" style="flex:1;min-width:220px;margin:0"><div class="filtro-nivel" id="fNivel">' + ['Todas', 'Ouro', 'Prata', 'Bronze', 'Nova'].map(function (k, i) { var n = k === 'Todas' ? DB.clientes.length : DB.clientes.filter(function (c) { return fidelidade(c).nivel === k; }).length; return '<button data-n="' + k + '" class="' + (i ? '' : 'on') + '">' + (NIVEIS[k] ? NIVEIS[k].ico + ' ' : '') + k + ' <small>' + n + '</small></button>'; }).join('') + '</div></div><div class="rolagem"><table class="tabela"><thead><tr><th>Nome</th><th>Nível</th><th>Telefone</th><th>Atenção</th><th class="num">Combinado</th><th class="num">Recebido</th><th class="num">Saldo</th></tr></thead><tbody id="lista"></tbody></table></div></div>';
 };
 ACOES.clientes = function (m) {
   m.querySelector('#nova').onclick = function () { ir('fichaForm', {}); };
   var busca = m.querySelector('#busca');
   function desenhar() {
     var q = busca.value.toLowerCase(), qd = digitos(q);
-    var l = DB.clientes.filter(function (c) { return !q || c.nome.toLowerCase().indexOf(q) >= 0 || (qd && (digitos(c.telefone).indexOf(qd) >= 0 || digitos(c.cpf).indexOf(qd) >= 0)); })
+    var fn = (m.querySelector('#fNivel .on') || {}).dataset; fn = fn ? fn.n : 'Todas';
+    var l = DB.clientes.filter(function (c) { return fn === 'Todas' || fidelidade(c).nivel === fn; }).filter(function (c) { return !q || c.nome.toLowerCase().indexOf(q) >= 0 || (qd && (digitos(c.telefone).indexOf(qd) >= 0 || digitos(c.cpf).indexOf(qd) >= 0)); })
       .sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); });
     m.querySelector('#lista').innerHTML = l.length ? l.map(function (c) {
       var comb = combinadoCliente(c.id), rec = recebidoCliente(c.id), al = alertasSaude(c);
-      return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><div class="cli-linha">' + avatar(c, 38) + '<span><b>' + esc(c.nome) + '</b>' + (!c.assinaturaId ? '<br><span class="small" style="color:var(--warn)">Ficha sem assinatura</span>' : '') + '</span></div></td><td>' + esc(c.telefone) + '</td><td>' + (function () { var at = atrasoCliente(c.id), x = ''; if (at > 0.009) x += '<span class="chip alerta">Em atraso ' + brl(at) + '</span> '; if (al.length) x += '<span class="chip alerta">' + al.length + ' alerta(s)</span>'; return x || '<span class="mute small">—</span>'; })() + '</td><td class="num">' + brl(comb) + '</td><td class="num">' + brl(rec) + '</td><td class="num"><b>' + brl(Math.max(0, comb - rec)) + '</b></td></tr>';
-    }).join('') : '<tr><td colspan="6" class="vazio">' + (q ? 'Nenhuma cliente encontrada.' : 'Nenhuma cliente cadastrada ainda. Toque em “Nova cliente”.') + '</td></tr>';
+      return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><div class="cli-linha">' + avatar(c, 38) + '<span><b>' + esc(c.nome) + '</b>' + (!c.assinaturaId ? '<br><span class="small" style="color:var(--warn)">Ficha sem assinatura</span>' : '') + '</span></div></td><td>' + seloNivel(c) + '</td><td>' + esc(c.telefone) + '</td><td>' + (function () { var at = atrasoCliente(c.id), x = ''; if (at > 0.009) x += '<span class="chip alerta">Em atraso ' + brl(at) + '</span> '; if (al.length) x += '<span class="chip alerta">' + al.length + ' alerta(s)</span>'; return x || '<span class="mute small">—</span>'; })() + '</td><td class="num">' + brl(comb) + '</td><td class="num">' + brl(rec) + '</td><td class="num"><b>' + brl(Math.max(0, comb - rec)) + '</b></td></tr>';
+    }).join('') : '<tr><td colspan="7" class="vazio">' + (q || fn !== 'Todas' ? 'Nenhuma cliente encontrada.' : 'Nenhuma cliente cadastrada ainda. Toque em “Nova cliente”.') + '</td></tr>';
     ligarLinks(m);
   }
+  m.querySelectorAll('#fNivel button').forEach(function (b) { b.onclick = function () { m.querySelectorAll('#fNivel button').forEach(function (x) { x.classList.toggle('on', x === b); }); desenhar(); }; });
   busca.oninput = desenhar; desenhar();
 };
 
@@ -844,6 +887,10 @@ VIEWS.clienteDet = function (p) {
     .replace('</div><div class="row">', '</div></div><div class="row">');
   if (al.length) h += '<div class="card" style="margin-bottom:16px;border-color:#f0c9c9;background:#fffafa"><div class="row"><b style="color:var(--bad)">Atenção na anamnese:</b><div class="chips">' + al.map(function (x) { return '<span class="chip alerta">' + esc(x) + '</span>'; }).join('') + '</div></div></div>';
   if (!c.assinaturaId) h += '<div class="card" style="margin-bottom:16px;border-color:#f1dfb9;background:#fffcf5"><div class="row" style="justify-content:space-between"><span><b style="color:var(--warn)">A ficha de anamnese ainda não foi assinada.</b></span><span class="row"><button class="btn peq" id="papelFicha">' + ICON.doc + ' Anexar ficha em papel</button><button class="btn pri peq" id="assinarFicha">' + ICON.caneta + ' Assinar no tablet</button></span></div></div>';
+  (function () { var f = fidelidade(c), n = NIVEIS[f.nivel];
+    h += '<div class="card fid-card n-' + f.nivel + '" style="margin-bottom:16px"><div class="fid-esq"><span class="fid-medalha">' + n.ico + '</span><div><div class="fid-tit">' + n.txt + '</div><div class="small mute" title="' + esc(CRIT_FID) + '" style="cursor:help">' + f.pts + ' de 9 pontos ⓘ' + (f.falta > 0 ? ' · faltam ' + f.falta + ' para ' + (f.nivel === 'Prata' ? 'Ouro' : f.nivel === 'Bronze' ? 'Prata' : 'Bronze') : '') + '</div></div></div>' +
+      '<div class="fid-dados"><div><span>Cliente há</span><b>' + tempoCasa(f.meses) + '</b></div><div><span>Total investido</span><b>' + brl(f.gasto) + '</b></div><div><span>Visitas no último ano</span><b>' + f.visitas + '</b></div><div><span>Última visita</span><b>' + (f.ultima ? quandoTxt(f.ultima) : '—') + '</b></div></div>' +
+      '<div class="fid-benef"><span class="small mute">Atendimento sugerido</span><ul>' + n.benef.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') + '</ul></div></div>'; })();
   h += '<div class="grid g3" style="margin-bottom:16px"><div class="card kpi"><div class="rot">Combinado</div><div class="val">' + brl(comb) + '</div></div><div class="card kpi"><div class="rot">Recebido</div><div class="val">' + brl(rec) + '</div></div><div class="card kpi"><div class="rot">Saldo a receber</div><div class="val" style="color:' + (comb - rec > 0 ? 'var(--rose-d)' : 'inherit') + '">' + brl(Math.max(0, comb - rec)) + '</div></div></div>';
   h += '<div class="card"><div class="abas">' + [['resumo', 'Ficha de anamnese'], ['sess', 'Evolução (' + sess.length + ')'], ['acomp', 'Acompanhamento (' + acs.length + ')'], ['fotos', 'Fotos e documentos (' + arqs.length + ')'], ['orc', 'Orçamentos (' + orcs.length + ')'], ['pag', 'Pagamentos (' + pags.length + ')']].map(function (x) { return '<button data-aba="' + x[0] + '" class="' + (aba === x[0] ? 'ativo' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>';
   if (aba === 'resumo') {
