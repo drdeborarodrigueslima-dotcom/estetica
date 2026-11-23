@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Débora Rodrigues · Sistema</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#b5707c; --rose-d:#94525e; --rose-l:#f3e3e6; --rose-ll:#faf2f3;
+  --ink:#2f2a2b; --mute:#7a7072; --line:#eadfe1; --bg:#fbf8f7; --card:#fff;
+  --ok:#3f8a62; --ok-l:#e3f2ea; --warn:#b7791f; --warn-l:#fbf0dc; --bad:#b84a4a; --bad-l:#f8e1e1;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;-webkit-tap-highlight-color:transparent}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--rose-d)}
+.app{display:flex;min-height:100vh}
+/* Navegação */
+.nav{width:232px;flex:none;background:#fff;border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.marca-logo{padding:0 8px 18px}.marca-logo img{width:100%;max-width:190px;display:block}
+@media (max-width:899px){.marca-logo{padding:0 6px 0 0;flex:none}.marca-logo img{height:40px;width:auto}}
+.marca{font-family:"Great Vibes",cursive;font-size:34px;color:var(--rose-d);line-height:1;padding:0 10px 2px}
+.marca-sub{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);padding:0 12px 18px}
+.nav button{display:flex;align-items:center;gap:12px;border:0;background:none;padding:11px 12px;border-radius:10px;cursor:pointer;text-align:left;font-weight:500;color:var(--mute)}
+.nav button svg{width:20px;height:20px;flex:none}
+.nav button:hover{background:var(--rose-ll);color:var(--ink)}
+.nav button.ativo{background:var(--rose-l);color:var(--rose-d)}
+.nav .rodape{margin-top:auto;font-size:12px;color:var(--mute);padding:10px 12px;line-height:1.5;word-break:break-all}
+.demo-tag{background:var(--warn-l);color:var(--warn);border-radius:8px;padding:8px 10px;font-size:12px;margin:0 4px 8px;line-height:1.4}
+main{flex:1;min-width:0;padding:28px 32px 80px;max-width:1180px}
+@media (max-width:899px){
+  .app{flex-direction:column}
+  .nav{width:auto;height:auto;position:sticky;top:0;z-index:20;flex-direction:row;align-items:center;padding:8px 10px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);gap:2px}
+  .marca{font-size:26px;padding:0 8px 0 4px;flex:none}
+  .marca-sub,.nav .rodape,.demo-tag{display:none}
+  .nav button{flex:none;padding:9px 11px;font-size:14px;gap:6px}
+  .nav button svg{width:18px;height:18px}
+  main{padding:18px 16px 80px}
+}
+/* Tipografia e blocos */
+h1{font-size:26px;margin:0;font-weight:700;letter-spacing:-.01em}
+h2{font-size:18px;margin:0 0 12px}
+h3{font-size:15px;margin:0 0 8px}
+.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.topo .sub{color:var(--mute);margin-top:4px}
+.voltar{border:0;background:none;color:var(--mute);cursor:pointer;padding:0;margin-bottom:8px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1000px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.g4,.g3,.g2{grid-template-columns:1fr}}
+.kpi .rot{font-size:13px;color:var(--mute);margin-bottom:8px}
+.kpi .val{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.kpi .det{font-size:12px;color:var(--mute);margin-top:4px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mute{color:var(--mute)}.small{font-size:13px}
+.right{text-align:right}
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#fff;padding:11px 16px;border-radius:11px;cursor:pointer;font-weight:600;font-size:14px;text-decoration:none;color:var(--ink);min-height:44px}
+.btn:hover{border-color:var(--rose)}
+.btn.pri{background:var(--rose);border-color:var(--rose);color:#fff}
+.btn.pri:hover{background:var(--rose-d)}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.perigo{color:var(--bad)}
+.btn.peq{padding:7px 12px;min-height:36px;font-size:13px}
+.btn svg{width:18px;height:18px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+/* Tabelas / listas */
+.tabela{width:100%;border-collapse:collapse}
+.tabela th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line)}
+.tabela td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tabela tr.click{cursor:pointer}.tabela tr.click:hover td{background:var(--rose-ll)}
+.tabela td.num,.tabela th.num{text-align:right;white-space:nowrap}
+.rolagem{overflow-x:auto;margin:0 -20px;padding:0 20px}
+.vazio{padding:28px;text-align:center;color:var(--mute)}
+.selo{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.s-Rascunho{background:#eee;color:#666}.s-Enviado{background:var(--warn-l);color:var(--warn)}
+.s-Aprovado{background:var(--ok-l);color:var(--ok)}.s-Recusado{background:var(--bad-l);color:var(--bad)}
+.alerta{background:var(--bad-l);color:var(--bad)}
+/* Formulários */
+.campo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.campo label,.rot-campo{font-size:13px;font-weight:600;color:#5c5254}
+.campo input,.campo select,.campo textarea,input.busca{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;min-height:44px;width:100%}
+.campo textarea{min-height:76px;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus,input.busca:focus{outline:2px solid var(--rose-l);border-color:var(--rose)}
+.form-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}
+@media (max-width:700px){.form-grid{grid-template-columns:1fr 1fr}.c2,.c3{grid-column:span 1}.c4,.c6{grid-column:span 2}}
+.pergunta{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.pergunta:last-child{border-bottom:0}
+.pergunta .tit{font-weight:600}
+.opcoes{display:flex;gap:8px;flex-wrap:wrap}
+.opcoes label{position:relative}
+.opcoes input{position:absolute;opacity:0;pointer-events:none}
+.opcoes span{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:9px 18px;cursor:pointer;background:#fff;font-weight:500;min-width:64px;text-align:center}
+.opcoes input:checked+span{background:var(--rose);border-color:var(--rose);color:#fff}
+.secao-tit{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-d);font-weight:700;margin:6px 0 2px}
+.declara{background:var(--rose-ll);border:1px solid var(--rose-l);border-radius:12px;padding:16px;font-weight:600;line-height:1.5}
+.itens-orc .item{display:grid;grid-template-columns:minmax(0,1fr) 90px 130px 120px 44px;gap:8px;align-items:end;padding:10px 0;border-bottom:1px dashed var(--line)}
+@media (max-width:700px){.itens-orc .item{grid-template-columns:1fr 1fr;}.itens-orc .item .campo:first-child{grid-column:span 2}}
+.total-box{display:flex;justify-content:flex-end;gap:28px;font-size:15px;padding-top:12px;flex-wrap:wrap}
+.total-box b{font-size:22px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--rose-ll);border:1px solid var(--rose-l);color:var(--rose-d);border-radius:99px;padding:4px 10px;font-size:12px;font-weight:600}
+.chip.alerta{background:var(--bad-l);border-color:#f0c9c9;color:var(--bad)}
+.dl{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 14px;font-size:14px}
+.dl dt{color:var(--mute)}.dl dd{margin:0;word-break:break-word}
+.abas{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:16px;overflow-x:auto}
+.abas button{border:0;background:none;padding:10px 14px;cursor:pointer;font-weight:600;color:var(--mute);border-bottom:2px solid transparent;white-space:nowrap}
+.abas button.ativo{color:var(--rose-d);border-bottom-color:var(--rose)}
+/* Gráfico */
+.barras{display:flex;align-items:flex-end;gap:14px;height:170px;padding-top:10px}
+.barras .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;min-width:0}
+.barras .par{display:flex;gap:4px;align-items:flex-end;height:100%;width:100%;justify-content:center}
+.barras .b{width:40%;max-width:26px;border-radius:6px 6px 2px 2px;min-height:2px}
+.barras .b1{background:var(--rose-l)}.barras .b2{background:var(--rose)}
+.barras .m{font-size:12px;color:var(--mute)}
+.legenda{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-top:10px}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* Sobreposições */
+.veu{position:fixed;inset:0;background:rgba(47,42,43,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:92vh;overflow:auto;padding:24px}
+.modal.grande{max-width:900px}
+.modal .acoes{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;flex-wrap:wrap}
+.assin{position:fixed;inset:0;background:#fff;z-index:60;display:flex;flex-direction:column}
+.assin .cab{padding:18px 22px 10px;max-width:900px;margin:0 auto;width:100%}
+.assin .texto{color:#5c5254;line-height:1.5;font-size:15px;max-height:22vh;overflow:auto}
+.assin .area{flex:1;margin:10px 22px;border:2px dashed var(--rose);border-radius:16px;position:relative;background:var(--rose-ll);min-height:200px}
+.assin canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.assin .linha{position:absolute;left:8%;right:8%;bottom:28%;border-bottom:1.5px solid #c9a9af;pointer-events:none}
+.assin .dica{position:absolute;left:8%;bottom:calc(28% - 26px);font-size:13px;color:var(--mute);pointer-events:none}
+.assin .pe{display:flex;justify-content:space-between;gap:10px;padding:12px 22px 22px;flex-wrap:wrap}
+.carregando{position:fixed;inset:0;background:rgba(255,255,255,.7);z-index:70;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-weight:600;color:var(--rose-d)}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--rose-l);border-top-color:var(--rose);animation:g 0.8s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+.aviso{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;z-index:80;font-weight:500;box-shadow:0 8px 30px rgba(0,0,0,.2);max-width:calc(100% - 32px)}
+.aviso.erro{background:var(--bad)}
+iframe.previa{width:100%;height:70vh;border:1px solid var(--line);border-radius:10px;background:#fff}
+.lista-simples>div{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);align-items:center}
+.lista-simples>div:last-child{border-bottom:0}
+.hidden{display:none!important}
+.galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.galeria .f{border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;background:#fff;display:flex;flex-direction:column}
+.galeria .f .im{aspect-ratio:1/1;background:var(--rose-ll) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--rose-d);font-weight:700;font-size:13px}
+.galeria .f .tx{padding:8px 10px;font-size:12px;line-height:1.35}
+.galeria .f .tx b{display:block;font-size:13px}
+.grupo-tit{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose-d);font-weight:700;margin:18px 0 10px}
+.grupo-tit:first-child{margin-top:0}
+.tempo{position:relative;padding-left:22px}
+.tempo:before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--rose-l)}
+.tempo .ev{position:relative;padding:0 0 18px;cursor:pointer}
+.tempo .ev:before{content:"";position:absolute;left:-21px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--rose)}
+.tempo .ev .d{font-size:12px;color:var(--mute);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.tempo .ev .t{font-weight:700;margin:2px 0}
+.tempo .ev .o{font-size:14px;color:#5c5254;white-space:pre-wrap}
+.tempo .ev:hover .t{color:var(--rose-d)}
+.zona-up{border:2px dashed var(--rose-l);border-radius:14px;padding:22px;text-align:center;background:var(--rose-ll)}
+.zona-up img{max-width:100%;max-height:260px;border-radius:10px;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="nav" id="nav"></nav>
+  <main id="main"><div class="vazio">Carregando…</div></main>
+</div>
+<div id="camadas"></div>
+
+<script>
+/* ================================================================
+   Utilidades
+   ================================================================ */
+var LOGO = 'data:image/png;base64,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';
+var EM_GOOGLE = !!(window.google && google.script && google.script.run);
+var DB = { clientes: [], procedimentos: [], orcamentos: [], sessoes: [], pagamentos: [], arquivos: [], config: {}, links: {} };
+var VIEW = { nome: 'painel', p: {} };
+var PILHA = [];
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function brl(v) { return (Number(v) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+function num(v) { if (typeof v === 'number') return v; v = String(v || '').replace(/[^\d,.-]/g, ''); if (v.indexOf(',') >= 0) v = v.replace(/\./g, '').replace(',', '.'); return Number(v) || 0; }
+function hoje() { var d = new Date(); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
+function p2(n) { return (n < 10 ? '0' : '') + n; }
+function dataBR(s) { if (!s) return ''; s = String(s).slice(0, 10); var a = s.split('-'); return a.length === 3 ? a[2] + '/' + a[1] + '/' + a[0] : s; }
+function dataExtenso(s) { var m = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro']; var a = String(s || hoje()).slice(0,10).split('-'); return Number(a[2]) + ' de ' + m[Number(a[1]) - 1] + ' de ' + a[0]; }
+function mesNome(ym, curto) { var m = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez']; var M = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']; var a = ym.split('-'); return curto ? m[Number(a[1]) - 1] : M[Number(a[1]) - 1] + ' de ' + a[0]; }
+function idade(s) { if (!s) return ''; var n = new Date(s + 'T12:00:00'), h = new Date(); var i = h.getFullYear() - n.getFullYear(); if (h.getMonth() < n.getMonth() || (h.getMonth() === n.getMonth() && h.getDate() < n.getDate())) i--; return isNaN(i) ? '' : i + ' anos'; }
+function porId(lista, id) { for (var i = 0; i < lista.length; i++) if (lista[i].id === id) return lista[i]; return null; }
+function digitos(s) { return String(s || '').replace(/\D/g, ''); }
+function waLink(tel, texto) { var d = digitos(tel); if (!d) return ''; if (d.length <= 11) d = '55' + d; return 'https://wa.me/' + d + '?text=' + encodeURIComponent(texto || ''); }
+function nOrc(n) { return String(n || 0).padStart(4, '0'); }
+function cfg(k, padrao) { return (DB.config && DB.config[k]) || padrao || ''; }
+function pdfUrl(id) { return id ? 'https://drive.google.com/file/d/' + id + '/view' : ''; }
+function porData(a, b) { return String(b.data || b.criadoEm).localeCompare(String(a.data || a.criadoEm)); }
+
+var ICON = {
+  painel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>',
+  clientes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8M22 21c0-3-2-5-5-6"/></svg>',
+  orcamentos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h8M9 17h5"/></svg>',
+  sessoes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M8 14l2.5 2.5L16 12"/></svg>',
+  financeiro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+  config: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+  mais: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>',
+  caneta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+  zap: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.6 1 1.3 1.7.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/></svg>',
+  email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>',
+  camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>'
+};
+
+/* ================================================================
+   Comunicação com o Google (ou modo demonstração)
+   ================================================================ */
+function chamar(acao, payload) {
+  return new Promise(function (ok, falha) {
+    var fim = function (txt) { var r = typeof txt === 'string' ? JSON.parse(txt) : txt; if (r.ok) ok(r.dados); else falha(new Error(r.erro)); };
+    if (EM_GOOGLE) {
+      google.script.run.withSuccessHandler(fim).withFailureHandler(falha).api(acao, JSON.stringify(payload || {}));
+    } else {
+      setTimeout(function () { try { fim(Demo.api(acao, payload || {})); } catch (e) { falha(e); } }, 250);
+    }
+  });
+}
+
+var Demo = {
+  chave: 'debora_demo_v1',
+  ler: function () { try { var s = localStorage.getItem(this.chave); if (s) return JSON.parse(s); } catch (e) {} return this.semente(); },
+  gravar: function (d) { try { localStorage.setItem(this.chave, JSON.stringify(d)); } catch (e) {} this._mem = d; },
+  dados: function () { if (!this._mem) this._mem = this.ler(); return this._mem; },
+  id: function () { return Math.random().toString(36).slice(2, 8) + Date.now().toString(36); },
+  semente: function () {
+    var d = new Date(), y = d.getFullYear(), m = d.getMonth();
+    function dt(mm, dd) { var x = new Date(y, m - mm, dd); return x.getFullYear() + '-' + p2(x.getMonth() + 1) + '-' + p2(x.getDate()); }
+    var procs = [['Harmonização facial',0],['Harmonização corporal',0],['Toxina botulínica',0],['Bioestimuladores',0],['Limpeza de pele',150],['Preenchimento',0],['Peeling químico',200],['Microagulhamento',300],['Skinbooster',0],['Remodelação glútea',0],['Mesoterapia facial',0],['Mesoterapia corporal',0],['Mesoterapia capilar',0],['Aplicação de injetável com receita',0]]
+      .map(function (p, i) { return { id: 'p' + i, nome: p[0], preco: p[1], descricao: '', ativo: 'sim' }; });
+    var c1 = { id: 'c1', nome: 'Ana Paula Souza (exemplo)', cpf: '123.456.789-00', telefone: '(14) 99999-0001', email: 'ana@exemplo.com', endereco: 'Rua Exemplo, 100 - Centro, Tupã', nascimento: '1990-' + p2(m + 1) + '-15', profissao: 'Professora', fichaData: dt(2, 5), anamnese: { gravida: 'Não', lactante: 'Não', diabetes: 'Não', anemia: 'Não', hipertensao: 'Não', cardiaco: 'Não', tireoide: 'Sim', tireoide_det: 'Levotiroxina 50mcg', alergia: 'Dipirona', neoplasia: 'Não', sol: 'Pouco', fumante: 'Não', alcool: 'Pouco', tratamento12m: 'Não', cirurgia: 'Não', cosmeticos: 'Protetor solar e hidratante' }, obs: '' };
+    var c2 = { id: 'c2', nome: 'Mariana Lima (exemplo)', cpf: '987.654.321-00', telefone: '(14) 99999-0002', email: '', endereco: 'Av. Tamoios, 500 - Tupã', nascimento: '1985-03-02', profissao: 'Advogada', fichaData: dt(1, 10), anamnese: { gravida: 'Não', lactante: 'Não', diabetes: 'Não', anemia: 'Não', hipertensao: 'Não', cardiaco: 'Não', tireoide: 'Não', neoplasia: 'Não', sol: 'Muito', fumante: 'Não', alcool: 'Não', tratamento12m: 'Sim', tratamento12m_det: 'Limpeza de pele', cirurgia: 'Não' }, obs: '' };
+    var o1 = { id: 'o1', numero: 1, clienteId: 'c1', clienteNome: c1.nome, data: dt(2, 5), validade: dt(2, 20), itens: [{ nome: 'Microagulhamento', qtd: 4, valor: 300 }, { nome: 'Limpeza de pele', qtd: 1, valor: 150 }], desconto: 50, total: 1300, formaPagamento: 'Cartão de crédito', condicoes: 'Em 4x sem juros', obs: '', status: 'Aprovado', aprovadoEm: dt(2, 5) };
+    var o2 = { id: 'o2', numero: 2, clienteId: 'c2', clienteNome: c2.nome, data: dt(0, 3), validade: dt(0, 18), itens: [{ nome: 'Mesoterapia corporal', qtd: 10, valor: 120 }], desconto: 200, total: 1000, formaPagamento: 'Pix', condicoes: 'Pagamento por sessão', obs: '', status: 'Aprovado', aprovadoEm: dt(0, 3) };
+    var o3 = { id: 'o3', numero: 3, clienteId: 'c2', clienteNome: c2.nome, data: hoje(), validade: '', itens: [{ nome: 'Bioestimuladores', qtd: 2, valor: 450 }], desconto: 0, total: 900, formaPagamento: 'Pix', condicoes: '', obs: '', status: 'Enviado' };
+    var pg = [
+      { id: 'g1', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(2, 5), valor: 325, forma: 'Cartão de crédito', obs: '1/4' },
+      { id: 'g2', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(1, 5), valor: 325, forma: 'Cartão de crédito', obs: '2/4' },
+      { id: 'g3', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(0, 5), valor: 325, forma: 'Cartão de crédito', obs: '3/4' },
+      { id: 'g4', clienteId: 'c2', clienteNome: c2.nome, orcamentoId: 'o2', data: dt(0, 4), valor: 100, forma: 'Pix', obs: '' },
+      { id: 'g5', clienteId: 'c2', clienteNome: c2.nome, orcamentoId: 'o2', data: dt(0, 11), valor: 100, forma: 'Pix', obs: '' },
+      { id: 'g6', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: '', data: dt(3, 12), valor: 50, forma: 'Dinheiro', obs: 'Sobrancelha' },
+      { id: 'g7', clienteId: 'c2', clienteNome: c2.nome, orcamentoId: '', data: dt(4, 20), valor: 150, forma: 'Pix', obs: 'Limpeza de pele' }
+    ];
+    var ss = [
+      { id: 's1', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(2, 6), procedimento: 'Microagulhamento', area: 'Face', produtos: 'Agulha 1,0 mm · ativo clareador', obs: 'Leve eritema, esperado.' },
+      { id: 's2', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(1, 6), procedimento: 'Microagulhamento', area: 'Face', produtos: 'Agulha 1,0 mm', obs: '' },
+      { id: 's3', clienteId: 'c2', clienteNome: c2.nome, orcamentoId: 'o2', data: dt(0, 4), procedimento: 'Mesoterapia corporal', area: 'Abdômen', produtos: 'Enzimas lipolíticas', obs: '' }
+    ];
+    var d0 = { clientes: [c1, c2], procedimentos: procs, orcamentos: [o1, o2, o3], sessoes: ss, pagamentos: pg, arquivos: [],
+      config: { nome: 'Débora Rodrigues', subtitulo: 'Estética Avançada', cidade: 'Tupã', telefone: '(14) 99745-0903', email: 'drdebora.rodrigueslima@gmail.com', endereco: 'R. Goitacazes, 1.000 - Instituto Drefahl - Centro, Tupã-SP', instagram: '@dra.deborarodrigues', documento: '', pix: '', validadeDias: '15', emailContador: '' } };
+    return d0;
+  },
+  api: function (acao, p) {
+    var d = this.dados();
+    var agora = new Date().toISOString();
+    if (acao === 'carregar') {
+      d.arquivos = d.arquivos || []; var c = JSON.parse(JSON.stringify(d)); c.links = {}; c.usuario = 'modo demonstração'; return { ok: true, dados: c };
+    }
+    if (acao === 'salvar' || acao === 'documento') {
+      var t = p.tabela, r = acao === 'salvar' ? p.registro : p.registro;
+      var lista = d[t], atual = r.id ? porId(lista, r.id) : null;
+      if (t === 'orcamentos' && !r.numero && !(atual && atual.numero)) r.numero = lista.reduce(function (m, o) { return Math.max(m, o.numero || 0); }, 0) + 1;
+      if (atual) { Object.keys(r).forEach(function (k) { atual[k] = r[k]; }); atual.atualizadoEm = agora; }
+      else { atual = JSON.parse(JSON.stringify(r)); atual.id = atual.id || this.id(); atual.criadoEm = agora; lista.push(atual); }
+      if (acao === 'documento') {
+        if (p.assinatura) { atual.assinaturaId = 'demo'; atual._assinatura = p.assinatura; }
+        atual[p.campoPdf || 'pdfId'] = 'demo';
+      }
+      this.gravar(d);
+      return { ok: true, dados: JSON.parse(JSON.stringify(atual)) };
+    }
+    if (acao === 'excluir') { d[p.tabela] = d[p.tabela].filter(function (x) { return x.id !== p.id; }); this.gravar(d); return { ok: true, dados: { id: p.id } }; }
+    if (acao === 'salvarConfig') { d.config = p; this.gravar(d); return { ok: true, dados: p }; }
+    if (acao === 'email') { return { ok: true, dados: { enviado: true, demo: true } }; }
+    if (acao === 'arquivo') {
+      var a = JSON.parse(JSON.stringify(p.registro)); a.id = this.id(); a.criadoEm = agora; a.arquivoId = 'demo'; a.mime = p.mime; a.nomeArquivo = p.nome;
+      d.arquivos = d.arquivos || []; d.arquivos.push(a);
+      this.completos = this.completos || {}; this.completos[a.id] = 'data:' + p.mime + ';base64,' + p.base64;
+      var resp = { arquivo: a };
+      if (p.vincular) { var alvo = porId(d[p.vincular.tabela], p.vincular.id); Object.keys(p.vincular.campos || {}).forEach(function (k) { alvo[k] = p.vincular.campos[k]; }); alvo[p.vincular.campoPdf || 'pdfId'] = 'demo'; alvo.assinaturaId = 'papel'; alvo._papel = a.id; resp.vinculado = JSON.parse(JSON.stringify(alvo)); resp.tabela = p.vincular.tabela; }
+      this.gravar(d); return { ok: true, dados: resp };
+    }
+    if (acao === 'relatorio') { return { ok: true, dados: { demo: true, enviado: !!p.para } }; }
+    return { ok: false, erro: 'Ação desconhecida' };
+  },
+  zerar: function () { try { localStorage.removeItem(this.chave); } catch (e) {} this._mem = null; }
+};
+
+/* ================================================================
+   Interface: avisos, carregando, modais
+   ================================================================ */
+function aviso(txt, erro) {
+  var el = document.createElement('div'); el.className = 'aviso' + (erro ? ' erro' : ''); el.textContent = txt;
+  document.body.appendChild(el); setTimeout(function () { el.remove(); }, erro ? 6000 : 3200);
+}
+var _carr = null;
+function carregando(txt) {
+  if (txt === false) { if (_carr) _carr.remove(); _carr = null; return; }
+  if (!_carr) { _carr = document.createElement('div'); _carr.className = 'carregando'; document.body.appendChild(_carr); }
+  _carr.innerHTML = '<div class="spin"></div><div>' + esc(txt || 'Salvando no Google…') + '</div>';
+}
+function tarefa(txt, prom) {
+  carregando(txt);
+  return prom.then(function (r) { carregando(false); return r; }, function (e) { carregando(false); aviso('Não deu certo: ' + e.message, true); throw e; });
+}
+function modal(html, grande) {
+  var v = document.createElement('div'); v.className = 'veu';
+  v.innerHTML = '<div class="modal' + (grande ? ' grande' : '') + '">' + html + '</div>';
+  v.addEventListener('click', function (e) { if (e.target === v) v.remove(); });
+  document.getElementById('camadas').appendChild(v);
+  v.fechar = function () { v.remove(); };
+  v.querySelectorAll('[data-fechar]').forEach(function (b) { b.onclick = v.fechar; });
+  return v;
+}
+function confirmar(texto, botao) {
+  return new Promise(function (ok) {
+    var m = modal('<h2>' + esc(texto) + '</h2><div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="sim">' + esc(botao || 'Confirmar') + '</button></div>');
+    m.querySelector('#sim').onclick = function () { m.fechar(); ok(true); };
+  });
+}
+function previa(html, titulo) {
+  var m = modal('<div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">' + esc(titulo || 'Documento') + '</h2><div class="row"><button class="btn peq" id="imp">Imprimir / salvar PDF</button><button class="btn peq" data-fechar>Fechar</button></div></div><iframe class="previa"></iframe>', true);
+  var f = m.querySelector('iframe'); f.srcdoc = html;
+  m.querySelector('#imp').onclick = function () { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { aviso('Não foi possível imprimir aqui.', true); } };
+}
+
+/* ================================================================
+   Assinatura (dedo ou caneta no tablet)
+   ================================================================ */
+function coletarAssinatura(op) {
+  return new Promise(function (resolve) {
+    var el = document.createElement('div'); el.className = 'assin';
+    el.innerHTML = '<div class="cab"><div class="secao-tit">Assinatura da cliente</div><h2 style="margin:4px 0 8px">' + esc(op.titulo) + '</h2><div class="texto">' + (op.texto || '') + '</div></div>' +
+      '<div class="area"><div class="linha"></div><div class="dica">' + esc(op.nome || '') + ' · assine acima da linha</div><canvas></canvas></div>' +
+      '<div class="pe"><button class="btn" id="canc">Cancelar</button><div class="row"><button class="btn" id="limpar">Limpar</button><button class="btn ok" id="conf">' + ICON.caneta + ' Confirmar assinatura</button></div></div>';
+    document.body.appendChild(el);
+    document.documentElement.style.overflow = 'hidden';
+    var cv = el.querySelector('canvas'), ctx = cv.getContext('2d'), area = el.querySelector('.area');
+    var dpr = Math.max(1, window.devicePixelRatio || 1), tracos = [], atual = null, vazio = true;
+    function ajustar() { var r = area.getBoundingClientRect(); cv.width = r.width * dpr; cv.height = r.height * dpr; redesenhar(); }
+    function largura(pt) { return (pt.tipo === 'pen' ? 1.2 + 2.6 * (pt.p || .5) : 2.6) * dpr; }
+    function seg(a, b) { ctx.lineWidth = (largura(a) + largura(b)) / 2; ctx.beginPath(); ctx.moveTo(a.x * dpr, a.y * dpr); ctx.lineTo(b.x * dpr, b.y * dpr); ctx.stroke(); }
+    function redesenhar() { ctx.clearRect(0, 0, cv.width, cv.height); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1d2a52';
+      tracos.forEach(function (t) { if (t.length === 1) { ctx.beginPath(); ctx.arc(t[0].x * dpr, t[0].y * dpr, largura(t[0]) / 2, 0, 7); ctx.fillStyle = '#1d2a52'; ctx.fill(); } for (var i = 1; i < t.length; i++) seg(t[i - 1], t[i]); }); }
+    function pt(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top, p: e.pressure, tipo: e.pointerType }; }
+    cv.addEventListener('pointerdown', function (e) { e.preventDefault(); cv.setPointerCapture(e.pointerId); atual = [pt(e)]; tracos.push(atual); vazio = false; redesenhar(); });
+    cv.addEventListener('pointermove', function (e) { if (!atual) return; e.preventDefault(); var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; if (!evs.length) evs = [e]; evs.forEach(function (ev) { var p = pt(ev); seg(atual[atual.length - 1], p); atual.push(p); }); });
+    function fim() { atual = null; }
+    cv.addEventListener('pointerup', fim); cv.addEventListener('pointercancel', fim);
+    window.addEventListener('resize', ajustar);
+    setTimeout(ajustar, 30);
+    function fechar(v) { window.removeEventListener('resize', ajustar); document.documentElement.style.overflow = ''; el.remove(); resolve(v); }
+    el.querySelector('#canc').onclick = function () { fechar(null); };
+    el.querySelector('#limpar').onclick = function () { tracos = []; vazio = true; redesenhar(); };
+    el.querySelector('#conf').onclick = function () {
+      if (vazio) { aviso('Peça para a cliente assinar antes de confirmar.', true); return; }
+      // recorta a assinatura e gera um PNG leve
+      var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+      tracos.forEach(function (t) { t.forEach(function (q) { minX = Math.min(minX, q.x); minY = Math.min(minY, q.y); maxX = Math.max(maxX, q.x); maxY = Math.max(maxY, q.y); }); });
+      var pad = 12, w = maxX - minX + pad * 2, h = maxY - minY + pad * 2;
+      var esc2 = Math.min(1, 700 / w) * 2;
+      var out = document.createElement('canvas'); out.width = Math.max(10, w * esc2); out.height = Math.max(10, h * esc2);
+      var o = out.getContext('2d'); o.lineCap = 'round'; o.lineJoin = 'round'; o.strokeStyle = o.fillStyle = '#1d2a52';
+      tracos.forEach(function (t) {
+        function X(q) { return (q.x - minX + pad) * esc2; } function Y(q) { return (q.y - minY + pad) * esc2; }
+        if (t.length === 1) { o.beginPath(); o.arc(X(t[0]), Y(t[0]), largura(t[0]) / dpr * esc2 / 2, 0, 7); o.fill(); }
+        for (var i = 1; i < t.length; i++) { o.lineWidth = (largura(t[i - 1]) + largura(t[i])) / 2 / dpr * esc2; o.beginPath(); o.moveTo(X(t[i - 1]), Y(t[i - 1])); o.lineTo(X(t[i]), Y(t[i])); o.stroke(); }
+      });
+      fechar(out.toDataURL('image/png'));
+    };
+  });
+}
+
+/* ================================================================
+   Documentos (viram PDF no Google Drive)
+   ================================================================ */
+var DECL_FICHA = 'Declaro que todas as informações acima expressam a verdade, não cabendo à profissional responsabilidade por fatos omitidos ou falsos.';
+var DECL_ORC = 'Declaro que li e estou de acordo com os procedimentos, valores e condições de pagamento descritos neste orçamento.';
+var DECL_SESSAO = 'Declaro que recebi nesta data o procedimento descrito acima, que fui orientada sobre os cuidados antes e depois do procedimento e que estou de acordo com sua realização.';
+
+function docBase(titulo, corpo) {
+  var c = DB.config || {};
+  var contato = [c.endereco, c.telefone, c.instagram, c.email].filter(Boolean).map(esc).join(' &nbsp;·&nbsp; ');
+  return '<!DOCTYPE html><html><head><meta charset="utf-8"><style>' +
+    '@page{size:A4;margin:16mm 16mm 18mm}body{font-family:Georgia,"Times New Roman",serif;color:#2f2a2b;font-size:12.5px;line-height:1.45;margin:0}' +
+    '.cab{text-align:center;border-bottom:1.5px solid #d9b7bd;padding-bottom:10px;margin-bottom:16px}.nome{font-size:28px;font-style:italic;color:#94525e;letter-spacing:.02em}' +
+    '.sub{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#7a7072;margin-top:2px}.ctt{font-size:10px;color:#7a7072;margin-top:6px}' +
+    'h1{font-size:16px;text-align:center;letter-spacing:.12em;text-transform:uppercase;margin:0 0 14px}' +
+    'h2{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#94525e;margin:16px 0 6px;border-bottom:1px solid #eadfe1;padding-bottom:3px}' +
+    'table{width:100%;border-collapse:collapse}td,th{padding:5px 6px;vertical-align:top;text-align:left}' +
+    '.kv td{border-bottom:1px solid #f0e8e9}.kv td.k{width:38%;color:#5c5254}' +
+    '.itens th{background:#f6ecee;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em}.itens td{border-bottom:1px solid #eadfe1}.n{text-align:right;white-space:nowrap}' +
+    '.tot td{font-size:13px}.tot .g{font-size:16px;font-weight:bold;color:#94525e}' +
+    '.decl{border:1px solid #e3cdd1;background:#fbf4f5;padding:10px 12px;font-weight:bold;margin-top:16px}' +
+    '.ass{margin-top:22px;text-align:center}.ass img{max-height:90px;max-width:320px}.ass .l{border-top:1px solid #2f2a2b;width:320px;margin:4px auto 0;padding-top:4px;font-size:11px}' +
+    '.rod{margin-top:26px;font-size:9.5px;color:#9a9092;text-align:center}' +
+    '</style></head><body><div class="cab"><img src="' + LOGO + '" style="height:78px" alt="' + esc(c.nome || 'Débora Rodrigues') + '">' +
+    (contato ? '<div class="ctt">' + contato + '</div>' : '') + '</div><h1>' + esc(titulo) + '</h1>' + corpo + '</body></html>';
+}
+function kv(pares) { return '<table class="kv">' + pares.filter(function (p) { return p[1] !== undefined; }).map(function (p) { return '<tr><td class="k">' + esc(p[0]) + '</td><td>' + esc(p[1] || '—') + '</td></tr>'; }).join('') + '</table>'; }
+function blocoAssinatura(decl, nome, img, data) {
+  return '<div class="decl">' + esc(decl) + '</div><p style="margin-top:14px">' + esc(cfg('cidade', 'Tupã')) + ', ' + esc(dataExtenso(data)) + '.</p>' +
+    '<div class="ass">' + (img ? '<img src="' + img + '">' : '<div style="height:60px"></div>') + '<div class="l">Assinatura da cliente · ' + esc(nome) + '</div></div>' +
+    (img ? '<div class="rod">Assinado eletronicamente no tablet em ' + esc(new Date().toLocaleString('pt-BR')) + '.</div>' : '');
+}
+
+function docFicha(cli, img) {
+  var a = cli.anamnese || {}, corpo = '<h2>Dados pessoais</h2>' + kv([['Nome', cli.nome], ['RG/CPF', cli.cpf], ['Telefone', cli.telefone], ['E-mail', cli.email], ['Endereço', cli.endereco], ['Data de nascimento', dataBR(cli.nascimento) + (cli.nascimento ? ' (' + idade(cli.nascimento) + ')' : '')], ['Profissão', cli.profissao]]);
+  var linhas = [];
+  ANAMNESE.forEach(function (q) {
+    if (q.sec) { if (linhas.length) corpo += kv(linhas); linhas = []; corpo += '<h2>' + esc(q.sec) + '</h2>'; return; }
+    var v = a[q.k] || '', det = a[q.k + '_det'];
+    if (det) v = (v ? v + ' — ' : '') + (q.det ? q.det + ': ' : '') + det;
+    linhas.push([q.t, v]);
+  });
+  corpo += kv(linhas);
+  corpo += blocoAssinatura(DECL_FICHA, cli.nome, img, cli.fichaData || hoje());
+  return docBase('Ficha de anamnese', corpo);
+}
+
+function docOrcamento(o, cli, img) {
+  cli = cli || {};
+  var sub = 0;
+  var linhas = (o.itens || []).map(function (i) { var t = num(i.qtd) * num(i.valor); sub += t; return '<tr><td>' + esc(i.nome) + '</td><td class="n">' + esc(i.qtd) + '</td><td class="n">' + brl(i.valor) + '</td><td class="n">' + brl(t) + '</td></tr>'; }).join('');
+  var corpo = '<table><tr><td><b>Orçamento nº ' + nOrc(o.numero) + '</b></td><td class="n">Data: ' + dataBR(o.data) + (o.validade ? ' &nbsp;·&nbsp; Válido até: ' + dataBR(o.validade) : '') + '</td></tr></table>' +
+    '<h2>Cliente</h2>' + kv([['Nome', cli.nome || o.clienteNome], ['RG/CPF', cli.cpf], ['Telefone', cli.telefone]]) +
+    '<h2>Procedimentos</h2><table class="itens"><tr><th>Procedimento</th><th class="n">Sessões</th><th class="n">Valor unit.</th><th class="n">Subtotal</th></tr>' + linhas + '</table>' +
+    '<table class="tot" style="margin-top:8px"><tr><td class="n" style="width:75%">Subtotal</td><td class="n">' + brl(sub) + '</td></tr>' +
+    (num(o.desconto) ? '<tr><td class="n">Desconto</td><td class="n">− ' + brl(o.desconto) + '</td></tr>' : '') +
+    '<tr><td class="n g">Total</td><td class="n g">' + brl(o.total) + '</td></tr></table>' +
+    '<h2>Pagamento</h2>' + kv([['Forma de pagamento', o.formaPagamento], ['Condições', o.condicoes]]) +
+    (o.obs ? '<h2>Observações</h2><p>' + esc(o.obs).replace(/\n/g, '<br>') + '</p>' : '');
+  if (img || o.status === 'Aprovado') corpo += blocoAssinatura(DECL_ORC, cli.nome || o.clienteNome, img, o.aprovadoEm || hoje());
+  else corpo += '<div class="decl" style="font-weight:normal">Para aprovar, basta responder esta mensagem ou falar com a Débora. A assinatura é feita no dia do atendimento.</div>';
+  return docBase('Orçamento', corpo);
+}
+
+function docSessao(s, cli, img) {
+  cli = cli || {};
+  var orc = s.orcamentoId ? porId(DB.orcamentos, s.orcamentoId) : null;
+  var corpo = '<h2>Cliente</h2>' + kv([['Nome', cli.nome || s.clienteNome], ['RG/CPF', cli.cpf]]) +
+    '<h2>Atendimento</h2>' + kv([['Data', dataBR(s.data)], ['Procedimento', s.procedimento], ['Área tratada', s.area], ['Produtos / parâmetros', s.produtos], ['Orçamento', orc ? 'nº ' + nOrc(orc.numero) + ' — sessão ' + numeroSessao(s) : undefined]]) +
+    (s.obs ? '<h2>Observações e cuidados</h2><p>' + esc(s.obs).replace(/\n/g, '<br>') + '</p>' : '') +
+    blocoAssinatura(DECL_SESSAO, cli.nome || s.clienteNome, img, s.data);
+  return docBase('Registro de atendimento', corpo);
+}
+function numeroSessao(s) {
+  var lista = DB.sessoes.filter(function (x) { return x.orcamentoId && x.orcamentoId === s.orcamentoId && x.procedimento === s.procedimento; }).sort(function (a, b) { return String(a.data + a.criadoEm).localeCompare(String(b.data + b.criadoEm)); });
+  var i = lista.indexOf(s); if (i < 0) i = lista.length;
+  var orc = porId(DB.orcamentos, s.orcamentoId), tot = 0;
+  if (orc) (orc.itens || []).forEach(function (it) { if (it.nome === s.procedimento) tot += num(it.qtd); });
+  return (i + 1) + (tot ? ' de ' + tot : '');
+}
+
+/** Envia o documento para o Google: salva o registro, a assinatura e gera o PDF. */
+function gerarDocumento(tabela, registro, html, assinatura, nomeArquivo, campoPdf) {
+  return chamar('documento', { tabela: tabela, registro: registro, html: html, assinatura: assinatura, nomeArquivo: nomeArquivo, campoPdf: campoPdf || 'pdfId' })
+    .then(function (r) { substituir(tabela, r); return r; });
+}
+function substituir(tabela, r) {
+  var l = DB[tabela], i = -1;
+  for (var k = 0; k < l.length; k++) if (l[k].id === r.id) i = k;
+  if (i >= 0) l[i] = r; else l.push(r);
+}
+function verDocumento(tipo, reg) {
+  var campo = tipo === 'ficha' ? 'fichaPdfId' : 'pdfId';
+  if (EM_GOOGLE && reg[campo] && reg[campo] !== 'demo') { window.open(pdfUrl(reg[campo]), '_blank'); return; }
+  var cli = porId(DB.clientes, tipo === 'ficha' ? reg.id : reg.clienteId);
+  var img = reg._assinatura || null;
+  if (tipo === 'ficha') previa(docFicha(reg, img), 'Ficha de anamnese');
+  if (tipo === 'orcamento') previa(docOrcamento(reg, cli, img), 'Orçamento nº ' + nOrc(reg.numero));
+  if (tipo === 'sessao') previa(docSessao(reg, cli, img), 'Registro de atendimento');
+}
+
+/* ================================================================
+   Navegação
+   ================================================================ */
+var MENU = [['painel', 'Painel'], ['clientes', 'Clientes'], ['orcamentos', 'Orçamentos'], ['sessoes', 'Atendimentos'], ['financeiro', 'Financeiro'], ['config', 'Configurações']];
+function desenharNav() {
+  var raiz = VIEW.nome.replace(/Form$|Det$/, '');
+  if (raiz === 'cliente' || raiz === 'ficha') raiz = 'clientes';
+  if (raiz === 'orcamento') raiz = 'orcamentos';
+  if (raiz === 'sessao') raiz = 'sessoes';
+  var h = '<div class="marca-logo"><img src="' + LOGO + '" alt="' + esc(cfg('nome', 'Débora Rodrigues')) + '"></div>';
+  if (!EM_GOOGLE) h += '<div class="demo-tag"><b>Modo demonstração.</b> Os dados ficam só neste aparelho. Instalado no Google, tudo vai para a planilha e o Drive.</div>';
+  MENU.forEach(function (m) { h += '<button data-ir="' + m[0] + '" class="' + (raiz === m[0] ? 'ativo' : '') + '">' + ICON[m[0]] + '<span>' + m[1] + '</span></button>'; });
+  h += '<div class="rodape">' + esc(DB.usuario || '') + '</div>';
+  var nav = document.getElementById('nav'); nav.innerHTML = h;
+  nav.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { PILHA = []; ir(b.dataset.ir); }; });
+}
+function ir(nome, p, semPilha) {
+  if (!semPilha && VIEW.nome) PILHA.push(VIEW);
+  VIEW = { nome: nome, p: p || {} };
+  desenharNav();
+  var main = document.getElementById('main');
+  main.innerHTML = (VIEWS[nome] || VIEWS.painel)(VIEW.p);
+  if (ACOES[nome]) ACOES[nome](main, VIEW.p);
+  main.querySelectorAll('[data-voltar]').forEach(function (b) { b.onclick = voltar; });
+  ligarLinks(main);
+  window.scrollTo(0, 0);
+}
+function voltar() { var v = PILHA.pop(); if (v) ir(v.nome, v.p, true); else ir('painel', {}, true); }
+function recarregar() { ir(VIEW.nome, VIEW.p, true); }
+function ligarLinks(raiz) {
+  raiz.querySelectorAll('[data-abrir]').forEach(function (el) {
+    el.onclick = function (e) { if (e.target.closest('a,button:not([data-abrir])') && e.target.closest('[data-abrir]') !== e.target.closest('a,button')) return; var a = el.dataset.abrir.split(':'); ir(a[0], { id: a[1], clienteId: a[2] }); };
+  });
+}
+function cabec(titulo, sub, botoes, comVoltar) {
+  return (comVoltar ? '<button class="voltar" data-voltar>‹ Voltar</button>' : '') +
+    '<div class="topo"><div><h1>' + titulo + '</h1>' + (sub ? '<div class="sub">' + sub + '</div>' : '') + '</div><div class="row">' + (botoes || '') + '</div></div>';
+}
+
+/* ================================================================
+   Cálculos
+   ================================================================ */
+function combinadoCliente(id) { return DB.orcamentos.filter(function (o) { return o.clienteId === id && o.status === 'Aprovado'; }).reduce(function (s, o) { return s + num(o.total); }, 0); }
+function recebidoCliente(id) { return DB.pagamentos.filter(function (p) { return p.clienteId === id; }).reduce(function (s, p) { return s + num(p.valor); }, 0); }
+function recebidoOrc(id) { return DB.pagamentos.filter(function (p) { return p.orcamentoId === id; }).reduce(function (s, p) { return s + num(p.valor); }, 0); }
+function somaMes(lista, campoData, campoValor, ym) { return lista.filter(function (x) { return String(x[campoData] || '').slice(0, 7) === ym; }).reduce(function (s, x) { return s + num(x[campoValor]); }, 0); }
+function aprovados() { return DB.orcamentos.filter(function (o) { return o.status === 'Aprovado'; }); }
+function aReceberTotal() { var c = aprovados().reduce(function (s, o) { return s + num(o.total); }, 0); var r = DB.pagamentos.filter(function (p) { return p.orcamentoId; }).reduce(function (s, p) { return s + num(p.valor); }, 0); return Math.max(0, c - r); }
+function ultimosMeses(n) { var r = [], d = new Date(); for (var i = n - 1; i >= 0; i--) { var x = new Date(d.getFullYear(), d.getMonth() - i, 1); r.push(x.getFullYear() + '-' + p2(x.getMonth() + 1)); } return r; }
+function alertasSaude(cli) {
+  var a = cli.anamnese || {}, r = [];
+  ANAMNESE.forEach(function (q) { if (q.alerta && (a[q.k] === 'Sim' || (q.txt && a[q.k] && !/^n[aã]o$/i.test(a[q.k])))) r.push(q.curto || q.t); });
+  return r;
+}
+
+/* ================================================================
+   Ficha de anamnese (igual ao papel)
+   ================================================================ */
+var SN = ['Sim', 'Não'], SNPM = ['Sim', 'Não', 'Pouco', 'Muito'];
+var ANAMNESE = [
+  { sec: 'Saúde' },
+  { k: 'gravida', t: 'Grávida', op: SN, alerta: 1 },
+  { k: 'lactante', t: 'Lactante', op: SN, alerta: 1 },
+  { k: 'diabetes', t: 'Diabetes', op: SN, det: 'Qual medicamento faz uso', alerta: 1 },
+  { k: 'anemia', t: 'Anemia', op: SN, det: 'Qual medicamento faz uso', alerta: 1 },
+  { k: 'hipertensao', t: 'Hipertensão', op: SN, det: 'Qual medicamento faz uso', alerta: 1 },
+  { k: 'cardiaco', t: 'Problemas cardíacos', op: SN, det: 'Se sim, qual?', alerta: 1 },
+  { k: 'tireoide', t: 'Disfunção de tireoide', op: SN, det: 'Qual medicamento faz uso', alerta: 1, curto: 'Tireoide' },
+  { k: 'outrasDoencas', t: 'Outros tipos de doenças não citadas: qual?', txt: 1, alerta: 1, curto: 'Outras doenças' },
+  { k: 'medicamentos', t: 'Uso de medicamento(s) não citados acima, qual e o motivo?', txt: 1, area: 1, alerta: 1, curto: 'Usa medicamentos' },
+  { k: 'alergia', t: 'Alergia a algum medicamento, cosméticos ou alimento?', txt: 1, alerta: 1, curto: 'Alergias' },
+  { k: 'alergiaMetais', t: 'Alérgico a metais', txt: 1, alerta: 1, curto: 'Alergia a metais' },
+  { k: 'neoplasia', t: 'Neoplasia', op: SN, alerta: 1 },
+  { k: 'neoplasiaSituacao', t: 'Se sim, como está?', op: ['Alta médica sob monitoramento', 'Em tratamento', 'Sob investigação'] },
+  { k: 'neoplasiaLocal', t: 'Localização', txt: 1 },
+  { sec: 'Hábitos' },
+  { k: 'sol', t: 'Exposição ao sol', op: SNPM },
+  { k: 'fumante', t: 'Fumante', op: SNPM },
+  { k: 'alcool', t: 'Ingestão de bebidas alcoólicas', op: SNPM },
+  { sec: 'Histórico estético' },
+  { k: 'tratamento12m', t: 'Tratamento estético nos últimos 12 meses', op: SN, det: 'Quais', area: 1 },
+  { k: 'cirurgia', t: 'Cirurgia plástica', op: SN, det: 'Quais', area: 1 },
+  { k: 'cosmeticos', t: 'Usa algum cosmético? Quais?', txt: 1, area: 1 },
+  { k: 'complemento', t: 'Deseja complementar com alguma informação relevante não questionada?', txt: 1, area: 1 }
+];
+
+function campo(nome, rot, valor, tipo, cls, extra) {
+  var v = esc(valor == null ? '' : valor);
+  var inp = tipo === 'area' ? '<textarea name="' + nome + '" ' + (extra || '') + '>' + v + '</textarea>' : '<input name="' + nome + '" type="' + (tipo || 'text') + '" value="' + v + '" ' + (extra || '') + '>';
+  return '<div class="campo ' + (cls || '') + '"><label>' + rot + '</label>' + inp + '</div>';
+}
+function opcoes(nome, lista, valor) {
+  return '<div class="opcoes">' + lista.map(function (o) { return '<label><input type="radio" name="' + nome + '" value="' + esc(o) + '"' + (valor === o ? ' checked' : '') + '><span>' + esc(o) + '</span></label>'; }).join('') + '</div>';
+}
+function lerForm(el) {
+  var o = {};
+  el.querySelectorAll('input,select,textarea').forEach(function (i) {
+    if (!i.name) return;
+    if (i.type === 'radio') { if (i.checked) o[i.name] = i.value; else if (!(i.name in o)) o[i.name] = ''; return; }
+    if (i.type === 'checkbox') { o[i.name] = i.checked; return; }
+    o[i.name] = i.value.trim();
+  });
+  return o;
+}
+// Permite desmarcar uma opção tocando de novo
+function opcoesDesmarcaveis(raiz) {
+  raiz.querySelectorAll('.opcoes input').forEach(function (i) {
+    i.addEventListener('click', function () { if (i._estava) { i.checked = false; } raiz.querySelectorAll('input[name="' + i.name + '"]').forEach(function (x) { x._estava = x.checked; }); });
+    i._estava = i.checked;
+  });
+}
+
+/* ================================================================
+   Telas
+   ================================================================ */
+var VIEWS = {}, ACOES = {};
+
+/* ---------- Painel ---------- */
+VIEWS.painel = function () {
+  var ym = hoje().slice(0, 7), meses = ultimosMeses(6);
+  var recMes = somaMes(DB.pagamentos, 'data', 'valor', ym);
+  var combMes = somaMes(aprovados(), 'aprovadoEm', 'total', ym);
+  var pend = DB.orcamentos.filter(function (o) { return o.status === 'Enviado' || o.status === 'Rascunho'; });
+  var max = 1, serie = meses.map(function (m) { var r = somaMes(DB.pagamentos, 'data', 'valor', m), c = somaMes(aprovados(), 'aprovadoEm', 'total', m); max = Math.max(max, r, c); return { m: m, r: r, c: c }; });
+  var mesAtual = Number(ym.slice(5));
+  var aniver = DB.clientes.filter(function (c) { return c.nascimento && Number(String(c.nascimento).slice(5, 7)) === mesAtual; });
+  var ultimas = DB.sessoes.slice().sort(porData).slice(0, 6);
+  var saud = new Date().getHours() < 12 ? 'Bom dia' : new Date().getHours() < 18 ? 'Boa tarde' : 'Boa noite';
+  var h = cabec(saud + ', ' + esc(cfg('nome', 'Débora').split(' ')[0]) + '!', esc(dataExtenso(hoje())),
+    '<button class="btn" data-novo="sessaoForm">' + ICON.caneta + ' Novo atendimento</button><button class="btn pri" data-novo="orcamentoForm">' + ICON.mais + ' Novo orçamento</button>');
+  h += '<div class="grid g4" style="margin-bottom:16px">' +
+    '<div class="card kpi"><div class="rot">Recebido em ' + mesNome(ym, true) + '</div><div class="val">' + brl(recMes) + '</div><div class="det">' + DB.pagamentos.filter(function (p) { return String(p.data).slice(0, 7) === ym; }).length + ' pagamentos</div></div>' +
+    '<div class="card kpi"><div class="rot">Fechado em ' + mesNome(ym, true) + '</div><div class="val">' + brl(combMes) + '</div><div class="det">orçamentos aprovados no mês</div></div>' +
+    '<div class="card kpi"><div class="rot">A receber</div><div class="val">' + brl(aReceberTotal()) + '</div><div class="det">dos orçamentos aprovados</div></div>' +
+    '<div class="card kpi"><div class="rot">Clientes</div><div class="val">' + DB.clientes.length + '</div><div class="det">' + pend.length + ' orçamento(s) aguardando</div></div></div>';
+  h += '<div class="grid g2" style="margin-bottom:16px"><div class="card"><h2>Últimos 6 meses</h2><div class="barras">' +
+    serie.map(function (s) { return '<div class="col"><div class="par"><div class="b b1" style="height:' + (s.c / max * 100) + '%" title="Fechado ' + brl(s.c) + '"></div><div class="b b2" style="height:' + (s.r / max * 100) + '%" title="Recebido ' + brl(s.r) + '"></div></div><div class="m">' + mesNome(s.m, true) + '</div></div>'; }).join('') +
+    '</div><div class="legenda"><span><i style="background:var(--rose-l)"></i>Fechado (orçamentos aprovados)</span><span><i style="background:var(--rose)"></i>Recebido</span></div></div>' +
+    '<div class="card"><h2>Orçamentos aguardando resposta</h2>' + (pend.length ? '<div class="lista-simples">' + pend.slice(0, 6).map(function (o) { return '<div data-abrir="orcamentoDet:' + o.id + '" style="cursor:pointer"><span><b>' + esc(o.clienteNome) + '</b><br><span class="small mute">nº ' + nOrc(o.numero) + ' · ' + dataBR(o.data) + '</span></span><span class="row"><span class="selo s-' + o.status + '">' + o.status + '</span><b>' + brl(o.total) + '</b></span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhum orçamento pendente.</div>') + '</div></div>';
+  h += '<div class="grid g2"><div class="card"><h2>Últimos atendimentos</h2>' + (ultimas.length ? '<div class="lista-simples">' + ultimas.map(function (s) { return '<div data-abrir="sessaoDet:' + s.id + '" style="cursor:pointer"><span><b>' + esc(s.clienteNome) + '</b><br><span class="small mute">' + esc(s.procedimento) + '</span></span><span class="small mute">' + dataBR(s.data) + '</span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhum atendimento registrado ainda.</div>') + '</div>' +
+    '<div class="card"><h2>Aniversariantes de ' + mesNome(ym).split(' ')[0].toLowerCase() + '</h2>' + (aniver.length ? '<div class="lista-simples">' + aniver.map(function (c) { return '<div><span><b>' + esc(c.nome) + '</b><br><span class="small mute">dia ' + String(c.nascimento).slice(8, 10) + '</span></span>' + (c.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(c.telefone, 'Feliz aniversário, ' + c.nome.split(' ')[0] + '! 🎉 Um carinho da ' + cfg('nome', 'Débora') + '.')) + '">' + ICON.zap + ' Parabéns</a>' : '') + '</div>'; }).join('') + '</div>' : '<div class="vazio">Nenhuma aniversariante este mês.</div>') + '</div></div>';
+  return h;
+};
+ACOES.painel = function (m) { m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); };
+
+/* ---------- Clientes ---------- */
+VIEWS.clientes = function () {
+  return cabec('Clientes', DB.clientes.length + ' cadastrada(s)', '<button class="btn pri" id="nova">' + ICON.mais + ' Nova cliente</button>') +
+    '<div class="card"><input class="busca" id="busca" placeholder="Buscar por nome, telefone ou CPF…" style="margin-bottom:10px"><div class="rolagem"><table class="tabela"><thead><tr><th>Nome</th><th>Telefone</th><th>Atenção</th><th class="num">Combinado</th><th class="num">Recebido</th><th class="num">Saldo</th></tr></thead><tbody id="lista"></tbody></table></div></div>';
+};
+ACOES.clientes = function (m) {
+  m.querySelector('#nova').onclick = function () { ir('fichaForm', {}); };
+  var busca = m.querySelector('#busca');
+  function desenhar() {
+    var q = busca.value.toLowerCase(), qd = digitos(q);
+    var l = DB.clientes.filter(function (c) { return !q || c.nome.toLowerCase().indexOf(q) >= 0 || (qd && (digitos(c.telefone).indexOf(qd) >= 0 || digitos(c.cpf).indexOf(qd) >= 0)); })
+      .sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); });
+    m.querySelector('#lista').innerHTML = l.length ? l.map(function (c) {
+      var comb = combinadoCliente(c.id), rec = recebidoCliente(c.id), al = alertasSaude(c);
+      return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><b>' + esc(c.nome) + '</b>' + (!c.assinaturaId ? '<br><span class="small" style="color:var(--warn)">Ficha sem assinatura</span>' : '') + '</td><td>' + esc(c.telefone) + '</td><td>' + (al.length ? '<span class="chip alerta">' + al.length + ' alerta(s)</span>' : '<span class="mute small">—</span>') + '</td><td class="num">' + brl(comb) + '</td><td class="num">' + brl(rec) + '</td><td class="num"><b>' + brl(Math.max(0, comb - rec)) + '</b></td></tr>';
+    }).join('') : '<tr><td colspan="6" class="vazio">' + (q ? 'Nenhuma cliente encontrada.' : 'Nenhuma cliente cadastrada ainda. Toque em “Nova cliente”.') + '</td></tr>';
+    ligarLinks(m);
+  }
+  busca.oninput = desenhar; desenhar();
+};
+
+/* ---------- Detalhe da cliente ---------- */
+VIEWS.clienteDet = function (p) {
+  var c = porId(DB.clientes, p.id); if (!c) return '<div class="vazio">Cliente não encontrada.</div>';
+  var aba = p.aba || 'resumo', al = alertasSaude(c), a = c.anamnese || {};
+  var orcs = DB.orcamentos.filter(function (o) { return o.clienteId === c.id; }).sort(porData);
+  var sess = DB.sessoes.filter(function (s) { return s.clienteId === c.id; }).sort(porData);
+  var pags = DB.pagamentos.filter(function (x) { return x.clienteId === c.id; }).sort(porData);
+  var arqs = (DB.arquivos || []).filter(function (x) { return x.clienteId === c.id; }).sort(porData);
+  var comb = combinadoCliente(c.id), rec = recebidoCliente(c.id);
+  var h = cabec('<span class="small mute" style="display:block;font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase">Pasta da cliente</span>' + esc(c.nome), [c.telefone, c.nascimento ? idade(c.nascimento) : '', c.profissao].filter(Boolean).map(esc).join(' · '),
+    (c.telefone ? '<a class="btn" target="_blank" href="' + esc(waLink(c.telefone, 'Olá, ' + c.nome.split(' ')[0] + '!')) + '">' + ICON.zap + ' WhatsApp</a>' : '') +
+    '<button class="btn" id="editar">Editar ficha</button>', true);
+  if (al.length) h += '<div class="card" style="margin-bottom:16px;border-color:#f0c9c9;background:#fffafa"><div class="row"><b style="color:var(--bad)">Atenção na anamnese:</b><div class="chips">' + al.map(function (x) { return '<span class="chip alerta">' + esc(x) + '</span>'; }).join('') + '</div></div></div>';
+  if (!c.assinaturaId) h += '<div class="card" style="margin-bottom:16px;border-color:#f1dfb9;background:#fffcf5"><div class="row" style="justify-content:space-between"><span><b style="color:var(--warn)">A ficha de anamnese ainda não foi assinada.</b></span><span class="row"><button class="btn peq" id="papelFicha">' + ICON.doc + ' Anexar ficha em papel</button><button class="btn pri peq" id="assinarFicha">' + ICON.caneta + ' Assinar no tablet</button></span></div></div>';
+  h += '<div class="grid g3" style="margin-bottom:16px"><div class="card kpi"><div class="rot">Combinado</div><div class="val">' + brl(comb) + '</div></div><div class="card kpi"><div class="rot">Recebido</div><div class="val">' + brl(rec) + '</div></div><div class="card kpi"><div class="rot">Saldo a receber</div><div class="val" style="color:' + (comb - rec > 0 ? 'var(--rose-d)' : 'inherit') + '">' + brl(Math.max(0, comb - rec)) + '</div></div></div>';
+  h += '<div class="card"><div class="abas">' + [['resumo', 'Ficha de anamnese'], ['sess', 'Evolução (' + sess.length + ')'], ['fotos', 'Fotos e documentos (' + arqs.length + ')'], ['orc', 'Orçamentos (' + orcs.length + ')'], ['pag', 'Pagamentos (' + pags.length + ')']].map(function (x) { return '<button data-aba="' + x[0] + '" class="' + (aba === x[0] ? 'ativo' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>';
+  if (aba === 'resumo') {
+    h += '<div class="row" style="justify-content:flex-end;margin-bottom:10px">' + (c.fichaPdfId ? '<button class="btn peq" id="verFicha">' + ICON.doc + ' Ver ficha em PDF</button>' : '') + '</div>';
+    h += '<dl class="dl"><dt>RG/CPF</dt><dd>' + esc(c.cpf || '—') + '</dd><dt>E-mail</dt><dd>' + esc(c.email || '—') + '</dd><dt>Endereço</dt><dd>' + esc(c.endereco || '—') + '</dd><dt>Nascimento</dt><dd>' + (c.nascimento ? dataBR(c.nascimento) + ' (' + idade(c.nascimento) + ')' : '—') + '</dd><dt>Profissão</dt><dd>' + esc(c.profissao || '—') + '</dd><dt>Ficha preenchida</dt><dd>' + (c.fichaData ? dataBR(c.fichaData) : '—') + (c.assinaturaId ? ' · assinada' : ' · <span style="color:var(--warn)">sem assinatura</span>') + '</dd>';
+    ANAMNESE.forEach(function (q) { if (q.sec) { h += '</dl><div class="secao-tit" style="margin:18px 0 8px">' + q.sec + '</div><dl class="dl">'; return; } var v = a[q.k] || '', d = a[q.k + '_det']; h += '<dt>' + esc(q.curto || q.t) + '</dt><dd>' + (v || d ? esc(v) + (d ? (v ? ' — ' : '') + esc(d) : '') : '<span class="mute">—</span>') + '</dd>'; });
+    h += '</dl>' + (c.obs ? '<div class="secao-tit" style="margin:18px 0 8px">Anotações da Débora</div><p>' + esc(c.obs).replace(/\n/g, '<br>') + '</p>' : '');
+  }
+  if (aba === 'orc') h += '<div class="row" style="justify-content:flex-end;margin-bottom:10px"><button class="btn pri peq" data-novo="orcamentoForm">' + ICON.mais + ' Novo orçamento</button></div>' + tabelaOrcamentos(orcs, true);
+  if (aba === 'sess') h += '<div class="row" style="justify-content:space-between;margin-bottom:10px"><span class="small mute">Histórico de tudo o que foi feito em cada visita.</span><button class="btn pri peq" data-novo="sessaoForm">' + ICON.caneta + ' Novo atendimento</button></div>' + linhaDoTempo(sess);
+  if (aba === 'fotos') h += '<div class="row" style="justify-content:space-between;margin-bottom:14px"><span class="small mute">Receitas, fotos de antes e depois e documentos digitalizados.</span><span class="row"><button class="btn peq" id="upArq">' + ICON.doc + ' Enviar arquivo</button><button class="btn pri peq" id="foto">' + ICON.camera + ' Tirar foto</button></span></div>' + galeria(arqs);
+  if (aba === 'pag') h += '<div class="row" style="justify-content:flex-end;margin-bottom:10px"><button class="btn pri peq" id="novoPag">' + ICON.mais + ' Registrar pagamento</button></div>' + tabelaPagamentos(pags, true);
+  return h + '</div>';
+};
+ACOES.clienteDet = function (m, p) {
+  var c = porId(DB.clientes, p.id); if (!c) return;
+  m.querySelectorAll('[data-aba]').forEach(function (b) { b.onclick = function () { p.aba = b.dataset.aba; recarregar(); }; });
+  m.querySelector('#editar').onclick = function () { ir('fichaForm', { id: c.id }); };
+  var vf = m.querySelector('#verFicha'); if (vf) vf.onclick = function () { verDocumento('ficha', c); };
+  var af = m.querySelector('#assinarFicha'); if (af) af.onclick = function () { assinarFicha(c).then(recarregar); };
+  var pf = m.querySelector('#papelFicha'); if (pf) pf.onclick = function () { enviarArquivo({ clienteId: c.id, tipo: 'Ficha assinada (papel)', travarTipo: true, vincular: { tabela: 'clientes', id: c.id, campoPdf: 'fichaPdfId', campos: { fichaData: hoje() } } }); };
+  var fo = m.querySelector('#foto'); if (fo) fo.onclick = function () { enviarArquivo({ clienteId: c.id, tipo: 'Antes', camera: true }); };
+  var ua = m.querySelector('#upArq'); if (ua) ua.onclick = function () { enviarArquivo({ clienteId: c.id, tipo: 'Receita' }); };
+  ligarGaleria(m);
+  m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, { clienteId: c.id }); }; });
+  var np = m.querySelector('#novoPag'); if (np) np.onclick = function () { formPagamento({ clienteId: c.id }); };
+  ligarPagamentos(m);
+};
+
+function assinarFicha(c) {
+  return coletarAssinatura({ titulo: 'Ficha de anamnese', nome: c.nome, texto: '<b>' + esc(DECL_FICHA) + '</b><br><span class="small">' + esc(cfg('cidade', 'Tupã')) + ', ' + dataExtenso(hoje()) + '.</span>' }).then(function (img) {
+    if (!img) return null;
+    c.fichaData = hoje();
+    return tarefa('Gerando a ficha em PDF no Google Drive…', gerarDocumento('clientes', c, docFicha(c, img), img, 'Ficha de anamnese - ' + c.nome, 'fichaPdfId'))
+      .then(function (r) { aviso('Ficha assinada e salva em PDF.'); return r; });
+  });
+}
+
+/* ---------- Formulário da ficha ---------- */
+VIEWS.fichaForm = function (p) {
+  var c = p.id ? porId(DB.clientes, p.id) : null, a = (c && c.anamnese) || {};
+  c = c || {};
+  var h = cabec(p.id ? 'Editar ficha' : 'Nova cliente', 'Ficha de anamnese', '', true);
+  h += '<form id="f" class="stack" autocomplete="off"><div class="card"><div class="secao-tit" style="margin-bottom:12px">Dados pessoais</div><div class="form-grid">' +
+    campo('nome', 'Nome completo *', c.nome, 'text', 'c6', 'required') +
+    campo('cpf', 'RG/CPF', c.cpf, 'text', 'c2') + campo('telefone', 'Telefone / WhatsApp', c.telefone, 'tel', 'c2', 'placeholder="(14) 99999-9999"') + campo('email', 'E-mail', c.email, 'email', 'c2') +
+    campo('endereco', 'Endereço', c.endereco, 'text', 'c6') +
+    campo('nascimento', 'Data de nascimento', c.nascimento, 'date', 'c2') + campo('profissao', 'Profissão', c.profissao, 'text', 'c4') +
+    '</div></div><div class="card">';
+  ANAMNESE.forEach(function (q) {
+    if (q.sec) { h += (q === ANAMNESE[0] ? '' : '</div><div class="card">') + '<div class="secao-tit">' + q.sec + '</div>'; return; }
+    h += '<div class="pergunta"><div class="tit">' + esc(q.t) + '</div>';
+    if (q.op) h += opcoes('a_' + q.k, q.op, a[q.k]);
+    if (q.det) h += '<div class="campo">' + (q.area ? '<textarea name="a_' + q.k + '_det" placeholder="' + esc(q.det) + '">' + esc(a[q.k + '_det'] || '') + '</textarea>' : '<input name="a_' + q.k + '_det" placeholder="' + esc(q.det) + '" value="' + esc(a[q.k + '_det'] || '') + '">') + '</div>';
+    if (q.txt) h += '<div class="campo">' + (q.area ? '<textarea name="a_' + q.k + '">' + esc(a[q.k] || '') + '</textarea>' : '<input name="a_' + q.k + '" value="' + esc(a[q.k] || '') + '">') + '</div>';
+    h += '</div>';
+  });
+  h += '</div><div class="card"><div class="secao-tit" style="margin-bottom:10px">Anotações internas (não aparecem na ficha)</div><div class="campo"><textarea name="obs" placeholder="Tipo de pele, preferências, observações…">' + esc(c.obs || '') + '</textarea></div></div>';
+  h += '<div class="declara">' + esc(DECL_FICHA) + '</div>';
+  h += '<div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="salvar">Salvar sem assinar</button><button type="button" class="btn pri" id="assinar">' + ICON.caneta + ' Salvar e assinar no tablet</button></div></form>';
+  return h;
+};
+ACOES.fichaForm = function (m, p) {
+  var f = m.querySelector('#f');
+  opcoesDesmarcaveis(f);
+  function montar() {
+    var d = lerForm(f);
+    if (!d.nome) { aviso('Preencha o nome da cliente.', true); f.querySelector('[name=nome]').focus(); return null; }
+    var base = p.id ? JSON.parse(JSON.stringify(porId(DB.clientes, p.id))) : {};
+    var an = {};
+    Object.keys(d).forEach(function (k) { if (k.indexOf('a_') === 0) an[k.slice(2)] = d[k]; else base[k] = d[k]; });
+    base.anamnese = an;
+    return base;
+  }
+  m.querySelector('#salvar').onclick = function () {
+    var c = montar(); if (!c) return;
+    tarefa('Salvando no Google…', chamar('salvar', { tabela: 'clientes', registro: c })).then(function (r) { substituir('clientes', r); aviso('Cliente salva.'); PILHA.pop(); ir('clienteDet', { id: r.id }, true); });
+  };
+  m.querySelector('#assinar').onclick = function () {
+    var c = montar(); if (!c) return;
+    var salvo = c.id ? Promise.resolve(c) : tarefa('Salvando…', chamar('salvar', { tabela: 'clientes', registro: c })).then(function (r) { substituir('clientes', r); return r; });
+    salvo.then(function (cli) {
+      return assinarFicha(cli).then(function (r) {
+        if (!r && !c.id) aviso('Cliente salva. A ficha ficou sem assinatura.');
+        PILHA.pop(); ir('clienteDet', { id: cli.id }, true);
+      });
+    });
+  };
+};
+
+/* ---------- Orçamentos ---------- */
+function tabelaOrcamentos(lista, semCliente) {
+  if (!lista.length) return '<div class="vazio">Nenhum orçamento.</div>';
+  return '<div class="rolagem"><table class="tabela"><thead><tr><th>Nº</th>' + (semCliente ? '' : '<th>Cliente</th>') + '<th>Data</th><th>Procedimentos</th><th>Situação</th><th class="num">Total</th><th class="num">Recebido</th></tr></thead><tbody>' +
+    lista.map(function (o) { return '<tr class="click" data-abrir="orcamentoDet:' + o.id + '"><td>' + nOrc(o.numero) + '</td>' + (semCliente ? '' : '<td><b>' + esc(o.clienteNome) + '</b></td>') + '<td>' + dataBR(o.data) + '</td><td class="small">' + esc((o.itens || []).map(function (i) { return i.nome; }).join(', ')) + '</td><td><span class="selo s-' + o.status + '">' + o.status + '</span></td><td class="num"><b>' + brl(o.total) + '</b></td><td class="num">' + (o.status === 'Aprovado' ? brl(recebidoOrc(o.id)) : '—') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+}
+VIEWS.orcamentos = function (p) {
+  var f = p.filtro || 'todos';
+  var l = DB.orcamentos.filter(function (o) { return f === 'todos' || o.status === f; }).sort(function (a, b) { return (b.numero || 0) - (a.numero || 0); });
+  return cabec('Orçamentos', '', '<button class="btn pri" id="novo">' + ICON.mais + ' Novo orçamento</button>') +
+    '<div class="card"><div class="abas">' + [['todos', 'Todos'], ['Rascunho', 'Rascunhos'], ['Enviado', 'Enviados'], ['Aprovado', 'Aprovados'], ['Recusado', 'Recusados']].map(function (x) { return '<button data-f="' + x[0] + '" class="' + (f === x[0] ? 'ativo' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>' + tabelaOrcamentos(l) + '</div>';
+};
+ACOES.orcamentos = function (m, p) {
+  m.querySelector('#novo').onclick = function () { ir('orcamentoForm', {}); };
+  m.querySelectorAll('[data-f]').forEach(function (b) { b.onclick = function () { p.filtro = b.dataset.f; recarregar(); }; });
+};
+
+function seletorCliente(sel) {
+  return '<select name="clienteId" required><option value="">Escolha a cliente…</option>' + DB.clientes.slice().sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); }).map(function (c) { return '<option value="' + c.id + '"' + (c.id === sel ? ' selected' : '') + '>' + esc(c.nome) + '</option>'; }).join('') + '</select>';
+}
+var FORMAS = ['Pix', 'Dinheiro', 'Cartão de débito', 'Cartão de crédito', 'Transferência', 'Boleto'];
+function seletorForma(nome, val) { return '<select name="' + nome + '"><option value="">—</option>' + FORMAS.map(function (x) { return '<option' + (x === val ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select>'; }
+function addDias(s, n) { var d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
+
+VIEWS.orcamentoForm = function (p) {
+  var o = p.id ? porId(DB.orcamentos, p.id) : { clienteId: p.clienteId, data: hoje(), validade: addDias(hoje(), Number(cfg('validadeDias', '15')) || 15), itens: [{ nome: '', qtd: 1, valor: '' }], desconto: 0, formaPagamento: '', condicoes: '', obs: '' };
+  var h = cabec(p.id ? 'Editar orçamento nº ' + nOrc(o.numero) : 'Novo orçamento', '', '', true);
+  h += '<form id="f" class="stack" autocomplete="off"><div class="card"><div class="form-grid"><div class="campo c4"><label>Cliente *</label>' + seletorCliente(o.clienteId) + '</div>' +
+    campo('data', 'Data', o.data, 'date', 'c1" style="grid-column:span 1') + campo('validade', 'Válido até', o.validade, 'date', 'c1" style="grid-column:span 1') + '</div>' +
+    (DB.clientes.length ? '' : '<p class="small mute">Cadastre uma cliente primeiro em Clientes.</p>') + '</div>';
+  h += '<div class="card"><div class="secao-tit">Procedimentos</div><datalist id="procs">' + DB.procedimentos.filter(function (x) { return x.ativo !== 'não'; }).map(function (x) { return '<option value="' + esc(x.nome) + '">'; }).join('') + '</datalist><div class="itens-orc" id="itens"></div>' +
+    '<button type="button" class="btn peq" id="addItem" style="margin-top:12px">' + ICON.mais + ' Adicionar procedimento</button>' +
+    '<div class="total-box"><span>Subtotal: <span id="sub">R$ 0,00</span></span><span class="row" style="gap:6px">Desconto (R$): <input name="desconto" inputmode="decimal" value="' + esc(o.desconto || '') + '" style="width:110px;border:1px solid var(--line);border-radius:10px;padding:8px 10px"></span><span>Total: <b id="tot">R$ 0,00</b></span></div></div>';
+  h += '<div class="card"><div class="form-grid"><div class="campo c2"><label>Forma de pagamento</label>' + seletorForma('formaPagamento', o.formaPagamento) + '</div>' + campo('condicoes', 'Condições (ex.: 3x sem juros, entrada + parcelas)', o.condicoes, 'text', 'c4') + campo('obs', 'Observações', o.obs, 'area', 'c6') + '</div></div>';
+  h += '<div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="previa">Pré-visualizar</button><button type="button" class="btn pri" id="salvar">Salvar orçamento</button></div></form>';
+  return h;
+};
+ACOES.orcamentoForm = function (m, p) {
+  var f = m.querySelector('#f'), cont = m.querySelector('#itens');
+  var o = p.id ? JSON.parse(JSON.stringify(porId(DB.orcamentos, p.id))) : null;
+  var itens = o ? o.itens : [{ nome: '', qtd: 1, valor: '' }];
+  function desenharItens() {
+    cont.innerHTML = itens.map(function (i, k) {
+      return '<div class="item" data-k="' + k + '"><div class="campo"><label>Procedimento</label><input list="procs" data-c="nome" value="' + esc(i.nome) + '" placeholder="Escolha ou digite"></div>' +
+        '<div class="campo"><label>Sessões</label><input data-c="qtd" type="number" min="1" inputmode="numeric" value="' + esc(i.qtd) + '"></div>' +
+        '<div class="campo"><label>Valor por sessão</label><input data-c="valor" inputmode="decimal" value="' + esc(i.valor === '' ? '' : String(i.valor).replace('.', ',')) + '" placeholder="0,00"></div>' +
+        '<div class="campo"><label>Subtotal</label><div style="padding:12px 0;font-weight:600" data-st>' + brl(num(i.qtd) * num(i.valor)) + '</div></div>' +
+        '<button type="button" class="btn peq perigo" data-rm title="Remover" style="align-self:end;margin-bottom:4px">✕</button></div>';
+    }).join('');
+    cont.querySelectorAll('.item').forEach(function (row) {
+      var k = Number(row.dataset.k);
+      row.querySelectorAll('[data-c]').forEach(function (inp) {
+        inp.oninput = function () {
+          itens[k][inp.dataset.c] = inp.value;
+          if (inp.dataset.c === 'nome') { var pr = DB.procedimentos.filter(function (x) { return x.nome === inp.value; })[0]; if (pr && !num(itens[k].valor)) { itens[k].valor = pr.preco; row.querySelector('[data-c=valor]').value = String(pr.preco).replace('.', ','); } }
+          row.querySelector('[data-st]').textContent = brl(num(itens[k].qtd) * num(itens[k].valor)); totais();
+        };
+      });
+      row.querySelector('[data-rm]').onclick = function () { itens.splice(k, 1); if (!itens.length) itens.push({ nome: '', qtd: 1, valor: '' }); desenharItens(); };
+    });
+    totais();
+  }
+  function totais() { var s = itens.reduce(function (a, i) { return a + num(i.qtd) * num(i.valor); }, 0); m.querySelector('#sub').textContent = brl(s); m.querySelector('#tot').textContent = brl(Math.max(0, s - num(f.querySelector('[name=desconto]').value))); return s; }
+  f.querySelector('[name=desconto]').oninput = totais;
+  m.querySelector('#addItem').onclick = function () { itens.push({ nome: '', qtd: 1, valor: '' }); desenharItens(); var u = cont.querySelectorAll('[data-c=nome]'); u[u.length - 1].focus(); };
+  desenharItens();
+  function montar() {
+    var d = lerForm(f);
+    if (!d.clienteId) { aviso('Escolha a cliente.', true); return null; }
+    var lim = itens.filter(function (i) { return String(i.nome).trim(); }).map(function (i) { return { nome: String(i.nome).trim(), qtd: num(i.qtd) || 1, valor: num(i.valor) }; });
+    if (!lim.length) { aviso('Adicione pelo menos um procedimento.', true); return null; }
+    var sub = lim.reduce(function (a, i) { return a + i.qtd * i.valor; }, 0);
+    var r = o || { status: 'Rascunho' };
+    r.clienteId = d.clienteId; r.clienteNome = porId(DB.clientes, d.clienteId).nome; r.data = d.data || hoje(); r.validade = d.validade;
+    r.itens = lim; r.desconto = num(d.desconto); r.total = Math.max(0, sub - r.desconto);
+    r.formaPagamento = d.formaPagamento; r.condicoes = d.condicoes; r.obs = d.obs;
+    return r;
+  }
+  m.querySelector('#previa').onclick = function () { var r = montar(); if (r) previa(docOrcamento(r, porId(DB.clientes, r.clienteId)), 'Pré-visualização'); };
+  m.querySelector('#salvar').onclick = function () {
+    var r = montar(); if (!r) return;
+    var salvar = chamar('salvar', { tabela: 'orcamentos', registro: r }).then(function (x) {
+      substituir('orcamentos', x);
+      return gerarDocumento('orcamentos', x, docOrcamento(x, porId(DB.clientes, x.clienteId)), null, 'Orçamento ' + nOrc(x.numero) + ' - ' + x.clienteNome);
+    });
+    tarefa('Salvando o orçamento e guardando o PDF…', salvar).then(function (x) { aviso('Orçamento salvo.'); PILHA.pop(); ir('orcamentoDet', { id: x.id }, true); });
+  };
+};
+
+VIEWS.orcamentoDet = function (p) {
+  var o = porId(DB.orcamentos, p.id); if (!o) return '<div class="vazio">Orçamento não encontrado.</div>';
+  var c = porId(DB.clientes, o.clienteId) || {}, rec = recebidoOrc(o.id), sess = DB.sessoes.filter(function (s) { return s.orcamentoId === o.id; }).sort(porData);
+  var h = cabec('Orçamento nº ' + nOrc(o.numero) + ' <span class="selo s-' + o.status + '" style="vertical-align:middle;font-size:13px">' + o.status + '</span>', '<a href="#" data-abrir="clienteDet:' + o.clienteId + '">' + esc(o.clienteNome) + '</a> · ' + dataBR(o.data), '', true);
+  h += '<div class="card" style="margin-bottom:16px"><div class="row">';
+  if (o.status !== 'Aprovado') h += '<button class="btn ok" id="aprovar">' + ICON.caneta + ' Cliente aprovou: assinar no tablet</button>';
+  h += '<button class="btn" id="email">' + ICON.email + ' Enviar por e-mail</button>';
+  h += '<button class="btn" id="zap">' + ICON.zap + ' Enviar por WhatsApp</button>';
+  h += '<button class="btn" id="imprimir">' + ICON.doc + ' Imprimir</button>';
+  if (o.pdfId && EM_GOOGLE) h += '<button class="btn" id="ver">Ver PDF no Drive</button>';
+  if (o.status !== 'Aprovado') h += '<button class="btn" id="papelOrc">Anexar assinado em papel</button>';
+  if (o.status !== 'Aprovado') h += '<button class="btn" id="editar">Editar</button>';
+  h += '</div>' + (o.status === 'Aprovado' ? '<p class="small mute" style="margin:12px 0 0">Aprovado e assinado em ' + dataBR(o.aprovadoEm) + '.</p>' : '<p class="small mute" style="margin:12px 0 0">Dica: no dia do atendimento, abra este orçamento no tablet e toque em “Cliente aprovou” para ela assinar.</p>') + '</div>';
+  h += '<div class="grid g2"><div class="card"><h2>Procedimentos</h2><table class="tabela"><thead><tr><th>Procedimento</th><th class="num">Sessões</th><th class="num">Subtotal</th></tr></thead><tbody>' +
+    (o.itens || []).map(function (i) { return '<tr><td>' + esc(i.nome) + '<br><span class="small mute">' + brl(i.valor) + ' por sessão</span></td><td class="num">' + esc(i.qtd) + '</td><td class="num">' + brl(num(i.qtd) * num(i.valor)) + '</td></tr>'; }).join('') +
+    (num(o.desconto) ? '<tr><td colspan="2">Desconto</td><td class="num">− ' + brl(o.desconto) + '</td></tr>' : '') + '<tr><td colspan="2"><b>Total</b></td><td class="num"><b>' + brl(o.total) + '</b></td></tr></tbody></table>' +
+    '<dl class="dl" style="margin-top:16px"><dt>Pagamento</dt><dd>' + esc(o.formaPagamento || '—') + (o.condicoes ? ' · ' + esc(o.condicoes) : '') + '</dd><dt>Válido até</dt><dd>' + (o.validade ? dataBR(o.validade) : '—') + '</dd>' + (o.obs ? '<dt>Observações</dt><dd>' + esc(o.obs) + '</dd>' : '') + '</dl></div>';
+  h += '<div class="stack"><div class="card"><h2>Financeiro deste orçamento</h2><div class="grid g3"><div class="kpi"><div class="rot">Combinado</div><div class="val" style="font-size:20px">' + brl(o.status === 'Aprovado' ? o.total : 0) + '</div></div><div class="kpi"><div class="rot">Recebido</div><div class="val" style="font-size:20px">' + brl(rec) + '</div></div><div class="kpi"><div class="rot">Falta</div><div class="val" style="font-size:20px">' + brl(o.status === 'Aprovado' ? Math.max(0, o.total - rec) : 0) + '</div></div></div>' +
+    (o.status === 'Aprovado' ? '<div style="margin-top:14px"><button class="btn peq" id="pag">' + ICON.mais + ' Registrar pagamento</button></div>' : '') + '</div>' +
+    '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="margin:0">Atendimentos</h2>' + (o.status === 'Aprovado' ? '<button class="btn peq" id="sessao">' + ICON.caneta + ' Novo atendimento</button>' : '') + '</div>' + progressoOrc(o, sess) + '</div></div></div>';
+  if (o.status !== 'Aprovado') h += '<div class="row" style="margin-top:16px;justify-content:flex-end">' + (o.status !== 'Recusado' ? '<button class="btn peq" id="recusar">Marcar como recusado</button>' : '') + '<button class="btn peq perigo" id="excluir">Excluir orçamento</button></div>';
+  return h;
+};
+function progressoOrc(o, sess) {
+  var h = '<div class="lista-simples">';
+  (o.itens || []).forEach(function (i) { var feitas = sess.filter(function (s) { return s.procedimento === i.nome; }).length; h += '<div><span>' + esc(i.nome) + '</span><span class="selo ' + (feitas >= i.qtd ? 's-Aprovado' : 's-Rascunho') + '">' + feitas + ' de ' + esc(i.qtd) + ' sessões</span></div>'; });
+  h += '</div>';
+  if (sess.length) h += '<div class="small mute" style="margin-top:10px">Últimos: ' + sess.slice(0, 4).map(function (s) { return dataBR(s.data); }).join(', ') + '</div>';
+  return h;
+}
+function textoWhatsOrc(o) {
+  var t = 'Olá, ' + o.clienteNome.split(' ')[0] + '! Segue seu orçamento nº ' + nOrc(o.numero) + ':\n\n';
+  (o.itens || []).forEach(function (i) { t += '• ' + i.nome + ' — ' + i.qtd + ' sessão(ões) × ' + brl(i.valor) + '\n'; });
+  if (num(o.desconto)) t += '\nDesconto: ' + brl(o.desconto);
+  t += '\n*Total: ' + brl(o.total) + '*';
+  if (o.formaPagamento || o.condicoes) t += '\nPagamento: ' + [o.formaPagamento, o.condicoes].filter(Boolean).join(' · ');
+  if (o.validade) t += '\nVálido até ' + dataBR(o.validade) + '.';
+  return t + '\n\nQualquer dúvida, estou à disposição! 💕\n' + cfg('nome', 'Débora Rodrigues');
+}
+ACOES.orcamentoDet = function (m, p) {
+  var o = porId(DB.orcamentos, p.id); if (!o) return;
+  var c = porId(DB.clientes, o.clienteId) || {};
+  function $(s) { return m.querySelector(s); }
+  if ($('#editar')) $('#editar').onclick = function () { ir('orcamentoForm', { id: o.id }); };
+  if ($('#ver')) $('#ver').onclick = function () { verDocumento('orcamento', o); };
+  $('#imprimir').onclick = function () { previa(docOrcamento(o, c, o._assinatura || null), 'Orçamento nº ' + nOrc(o.numero)); };
+  if ($('#papelOrc')) $('#papelOrc').onclick = function () { enviarArquivo({ clienteId: o.clienteId, tipo: 'Orçamento assinado (papel)', travarTipo: true, descricao: 'Orçamento nº ' + nOrc(o.numero), vincular: { tabela: 'orcamentos', id: o.id, campos: { status: 'Aprovado', aprovadoEm: hoje() } } }); };
+  $('#zap').onclick = function () {
+    if (!c.telefone) { aviso('A cliente não tem telefone cadastrado.', true); return; }
+    window.open(waLink(c.telefone, textoWhatsOrc(o)), '_blank');
+    if (o.status === 'Rascunho') chamar('salvar', { tabela: 'orcamentos', registro: { id: o.id, status: 'Enviado', enviadoEm: hoje() } }).then(function (r) { substituir('orcamentos', r); recarregar(); });
+  };
+  $('#email').onclick = function () {
+    var mm = modal('<h2>Enviar orçamento por e-mail</h2><p class="small mute">Sai do Gmail da Débora, com o PDF do orçamento em anexo.</p><div class="stack">' + campo('para', 'Para', c.email, 'email') + campo('assunto', 'Assunto', 'Seu orçamento - ' + cfg('nome', 'Débora Rodrigues') + ' Estética') +
+      campo('msg', 'Mensagem', 'Olá, ' + (c.nome || '').split(' ')[0] + '!\n\nConforme conversamos, segue em anexo o seu orçamento nº ' + nOrc(o.numero) + ', no valor total de ' + brl(o.total) + '.\n\nQualquer dúvida, estou à disposição.\n\nUm abraço,\n' + cfg('nome', 'Débora Rodrigues'), 'area', '', 'style="min-height:180px"') +
+      '</div><div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="env">' + ICON.email + ' Enviar</button></div>');
+    mm.querySelector('#env').onclick = function () {
+      var d = lerForm(mm.querySelector('.modal'));
+      if (!d.para) { aviso('Informe o e-mail da cliente.', true); return; }
+      mm.fechar();
+      var reg = JSON.parse(JSON.stringify(o)); if (reg.status === 'Rascunho') { reg.status = 'Enviado'; reg.enviadoEm = hoje(); }
+      var prom = (o.assinaturaId ? Promise.resolve(o) : gerarDocumento('orcamentos', reg, docOrcamento(reg, c), null, 'Orçamento ' + nOrc(o.numero) + ' - ' + o.clienteNome))
+        .then(function (r) { return chamar('email', { para: d.para, assunto: d.assunto, corpo: esc(d.msg).replace(/\n/g, '<br>'), pdfId: r.pdfId }); });
+      tarefa('Gerando o PDF e enviando o e-mail…', prom).then(function (r) {
+        if (d.para && !c.email && c.id) chamar('salvar', { tabela: 'clientes', registro: { id: c.id, email: d.para } }).then(function (x) { substituir('clientes', x); });
+        aviso(r && r.demo ? 'Modo demonstração: o e-mail seria enviado agora.' : 'E-mail enviado para ' + d.para + '.'); recarregar();
+      });
+    };
+  };
+  if ($('#aprovar')) $('#aprovar').onclick = function () {
+    var resumo = '<table class="tabela" style="margin-bottom:8px">' + (o.itens || []).map(function (i) { return '<tr><td>' + esc(i.nome) + '</td><td class="num">' + esc(i.qtd) + ' × ' + brl(i.valor) + '</td></tr>'; }).join('') + '<tr><td><b>Total</b></td><td class="num"><b>' + brl(o.total) + '</b></td></tr></table>' + (o.formaPagamento ? 'Pagamento: ' + esc(o.formaPagamento) + (o.condicoes ? ' · ' + esc(o.condicoes) : '') + '<br>' : '') + '<b>' + esc(DECL_ORC) + '</b>';
+    coletarAssinatura({ titulo: 'Aprovação do orçamento nº ' + nOrc(o.numero), nome: o.clienteNome, texto: resumo }).then(function (img) {
+      if (!img) return;
+      var reg = JSON.parse(JSON.stringify(o)); reg.status = 'Aprovado'; reg.aprovadoEm = hoje();
+      tarefa('Gerando o PDF assinado no Google Drive…', gerarDocumento('orcamentos', reg, docOrcamento(reg, c, img), img, 'Orçamento ' + nOrc(o.numero) + ' ASSINADO - ' + o.clienteNome))
+        .then(function () { aviso('Orçamento aprovado e assinado!'); recarregar(); });
+    });
+  };
+  if ($('#recusar')) $('#recusar').onclick = function () { tarefa('Salvando…', chamar('salvar', { tabela: 'orcamentos', registro: { id: o.id, status: 'Recusado' } })).then(function (r) { substituir('orcamentos', r); recarregar(); }); };
+  if ($('#excluir')) $('#excluir').onclick = function () { confirmar('Excluir o orçamento nº ' + nOrc(o.numero) + '?', 'Excluir').then(function () { tarefa('Excluindo…', chamar('excluir', { tabela: 'orcamentos', id: o.id })).then(function () { DB.orcamentos = DB.orcamentos.filter(function (x) { return x.id !== o.id; }); voltar(); }); }); };
+  if ($('#pag')) $('#pag').onclick = function () { formPagamento({ clienteId: o.clienteId, orcamentoId: o.id }); };
+  if ($('#sessao')) $('#sessao').onclick = function () { ir('sessaoForm', { clienteId: o.clienteId, orcamentoId: o.id }); };
+};
+
+/* ---------- Atendimentos (sessões) ---------- */
+function tabelaSessoes(lista, semCliente) {
+  if (!lista.length) return '<div class="vazio">Nenhum atendimento registrado.</div>';
+  return '<div class="rolagem"><table class="tabela"><thead><tr><th>Data</th>' + (semCliente ? '' : '<th>Cliente</th>') + '<th>Procedimento</th><th>Área</th><th>Assinatura</th></tr></thead><tbody>' +
+    lista.map(function (s) { return '<tr class="click" data-abrir="sessaoDet:' + s.id + '"><td>' + dataBR(s.data) + '</td>' + (semCliente ? '' : '<td><b>' + esc(s.clienteNome) + '</b></td>') + '<td>' + esc(s.procedimento) + '</td><td>' + esc(s.area || '—') + '</td><td>' + (s.assinaturaId ? '<span class="selo s-Aprovado">Assinado</span>' : '<span class="selo s-Enviado">Pendente</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+}
+VIEWS.sessoes = function () {
+  return cabec('Atendimentos', 'Cada atendimento é assinado pela cliente no tablet', '<button class="btn pri" id="novo">' + ICON.caneta + ' Novo atendimento</button>') +
+    '<div class="card"><input class="busca" id="busca" placeholder="Buscar por cliente ou procedimento…" style="margin-bottom:10px"><div id="lista"></div></div>';
+};
+ACOES.sessoes = function (m) {
+  m.querySelector('#novo').onclick = function () { ir('sessaoForm', {}); };
+  var b = m.querySelector('#busca');
+  function d() { var q = b.value.toLowerCase(); m.querySelector('#lista').innerHTML = tabelaSessoes(DB.sessoes.filter(function (s) { return !q || (s.clienteNome + ' ' + s.procedimento).toLowerCase().indexOf(q) >= 0; }).sort(porData)); ligarLinks(m); }
+  b.oninput = d; d();
+};
+VIEWS.sessaoForm = function (p) {
+  var s = p.id ? porId(DB.sessoes, p.id) : { clienteId: p.clienteId, orcamentoId: p.orcamentoId, data: hoje() };
+  var h = cabec(p.id ? 'Editar atendimento' : 'Novo atendimento', 'Ao final, a cliente assina no tablet', '', true);
+  h += '<form id="f" class="stack" autocomplete="off"><div class="card"><div class="form-grid"><div class="campo c4"><label>Cliente *</label>' + seletorCliente(s.clienteId) + '</div>' + campo('data', 'Data', s.data, 'date', 'c2') +
+    '<div class="campo c6"><label>Orçamento (opcional)</label><select name="orcamentoId" id="orc"></select></div>' +
+    '<div class="campo c3"><label>Procedimento *</label><input name="procedimento" list="procs2" value="' + esc(s.procedimento || '') + '" required><datalist id="procs2"></datalist></div>' +
+    campo('area', 'Área tratada', s.area, 'text', 'c3', 'placeholder="Ex.: face, abdômen, glúteos"') +
+    campo('produtos', 'Produtos, ativos e parâmetros utilizados', s.produtos, 'area', 'c6') +
+    campo('obs', 'Observações, reações e cuidados orientados', s.obs, 'area', 'c6') + '</div></div>';
+  if (!p.id) h += '<div class="card"><div class="secao-tit" style="margin-bottom:10px">Pagamento recebido hoje (opcional)</div><div class="form-grid">' + campo('pgValor', 'Valor (R$)', '', 'text', 'c2', 'inputmode="decimal" placeholder="0,00"') + '<div class="campo c2"><label>Forma</label>' + seletorForma('pgForma', '') + '</div>' + campo('pgObs', 'Observação', '', 'text', 'c2', 'placeholder="Ex.: parcela 2/4"') + '</div></div>';
+  h += '<div class="declara">' + esc(DECL_SESSAO) + '</div>';
+  h += '<div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="salvar">Salvar sem assinar</button><button type="button" class="btn pri" id="assinar">' + ICON.caneta + ' Salvar e assinar no tablet</button></div></form>';
+  return h;
+};
+ACOES.sessaoForm = function (m, p) {
+  var f = m.querySelector('#f'), selC = f.querySelector('[name=clienteId]'), selO = m.querySelector('#orc'), dl = m.querySelector('#procs2');
+  var s0 = p.id ? porId(DB.sessoes, p.id) : null;
+  function atualizarOrc() {
+    var cid = selC.value, atual = selO.value || (s0 ? s0.orcamentoId : p.orcamentoId);
+    var l = DB.orcamentos.filter(function (o) { return o.clienteId === cid && o.status === 'Aprovado'; });
+    selO.innerHTML = '<option value="">Sem orçamento (avulso)</option>' + l.map(function (o) { return '<option value="' + o.id + '"' + (o.id === atual ? ' selected' : '') + '>nº ' + nOrc(o.numero) + ' — ' + esc((o.itens || []).map(function (i) { return i.nome; }).join(', ')) + '</option>'; }).join('');
+    atualizarProcs();
+  }
+  function atualizarProcs() {
+    var o = porId(DB.orcamentos, selO.value), nomes = o ? (o.itens || []).map(function (i) { return i.nome; }) : DB.procedimentos.map(function (x) { return x.nome; });
+    dl.innerHTML = nomes.map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
+    var pi = f.querySelector('[name=procedimento]'); if (o && !pi.value && nomes.length === 1) pi.value = nomes[0];
+  }
+  selC.onchange = atualizarOrc; selO.onchange = atualizarProcs; atualizarOrc();
+  function montar() {
+    var d = lerForm(f);
+    if (!d.clienteId) { aviso('Escolha a cliente.', true); return null; }
+    if (!d.procedimento) { aviso('Informe o procedimento.', true); return null; }
+    var r = s0 ? JSON.parse(JSON.stringify(s0)) : {};
+    ['clienteId', 'data', 'orcamentoId', 'procedimento', 'area', 'produtos', 'obs'].forEach(function (k) { r[k] = d[k]; });
+    r.clienteNome = porId(DB.clientes, d.clienteId).nome;
+    return { s: r, pg: num(d.pgValor) ? { clienteId: r.clienteId, clienteNome: r.clienteNome, orcamentoId: r.orcamentoId, data: r.data, valor: num(d.pgValor), forma: d.pgForma, obs: d.pgObs || ('Atendimento: ' + r.procedimento) } : null };
+  }
+  function depois(x, pg) {
+    var prom = pg ? chamar('salvar', { tabela: 'pagamentos', registro: Object.assign(pg, { sessaoId: x.id }) }).then(function (r) { substituir('pagamentos', r); }) : Promise.resolve();
+    return prom.then(function () { PILHA.pop(); ir('sessaoDet', { id: x.id }, true); });
+  }
+  m.querySelector('#salvar').onclick = function () {
+    var r = montar(); if (!r) return;
+    tarefa('Salvando…', chamar('salvar', { tabela: 'sessoes', registro: r.s }).then(function (x) { substituir('sessoes', x); return depois(x, r.pg); })).then(function () { aviso('Atendimento salvo (sem assinatura).'); });
+  };
+  m.querySelector('#assinar').onclick = function () {
+    var r = montar(); if (!r) return;
+    assinarSessao(r.s).then(function (x) { if (x) return depois(x, r.pg); });
+  };
+};
+function assinarSessao(s) {
+  var cli = porId(DB.clientes, s.clienteId);
+  var txt = '<b>' + esc(s.procedimento) + '</b>' + (s.area ? ' · ' + esc(s.area) : '') + ' — ' + dataBR(s.data) + '<br><b>' + esc(DECL_SESSAO) + '</b>';
+  return coletarAssinatura({ titulo: 'Registro de atendimento', nome: s.clienteNome, texto: txt }).then(function (img) {
+    if (!img) return null;
+    return tarefa('Gerando o PDF assinado no Google Drive…', gerarDocumento('sessoes', s, docSessao(s, cli, img), img, 'Atendimento ' + s.data + ' - ' + s.procedimento + ' - ' + s.clienteNome))
+      .then(function (r) { aviso('Atendimento assinado e salvo em PDF.'); return r; });
+  });
+}
+VIEWS.sessaoDet = function (p) {
+  var s = porId(DB.sessoes, p.id); if (!s) return '<div class="vazio">Atendimento não encontrado.</div>';
+  var o = s.orcamentoId ? porId(DB.orcamentos, s.orcamentoId) : null;
+  var pg = DB.pagamentos.filter(function (x) { return x.sessaoId === s.id; });
+  var h = cabec(esc(s.procedimento), '<a href="#" data-abrir="clienteDet:' + s.clienteId + '">' + esc(s.clienteNome) + '</a> · ' + dataBR(s.data), '', true);
+  h += '<div class="card" style="margin-bottom:16px"><div class="row">' + (s.assinaturaId ? '<span class="selo s-Aprovado">Assinado pela cliente</span><button class="btn" id="ver">' + ICON.doc + ' Ver PDF</button>' : '<button class="btn ok" id="assinar">' + ICON.caneta + ' Coletar assinatura agora</button><button class="btn" id="ver">' + ICON.doc + ' Ver documento</button>') + '<button class="btn" id="editar">Editar</button></div></div>';
+  var fotosS = (DB.arquivos || []).filter(function (x) { return x.sessaoId === s.id; });
+  h = h.replace('<button class="btn" id="editar">', (s.assinaturaId ? '' : '<button class="btn" id="papelS">Anexar folha assinada em papel</button>') + '<button class="btn" id="fotoS">' + ICON.camera + ' Foto</button><button class="btn" id="editar">');
+  h += '<div class="card" style="margin-bottom:16px"><dl class="dl"><dt>Procedimento</dt><dd>' + esc(s.procedimento) + '</dd><dt>Área tratada</dt><dd>' + esc(s.area || '—') + '</dd><dt>Produtos / parâmetros</dt><dd>' + esc(s.produtos || '—') + '</dd><dt>Observações</dt><dd>' + esc(s.obs || '—').replace(/\n/g, '<br>') + '</dd>' +
+    (o ? '<dt>Orçamento</dt><dd><a href="#" data-abrir="orcamentoDet:' + o.id + '">nº ' + nOrc(o.numero) + '</a> — sessão ' + numeroSessao(s) + '</dd>' : '') +
+    (pg.length ? '<dt>Pagamento no dia</dt><dd>' + pg.map(function (x) { return brl(x.valor) + ' (' + esc(x.forma || '—') + ')'; }).join(', ') + '</dd>' : '') + '</dl></div>';
+  h += '<div class="card"><h2>Fotos deste atendimento</h2>' + galeria(fotosS) + '</div>';
+  return h;
+};
+ACOES.sessaoDet = function (m, p) {
+  var s = porId(DB.sessoes, p.id); if (!s) return;
+  m.querySelector('#ver').onclick = function () { verDocumento('sessao', s); };
+  m.querySelector('#editar').onclick = function () { ir('sessaoForm', { id: s.id }); };
+  var a = m.querySelector('#assinar'); if (a) a.onclick = function () { assinarSessao(JSON.parse(JSON.stringify(s))).then(function (r) { if (r) recarregar(); }); };
+  m.querySelector('#fotoS').onclick = function () { enviarArquivo({ clienteId: s.clienteId, sessaoId: s.id, tipo: 'Antes', camera: true, descricao: s.procedimento }); };
+  var ps = m.querySelector('#papelS'); if (ps) ps.onclick = function () { enviarArquivo({ clienteId: s.clienteId, sessaoId: s.id, tipo: 'Atendimento assinado (papel)', travarTipo: true, descricao: s.procedimento + ' - ' + dataBR(s.data), vincular: { tabela: 'sessoes', id: s.id, campos: {} } }); };
+  ligarGaleria(m);
+};
+
+/* ---------- Pagamentos / Financeiro ---------- */
+function tabelaPagamentos(lista, semCliente) {
+  if (!lista.length) return '<div class="vazio">Nenhum pagamento registrado.</div>';
+  return '<div class="rolagem"><table class="tabela"><thead><tr><th>Data</th>' + (semCliente ? '' : '<th>Cliente</th>') + '<th>Referente a</th><th>Forma</th><th class="num">Valor</th><th></th></tr></thead><tbody>' +
+    lista.map(function (x) { var o = x.orcamentoId ? porId(DB.orcamentos, x.orcamentoId) : null; return '<tr><td>' + dataBR(x.data) + '</td>' + (semCliente ? '' : '<td><b>' + esc(x.clienteNome) + '</b></td>') + '<td class="small">' + (o ? 'Orçamento nº ' + nOrc(o.numero) : 'Avulso') + (x.obs ? ' · ' + esc(x.obs) : '') + '</td><td>' + esc(x.forma || '—') + '</td><td class="num"><b>' + brl(x.valor) + '</b></td><td class="num"><button class="btn peq" data-edpag="' + x.id + '">Editar</button></td></tr>'; }).join('') + '</tbody></table></div>';
+}
+function ligarPagamentos(m) { m.querySelectorAll('[data-edpag]').forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); formPagamento(porId(DB.pagamentos, b.dataset.edpag)); }; }); }
+function formPagamento(pg) {
+  pg = pg || {};
+  var novo = !pg.id;
+  var mm = modal('<h2>' + (novo ? 'Registrar pagamento' : 'Editar pagamento') + '</h2><div class="form-grid" id="fp"><div class="campo c6"><label>Cliente *</label>' + seletorCliente(pg.clienteId) + '</div><div class="campo c6"><label>Referente ao orçamento</label><select name="orcamentoId"></select></div>' +
+    campo('data', 'Data', pg.data || hoje(), 'date', 'c2') + campo('valor', 'Valor (R$) *', pg.valor ? String(pg.valor).replace('.', ',') : '', 'text', 'c2', 'inputmode="decimal" placeholder="0,00"') + '<div class="campo c2"><label>Forma</label>' + seletorForma('forma', pg.forma) + '</div>' + campo('obs', 'Observação', pg.obs, 'text', 'c6', 'placeholder="Ex.: parcela 2/4"') + '</div>' +
+    '<div class="acoes">' + (novo ? '' : '<button class="btn perigo" id="exc" style="margin-right:auto">Excluir</button>') + '<button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok">Salvar</button></div>');
+  var fp = mm.querySelector('#fp'), sc = fp.querySelector('[name=clienteId]'), so = fp.querySelector('[name=orcamentoId]');
+  function orcs() { var l = DB.orcamentos.filter(function (o) { return o.clienteId === sc.value && o.status === 'Aprovado'; }); so.innerHTML = '<option value="">Avulso (sem orçamento)</option>' + l.map(function (o) { return '<option value="' + o.id + '"' + (o.id === pg.orcamentoId ? ' selected' : '') + '>nº ' + nOrc(o.numero) + ' — falta ' + brl(Math.max(0, o.total - recebidoOrc(o.id))) + '</option>'; }).join(''); }
+  sc.onchange = orcs; orcs();
+  mm.querySelector('#ok').onclick = function () {
+    var d = lerForm(fp);
+    if (!d.clienteId || !num(d.valor)) { aviso('Escolha a cliente e informe o valor.', true); return; }
+    var r = { id: pg.id, clienteId: d.clienteId, clienteNome: porId(DB.clientes, d.clienteId).nome, orcamentoId: d.orcamentoId, data: d.data || hoje(), valor: num(d.valor), forma: d.forma, obs: d.obs, sessaoId: pg.sessaoId || '' };
+    if (!r.id) delete r.id;
+    mm.fechar();
+    tarefa('Salvando…', chamar('salvar', { tabela: 'pagamentos', registro: r })).then(function (x) { substituir('pagamentos', x); aviso('Pagamento salvo.'); recarregar(); });
+  };
+  var ex = mm.querySelector('#exc'); if (ex) ex.onclick = function () { mm.fechar(); confirmar('Excluir este pagamento de ' + brl(pg.valor) + '?', 'Excluir').then(function () { tarefa('Excluindo…', chamar('excluir', { tabela: 'pagamentos', id: pg.id })).then(function () { DB.pagamentos = DB.pagamentos.filter(function (x) { return x.id !== pg.id; }); recarregar(); }); }); };
+}
+
+VIEWS.financeiro = function (p) {
+  var ym = p.mes || hoje().slice(0, 7);
+  var pagsMes = DB.pagamentos.filter(function (x) { return String(x.data).slice(0, 7) === ym; }).sort(porData);
+  var rec = pagsMes.reduce(function (s, x) { return s + num(x.valor); }, 0);
+  var comb = somaMes(aprovados(), 'aprovadoEm', 'total', ym);
+  var porForma = {}; pagsMes.forEach(function (x) { var k = x.forma || 'Não informado'; porForma[k] = (porForma[k] || 0) + num(x.valor); });
+  var meses = {}; DB.pagamentos.concat(DB.orcamentos).forEach(function (x) { var d = String(x.data || '').slice(0, 7); if (d) meses[d] = 1; }); meses[hoje().slice(0, 7)] = 1; meses[ym] = 1;
+  var listaMeses = Object.keys(meses).sort().reverse();
+  var abertos = aprovados().map(function (o) { return { o: o, falta: Math.max(0, o.total - recebidoOrc(o.id)) }; }).filter(function (x) { return x.falta > 0.009; }).sort(function (a, b) { return b.falta - a.falta; });
+  var h = cabec('Financeiro', 'Combinado × recebido', '<button class="btn" id="relat">' + ICON.doc + ' Relatório para o escritório</button><select id="mes" class="btn" style="font-weight:500">' + listaMeses.map(function (m) { return '<option value="' + m + '"' + (m === ym ? ' selected' : '') + '>' + mesNome(m) + '</option>'; }).join('') + '</select><button class="btn pri" id="novo">' + ICON.mais + ' Registrar pagamento</button>');
+  h += '<div class="grid g4" style="margin-bottom:16px"><div class="card kpi"><div class="rot">Recebido no mês</div><div class="val">' + brl(rec) + '</div><div class="det">' + pagsMes.length + ' pagamento(s)</div></div><div class="card kpi"><div class="rot">Fechado no mês</div><div class="val">' + brl(comb) + '</div><div class="det">orçamentos aprovados</div></div><div class="card kpi"><div class="rot">A receber (total)</div><div class="val">' + brl(aReceberTotal()) + '</div><div class="det">' + abertos.length + ' orçamento(s) em aberto</div></div><div class="card kpi"><div class="rot">Ticket médio no mês</div><div class="val">' + brl(pagsMes.length ? rec / pagsMes.length : 0) + '</div><div class="det">por pagamento</div></div></div>';
+  h += '<div class="grid g2" style="margin-bottom:16px"><div class="card"><h2>Em aberto (combinado e ainda não recebido)</h2>' + (abertos.length ? '<div class="lista-simples">' + abertos.map(function (x) { return '<div data-abrir="orcamentoDet:' + x.o.id + '" style="cursor:pointer"><span><b>' + esc(x.o.clienteNome) + '</b><br><span class="small mute">nº ' + nOrc(x.o.numero) + ' · combinado ' + brl(x.o.total) + ' · recebido ' + brl(recebidoOrc(x.o.id)) + '</span></span><b style="color:var(--rose-d)">' + brl(x.falta) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Nada em aberto. 🎉</div>') + '</div>' +
+    '<div class="card"><h2>Recebido por forma de pagamento</h2>' + (Object.keys(porForma).length ? '<div class="lista-simples">' + Object.keys(porForma).sort(function (a, b) { return porForma[b] - porForma[a]; }).map(function (k) { return '<div><span>' + esc(k) + '</span><b>' + brl(porForma[k]) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Sem pagamentos neste mês.</div>') + '</div></div>';
+  h += '<div class="card"><h2>Pagamentos de ' + mesNome(ym).toLowerCase() + '</h2>' + tabelaPagamentos(pagsMes) + '</div>';
+  return h;
+};
+ACOES.financeiro = function (m, p) {
+  m.querySelector('#mes').onchange = function (e) { p.mes = e.target.value; recarregar(); };
+  m.querySelector('#novo').onclick = function () { formPagamento({}); };
+  m.querySelector('#relat').onclick = function () { formRelatorio(p.mes || hoje().slice(0, 7)); };
+  ligarPagamentos(m);
+};
+
+/* ---------- Configurações ---------- */
+VIEWS.config = function () {
+  var c = DB.config || {};
+  var h = cabec('Configurações', 'Dados que aparecem nos PDFs e a lista de procedimentos');
+  h += '<div class="card" style="margin-bottom:16px"><h2>Dados da profissional</h2><div class="form-grid" id="fc">' + campo('nome', 'Nome', c.nome || 'Débora Rodrigues', 'text', 'c3') + campo('subtitulo', 'Subtítulo', c.subtitulo || 'Estética', 'text', 'c3') +
+    campo('telefone', 'Telefone / WhatsApp', c.telefone, 'text', 'c2') + campo('email', 'E-mail', c.email, 'text', 'c2') + campo('instagram', 'Instagram', c.instagram, 'text', 'c2') +
+    campo('endereco', 'Endereço', c.endereco, 'text', 'c4') + campo('cidade', 'Cidade (aparece na data das assinaturas)', c.cidade || 'Tupã', 'text', 'c2') +
+    campo('documento', 'CPF/CNPJ', c.documento, 'text', 'c2') + campo('pix', 'Chave Pix', c.pix, 'text', 'c2') + campo('validadeDias', 'Validade padrão do orçamento (dias)', c.validadeDias || '15', 'number', 'c2') + campo('emailContador', 'E-mail do escritório de contabilidade', c.emailContador, 'email', 'c3') +
+    '</div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn pri" id="salvarCfg">Salvar dados</button></div></div>';
+  h += '<div class="card" style="margin-bottom:16px"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0">Procedimentos e preços sugeridos</h2><button class="btn peq" id="novoProc">' + ICON.mais + ' Adicionar</button></div><div class="lista-simples">' +
+    DB.procedimentos.slice().sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); }).map(function (x) { return '<div><span>' + esc(x.nome) + '</span><span class="row"><b>' + brl(x.preco) + '</b><button class="btn peq" data-proc="' + x.id + '">Editar</button></span></div>'; }).join('') + '</div></div>';
+  h += '<div class="card"><h2>Onde ficam os dados</h2>' + (EM_GOOGLE ? '<p>Tudo fica no Google da Débora: os cadastros numa planilha e os PDFs assinados numa pasta do Drive, separados por cliente.</p><div class="row"><a class="btn" target="_blank" href="' + esc(DB.links.planilha) + '">Abrir planilha</a><a class="btn" target="_blank" href="' + esc(DB.links.pasta) + '">Abrir pasta no Drive</a></div>' :
+    '<p>Você está no <b>modo demonstração</b>: os dados ficam só neste navegador. Depois de instalado no Google da Débora, tudo vai para a planilha e o Drive dela.</p><button class="btn perigo" id="zerar">Apagar dados de demonstração</button>') + '</div>';
+  return h;
+};
+ACOES.config = function (m) {
+  m.querySelector('#salvarCfg').onclick = function () { var d = lerForm(m.querySelector('#fc')); tarefa('Salvando…', chamar('salvarConfig', d)).then(function (r) { DB.config = r; aviso('Dados salvos.'); recarregar(); }); };
+  m.querySelector('#novoProc').onclick = function () { formProc({}); };
+  m.querySelectorAll('[data-proc]').forEach(function (b) { b.onclick = function () { formProc(porId(DB.procedimentos, b.dataset.proc)); }; });
+  var z = m.querySelector('#zerar'); if (z) z.onclick = function () { confirmar('Apagar os dados de demonstração e começar do zero com exemplos?', 'Apagar').then(function () { Demo.zerar(); iniciar(); }); };
+};
+function formProc(x) {
+  var mm = modal('<h2>' + (x.id ? 'Editar procedimento' : 'Novo procedimento') + '</h2><div class="form-grid" id="fpr">' + campo('nome', 'Nome', x.nome, 'text', 'c4') + campo('preco', 'Preço sugerido (R$)', x.preco ? String(x.preco).replace('.', ',') : '', 'text', 'c2', 'inputmode="decimal"') + campo('descricao', 'Descrição (opcional)', x.descricao, 'area', 'c6') + '</div><div class="acoes">' + (x.id ? '<button class="btn perigo" id="exc" style="margin-right:auto">Excluir</button>' : '') + '<button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok">Salvar</button></div>');
+  mm.querySelector('#ok').onclick = function () {
+    var d = lerForm(mm.querySelector('#fpr')); if (!d.nome) { aviso('Informe o nome.', true); return; }
+    var r = { nome: d.nome, preco: num(d.preco), descricao: d.descricao, ativo: 'sim' }; if (x.id) r.id = x.id;
+    mm.fechar(); tarefa('Salvando…', chamar('salvar', { tabela: 'procedimentos', registro: r })).then(function (y) { substituir('procedimentos', y); recarregar(); });
+  };
+  var ex = mm.querySelector('#exc'); if (ex) ex.onclick = function () { mm.fechar(); tarefa('Excluindo…', chamar('excluir', { tabela: 'procedimentos', id: x.id })).then(function () { DB.procedimentos = DB.procedimentos.filter(function (y) { return y.id !== x.id; }); recarregar(); }); };
+}
+
+/* ================================================================
+   Evolução, fotos e documentos
+   ================================================================ */
+function linhaDoTempo(sess) {
+  if (!sess.length) return '<div class="vazio">Nenhum atendimento registrado ainda.</div>';
+  return '<div class="tempo">' + sess.map(function (s) {
+    var pg = DB.pagamentos.filter(function (x) { return x.sessaoId === s.id; }).reduce(function (a, x) { return a + num(x.valor); }, 0);
+    var nf = (DB.arquivos || []).filter(function (x) { return x.sessaoId === s.id; }).length;
+    return '<div class="ev" data-abrir="sessaoDet:' + s.id + '"><div class="d">' + dataBR(s.data) + (s.assinaturaId ? ' · <span style="color:var(--ok)">assinado</span>' : ' · <span style="color:var(--warn)">sem assinatura</span>') + (pg ? ' · pago ' + brl(pg) : '') + (nf ? ' · ' + nf + ' foto(s)' : '') + '</div>' +
+      '<div class="t">' + esc(s.procedimento) + (s.area ? ' <span class="mute" style="font-weight:500">· ' + esc(s.area) + '</span>' : '') + '</div>' +
+      (s.produtos || s.obs ? '<div class="o">' + esc([s.produtos, s.obs].filter(Boolean).join('\n')) + '</div>' : '') + '</div>';
+  }).join('') + '</div>';
+}
+var TIPOS_ARQ = ['Antes', 'Depois', 'Receita', 'Foto', 'Exame', 'Ficha assinada (papel)', 'Orçamento assinado (papel)', 'Atendimento assinado (papel)', 'Outro'];
+function galeria(lista) {
+  if (!lista.length) return '<div class="vazio">Nenhuma foto ou documento ainda.</div>';
+  var grupos = {};
+  lista.forEach(function (a) { (grupos[a.tipo || 'Outro'] = grupos[a.tipo || 'Outro'] || []).push(a); });
+  return TIPOS_ARQ.filter(function (t) { return grupos[t]; }).concat(Object.keys(grupos).filter(function (t) { return TIPOS_ARQ.indexOf(t) < 0; })).map(function (t) {
+    return '<div class="grupo-tit">' + esc(t) + ' (' + grupos[t].length + ')</div><div class="galeria">' + grupos[t].map(function (a) {
+      var im = a.miniatura ? '<div class="im" style="background-image:url(\'' + a.miniatura + '\')"></div>' : '<div class="im">' + (/pdf/.test(a.mime || '') ? 'PDF' : 'ARQUIVO') + '</div>';
+      return '<div class="f" data-arq="' + a.id + '">' + im + '<div class="tx"><b>' + dataBR(a.data) + '</b>' + esc(a.descricao || '') + '</div></div>';
+    }).join('') + '</div>';
+  }).join('');
+}
+function ligarGaleria(m) {
+  m.querySelectorAll('[data-arq]').forEach(function (el) { el.onclick = function () { verArquivo(porId(DB.arquivos, el.dataset.arq)); }; });
+}
+function verArquivo(a) {
+  if (!a) return;
+  var completo = (Demo.completos || {})[a.id];
+  var url = EM_GOOGLE && a.arquivoId !== 'demo' ? 'https://drive.google.com/file/d/' + a.arquivoId + '/view' : '';
+  var vis = completo && /^data:image/.test(completo) ? '<img src="' + completo + '" style="max-width:100%;border-radius:10px">' : (a.miniatura ? '<img src="' + a.miniatura + '" style="max-width:100%;border-radius:10px">' : '<div class="vazio">Pré-visualização indisponível.</div>');
+  var mm = modal('<div class="row" style="justify-content:space-between;margin-bottom:12px"><div><h2 style="margin:0">' + esc(a.tipo) + '</h2><div class="small mute">' + dataBR(a.data) + (a.descricao ? ' · ' + esc(a.descricao) : '') + '</div></div><button class="btn peq" data-fechar>Fechar</button></div>' +
+    '<div style="text-align:center">' + vis + '</div><div class="acoes"><button class="btn perigo" id="exc" style="margin-right:auto">Excluir</button>' + (url ? '<a class="btn pri" target="_blank" href="' + url + '">Abrir no Google Drive</a>' : '') + '</div>', true);
+  mm.querySelector('#exc').onclick = function () { mm.fechar(); confirmar('Excluir este arquivo?', 'Excluir').then(function () { tarefa('Excluindo…', chamar('excluir', { tabela: 'arquivos', id: a.id })).then(function () { DB.arquivos = DB.arquivos.filter(function (x) { return x.id !== a.id; }); recarregar(); }); }); };
+}
+function lerArquivoLocal(file) {
+  return new Promise(function (ok, falha) {
+    var fr = new FileReader();
+    fr.onload = function () { ok(fr.result); };
+    fr.onerror = function () { falha(new Error('Não foi possível ler o arquivo.')); };
+    fr.readAsDataURL(file);
+  });
+}
+function redimensionar(dataUrl, max, qualidade) {
+  return new Promise(function (ok) {
+    var img = new Image();
+    img.onload = function () {
+      var k = Math.min(1, max / Math.max(img.width, img.height));
+      var c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+      var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
+      ok(c.toDataURL('image/jpeg', qualidade));
+    };
+    img.onerror = function () { ok(null); };
+    img.src = dataUrl;
+  });
+}
+/** op = { clienteId, sessaoId, tipo, descricao, camera, travarTipo, vincular } */
+function enviarArquivo(op) {
+  var cli = porId(DB.clientes, op.clienteId) || {};
+  var mm = modal('<h2>' + (op.camera ? 'Tirar foto' : 'Enviar foto ou documento') + '</h2><p class="small mute" style="margin-top:-6px">Fica guardado na pasta de ' + esc(cli.nome || 'cliente') + ' no Google Drive.</p>' +
+    '<div class="form-grid" id="fa"><div class="campo c3"><label>Tipo</label><select name="tipo"' + (op.travarTipo ? ' disabled' : '') + '>' + TIPOS_ARQ.map(function (t) { return '<option' + (t === op.tipo ? ' selected' : '') + '>' + t + '</option>'; }).join('') + '</select></div>' +
+    campo('data', 'Data', hoje(), 'date', 'c3') + campo('descricao', 'Descrição', op.descricao || '', 'text', 'c6', 'placeholder="Ex.: rosto frontal, receita Mounjaro 5 mg, abdômen lateral"') + '</div>' +
+    '<div class="zona-up" style="margin-top:14px"><div class="row" style="justify-content:center"><label class="btn pri">' + ICON.camera + ' Câmera<input type="file" accept="image/*" capture="environment" id="cam" hidden></label><label class="btn">' + ICON.doc + ' Escolher arquivo<input type="file" accept="image/*,application/pdf" id="arq" hidden></label></div><div id="prev" class="small mute" style="margin-top:10px">Nenhum arquivo escolhido.</div></div>' +
+    '<div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok" disabled>Salvar</button></div>');
+  var escolhido = null;
+  function pegar(inp) {
+    var f = inp.files && inp.files[0]; if (!f) return;
+    if (f.size > 20 * 1024 * 1024) { aviso('Arquivo muito grande (máximo 20 MB).', true); return; }
+    lerArquivoLocal(f).then(function (url) {
+      var eImg = /^image\//.test(f.type);
+      var prom = eImg ? Promise.all([redimensionar(url, 1800, 0.85), redimensionar(url, 320, 0.7)]) : Promise.resolve([url, null]);
+      return prom.then(function (r) {
+        escolhido = { dados: r[0] || url, mini: r[1], mime: eImg ? 'image/jpeg' : (f.type || 'application/pdf'), nome: f.name.replace(/\.[^.]+$/, '') + (eImg ? '.jpg' : (/\.[^.]+$/.exec(f.name) || [''])[0]) };
+        mm.querySelector('#prev').innerHTML = esc(f.name) + (r[1] ? '<br><img src="' + r[1] + '">' : '');
+        mm.querySelector('#ok').disabled = false;
+      });
+    });
+  }
+  mm.querySelector('#cam').onchange = function () { pegar(this); };
+  mm.querySelector('#arq').onchange = function () { pegar(this); };
+  if (op.camera) setTimeout(function () { try { mm.querySelector('#cam').click(); } catch (e) {} }, 50);
+  mm.querySelector('#ok').onclick = function () {
+    if (!escolhido) return;
+    var d = lerForm(mm.querySelector('#fa'));
+    var tipo = op.travarTipo ? op.tipo : d.tipo;
+    var reg = { clienteId: op.clienteId, clienteNome: cli.nome, sessaoId: op.sessaoId || '', tipo: tipo, descricao: d.descricao, data: d.data || hoje(), miniatura: escolhido.mini || '' };
+    if (op.vincular) { reg.refTabela = op.vincular.tabela; reg.refId = op.vincular.id; }
+    var nome = tipo + ' - ' + (cli.nome || '') + ' - ' + reg.data + ' - ' + escolhido.nome;
+    mm.fechar();
+    tarefa('Enviando para o Google Drive…', chamar('arquivo', { registro: reg, base64: escolhido.dados.split(',')[1], mime: escolhido.mime, nome: nome, vincular: op.vincular || null }))
+      .then(function (r) {
+        DB.arquivos = DB.arquivos || []; DB.arquivos.push(r.arquivo);
+        if (r.vinculado) substituir(r.tabela, r.vinculado);
+        aviso(op.vincular ? 'Documento em papel anexado.' : 'Arquivo guardado na pasta da cliente.'); recarregar();
+      });
+  };
+}
+
+/* ================================================================
+   Relatório mensal para o escritório de contabilidade
+   ================================================================ */
+function dadosRelatorio(ym) {
+  var l = DB.pagamentos.filter(function (x) { return String(x.data).slice(0, 7) === ym; }).sort(function (a, b) { return String(a.data).localeCompare(String(b.data)); });
+  var porForma = {}, total = 0;
+  l.forEach(function (x) { var k = x.forma || 'Não informado'; porForma[k] = (porForma[k] || 0) + num(x.valor); total += num(x.valor); });
+  return { lista: l, porForma: porForma, total: total };
+}
+function referenciaPag(x) {
+  var s = x.sessaoId ? porId(DB.sessoes, x.sessaoId) : null, o = x.orcamentoId ? porId(DB.orcamentos, x.orcamentoId) : null;
+  if (s) return s.procedimento;
+  if (o) return (o.itens || []).map(function (i) { return i.nome; }).join(', ') + ' (orç. ' + nOrc(o.numero) + ')';
+  return x.obs || 'Avulso';
+}
+function docRelatorio(ym) {
+  var r = dadosRelatorio(ym);
+  var corpo = '<p>Período: <b>' + mesNome(ym) + '</b> &nbsp;·&nbsp; Emitido em ' + dataBR(hoje()) + (cfg('documento') ? ' &nbsp;·&nbsp; CPF/CNPJ: ' + esc(cfg('documento')) : '') + '</p>' +
+    '<h2>Resumo por forma de pagamento</h2><table class="itens"><tr><th>Forma</th><th class="n">Qtde</th><th class="n">Valor</th></tr>' +
+    Object.keys(r.porForma).sort().map(function (k) { return '<tr><td>' + esc(k) + '</td><td class="n">' + r.lista.filter(function (x) { return (x.forma || 'Não informado') === k; }).length + '</td><td class="n">' + brl(r.porForma[k]) + '</td></tr>'; }).join('') +
+    '<tr><td><b>Total</b></td><td class="n"><b>' + r.lista.length + '</b></td><td class="n"><b>' + brl(r.total) + '</b></td></tr></table>' +
+    '<h2>Recebimentos do mês</h2><table class="itens"><tr><th>Data</th><th>Cliente</th><th>CPF</th><th>Referente a</th><th>Forma</th><th class="n">Valor</th></tr>' +
+    r.lista.map(function (x) { var c = porId(DB.clientes, x.clienteId) || {}; return '<tr><td>' + dataBR(x.data) + '</td><td>' + esc(x.clienteNome) + '</td><td>' + esc(c.cpf || '') + '</td><td>' + esc(referenciaPag(x)) + '</td><td>' + esc(x.forma || '—') + '</td><td class="n">' + brl(x.valor) + '</td></tr>'; }).join('') +
+    (r.lista.length ? '' : '<tr><td colspan="6">Nenhum recebimento no período.</td></tr>') + '</table>';
+  return docBase('Relatório de recebimentos', corpo);
+}
+function csvRelatorio(ym) {
+  var r = dadosRelatorio(ym);
+  function c(v) { v = String(v == null ? '' : v); return /[;"\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  var linhas = [['Data', 'Cliente', 'CPF', 'Referente a', 'Forma de pagamento', 'Valor'].join(';')];
+  r.lista.forEach(function (x) { var cl = porId(DB.clientes, x.clienteId) || {}; linhas.push([dataBR(x.data), x.clienteNome, cl.cpf, referenciaPag(x), x.forma, num(x.valor).toFixed(2).replace('.', ',')].map(c).join(';')); });
+  linhas.push(''); linhas.push('Total;;;;;' + r.total.toFixed(2).replace('.', ','));
+  return linhas.join('\r\n');
+}
+function formRelatorio(ym) {
+  var r = dadosRelatorio(ym);
+  var mm = modal('<h2>Relatório para o escritório</h2><p class="mute small" style="margin-top:-6px">Todos os recebimentos do mês, com cliente, CPF, procedimento e forma de pagamento. Vai em PDF e em planilha.</p>' +
+    '<div class="lista-simples" style="margin-bottom:14px"><div><span>' + mesNome(ym) + '</span><b>' + brl(r.total) + '</b></div>' + Object.keys(r.porForma).map(function (k) { return '<div><span class="mute">' + esc(k) + '</span><span>' + brl(r.porForma[k]) + '</span></div>'; }).join('') + '</div>' +
+    '<div class="stack" id="fr">' + campo('para', 'E-mail do escritório', cfg('emailContador'), 'email', '', 'placeholder="contabilidade@exemplo.com"') + '</div>' +
+    '<div class="acoes"><button class="btn" id="ver">Ver e imprimir</button><button class="btn" id="drive">Salvar no Drive</button><button class="btn pri" id="env">' + ICON.email + ' Enviar ao escritório</button></div>');
+  var nome = 'Relatório de recebimentos - ' + mesNome(ym);
+  function salvar(para) {
+    var corpo = 'Olá!<br><br>Segue o relatório de recebimentos de <b>' + mesNome(ym).toLowerCase() + '</b> (total ' + brl(r.total) + '), em PDF e em planilha.<br><br>Atenciosamente,<br>' + esc(cfg('nome', 'Débora Rodrigues'));
+    return tarefa(para ? 'Enviando o relatório…' : 'Salvando no Drive…', chamar('relatorio', { html: docRelatorio(ym), csv: csvRelatorio(ym), nome: nome, para: para, assunto: nome + ' - ' + cfg('nome', 'Débora Rodrigues'), corpo: corpo }));
+  }
+  mm.querySelector('#ver').onclick = function () { mm.fechar(); previa(docRelatorio(ym), nome); };
+  mm.querySelector('#drive').onclick = function () { mm.fechar(); salvar('').then(function (x) { aviso(x.demo ? 'Modo demonstração: seria salvo na pasta Relatórios do Drive.' : 'Salvo na pasta Relatórios do Drive.'); if (x.pdfUrl) window.open(x.pdfUrl, '_blank'); }); };
+  mm.querySelector('#env').onclick = function () {
+    var para = lerForm(mm.querySelector('#fr')).para;
+    if (!para) { aviso('Informe o e-mail do escritório.', true); return; }
+    mm.fechar();
+    salvar(para).then(function (x) {
+      if (para !== cfg('emailContador')) { DB.config.emailContador = para; chamar('salvarConfig', DB.config); }
+      aviso(x.demo ? 'Modo demonstração: o relatório seria enviado para ' + para + '.' : 'Relatório enviado para ' + para + '.');
+    });
+  };
+}
+
+/* ================================================================
+   Início
+   ================================================================ */
+function iniciar() {
+  carregando('Abrindo o sistema…');
+  chamar('carregar').then(function (d) { DB = d; DB.links = DB.links || {}; carregando(false); PILHA = []; ir('painel', {}, true); })
+    .catch(function (e) { carregando(false); document.getElementById('main').innerHTML = '<div class="card"><h2>Não foi possível abrir o sistema</h2><p>' + esc(e.message) + '</p><button class="btn pri" onclick="iniciar()">Tentar de novo</button></div>'; });
+}
+iniciar();
+</script>
+</body>
+</html>
