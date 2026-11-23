@@ -42,7 +42,7 @@ a{color:var(--rose-d)}
 .nav button.ativo{background:var(--rose-l);color:var(--rose-d)}
 .nav .rodape{margin-top:auto;font-size:12px;color:var(--mute);padding:10px 12px;line-height:1.5;word-break:break-all}
 .demo-tag{background:var(--warn-l);color:var(--warn);border-radius:8px;padding:8px 10px;font-size:12px;margin:0 4px 8px;line-height:1.4}
-main{flex:1;min-width:0;padding:28px 32px 80px;max-width:1180px}
+main{flex:1;min-width:0;padding:28px 32px 80px;max-width:1440px}
 @media (max-width:899px){
   .app{flex-direction:column}
   .nav{width:auto;height:auto;position:sticky;top:0;z-index:20;flex-direction:row;align-items:center;padding:8px 10px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);gap:2px}
@@ -131,7 +131,39 @@ h3{font-size:15px;margin:0 0 8px}
 .barras .b{width:40%;max-width:26px;border-radius:6px 6px 2px 2px;min-height:2px}
 .barras .b1{background:var(--rose-l)}.barras .b2{background:var(--rose)}
 .barras .m{font-size:12px;color:var(--mute)}
-.legenda{display:flex;gap:16px;font-size:12px;color:var(--mute);margin-top:10px}
+.legenda{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:10px}
+/* Financeiro */
+.faixa-atraso{display:flex;gap:12px;align-items:center;background:var(--bad-l);color:#7d2f2f;border:1px solid #efc4c4;border-radius:var(--r);padding:12px 16px;margin-bottom:16px;cursor:pointer;font-size:14px}
+.faixa-atraso svg{width:20px;height:20px;flex:none;color:var(--bad)}
+.kpis-fin{margin-bottom:16px}
+.kpi.destaque{background:linear-gradient(135deg,#94525e,#b5707c);color:#fff;border:none}.kpi.destaque .rot,.kpi.destaque .det,.kpi.destaque .mute{color:#f6dfe3}
+.kpi.ruim .val{color:var(--bad)}
+.var{font-weight:700}.var.up{color:var(--ok)}.var.down{color:var(--bad)}.kpi.destaque .var{color:#fff}
+.fin-formas{grid-template-columns:2fr 1fr;margin-bottom:16px}
+.fin-atraso{grid-template-columns:3fr 2fr}@media (max-width:1000px){.fin-atraso{grid-template-columns:1fr}}
+.formas-wrap{display:flex;gap:28px;align-items:center}
+.donut{width:190px;height:190px;flex:none}.donut .d1{font-size:9px;fill:var(--mute)}.donut .d2{font-size:13px;font-weight:700;fill:var(--ink)}
+.formas-lista{flex:1;min-width:0}
+.fl{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}.fl:last-child{border:0}
+.fl i{width:12px;height:12px;border-radius:4px;flex:none}
+.fl .fk{flex:1;font-weight:600}.fl small{display:block;font-weight:400;color:var(--mute);font-size:12px}
+.fl .fv{text-align:right;font-weight:700}
+.card.mini{padding:16px 18px}.card.mini .rot{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-bottom:6px}.card.mini .rot svg{width:18px;height:18px;color:var(--rose)}
+.card.mini .val{font-size:22px;font-weight:700}.card.mini .det{font-size:12px;color:var(--mute);margin-top:2px}
+.pilhas{display:flex;align-items:flex-end;gap:10px;height:220px;padding-top:24px;margin-top:8px}
+.pilhas .col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0;gap:6px}
+.pilhas .pilha{width:70%;max-width:38px;display:flex;flex-direction:column-reverse;border-radius:6px 6px 3px 3px;overflow:hidden;min-height:2px}
+.pilhas .vt{font-size:11px;color:var(--mute);white-space:nowrap}.pilhas .m{font-size:12px;color:var(--mute)}
+.hbar .hb{display:grid;grid-template-columns:minmax(120px,1.1fr) 2fr auto;gap:12px;align-items:center;padding:7px 0}
+.hbar .hk{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbar .ht{height:10px;background:var(--rose-ll);border-radius:99px;overflow:hidden}.hbar .ht i{display:block;height:100%;background:linear-gradient(90deg,#c9a063,#b5707c);border-radius:99px}
+.pos{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--rose-ll);color:var(--rose-d);font-size:12px;font-weight:700;margin-right:8px}
+.filtros{display:flex;gap:6px;flex-wrap:wrap}
+.filtro{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer}.filtro.ativo{background:var(--rose);border-color:var(--rose);color:#fff}
+.total-lista{text-align:right;padding-top:12px;font-size:14px;color:var(--mute)}.total-lista b{color:var(--ink);font-size:16px}
+.parcelas .st{font-size:12px}
+@media (max-width:1000px){.fin-formas{grid-template-columns:1fr}.formas-wrap{flex-direction:column;align-items:stretch}.donut{margin:0 auto}}
+@media (max-width:640px){.pilhas .vt{display:none}.hbar .hb{grid-template-columns:1fr auto}.hbar .ht{grid-column:span 2;order:3}}
 .legenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 /* Sobreposições */
 .veu{position:fixed;inset:0;background:rgba(47,42,43,.45);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px}
@@ -220,7 +252,11 @@ var ICON = {
   zap: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 1-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.1.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.1.3.6 1 1.3 1.7.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1l.7-.9c.2-.2.4-.2.6-.1l1.9.9c.2.1.4.2.4.3.1.1.1.6-.1 1.2z"/></svg>',
   email: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>',
   camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>',
-  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>'
+  doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>',
+  alerta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  pix: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 2.5 9.5 9.5-9.5 9.5L2.5 12z"/><path d="m7.5 12 3 3 6-6"/></svg>',
+  cartao: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>',
+  dinheiro: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9v.01M18 15v.01"/></svg>'
 };
 
 /* ================================================================
@@ -238,7 +274,7 @@ function chamar(acao, payload) {
 }
 
 var Demo = {
-  chave: 'debora_demo_v1',
+  chave: 'debora_demo_v2',
   ler: function () { try { var s = localStorage.getItem(this.chave); if (s) return JSON.parse(s); } catch (e) {} return this.semente(); },
   gravar: function (d) { try { localStorage.setItem(this.chave, JSON.stringify(d)); } catch (e) {} this._mem = d; },
   dados: function () { if (!this._mem) this._mem = this.ler(); return this._mem; },
@@ -267,7 +303,22 @@ var Demo = {
       { id: 's2', clienteId: 'c1', clienteNome: c1.nome, orcamentoId: 'o1', data: dt(1, 6), procedimento: 'Microagulhamento', area: 'Face', produtos: 'Agulha 1,0 mm', obs: '' },
       { id: 's3', clienteId: 'c2', clienteNome: c2.nome, orcamentoId: 'o2', data: dt(0, 4), procedimento: 'Mesoterapia corporal', area: 'Abdômen', produtos: 'Enzimas lipolíticas', obs: '' }
     ];
-    var d0 = { clientes: [c1, c2], procedimentos: procs, orcamentos: [o1, o2, o3], sessoes: ss, pagamentos: pg, arquivos: [],
+    // Mais exemplos para o financeiro (parcelas, atrasos e formas variadas)
+    o1.parcelas = 4; o1.entrada = 0; o1.primeiroVencimento = dt(2, 5); o1.formaPagamento = 'Pix'; o1.condicoes = '4x no Pix';
+    pg[0].forma = pg[1].forma = pg[2].forma = 'Pix';
+    var c3 = { id: 'c3', nome: 'Juliana Castro (exemplo)', cpf: '111.222.333-44', telefone: '(14) 99999-0003', email: '', endereco: 'Rua Tupis, 80 - Tupã', nascimento: '1979-08-21', profissao: 'Empresária', fichaData: dt(3, 2), anamnese: { gravida: 'Não', lactante: 'Não', diabetes: 'Não', anemia: 'Não', hipertensao: 'Não', cardiaco: 'Não', tireoide: 'Não', neoplasia: 'Não', sol: 'Pouco', fumante: 'Não', alcool: 'Pouco', tratamento12m: 'Não', cirurgia: 'Não' }, obs: '' };
+    var c4 = { id: 'c4', nome: 'Fernanda Rocha (exemplo)', cpf: '555.666.777-88', telefone: '(14) 99999-0004', email: '', endereco: 'Av. Brasil, 1200 - Tupã', nascimento: '1993-' + p2(m + 1) + '-28', profissao: 'Dentista', fichaData: dt(5, 9), anamnese: { gravida: 'Não', lactante: 'Não', diabetes: 'Não', anemia: 'Não', hipertensao: 'Não', cardiaco: 'Não', tireoide: 'Não', neoplasia: 'Não', sol: 'Pouco', fumante: 'Não', alcool: 'Não', tratamento12m: 'Sim', tratamento12m_det: 'Toxina', cirurgia: 'Não' }, obs: '' };
+    var o4 = { id: 'o4', numero: 4, clienteId: 'c3', clienteNome: c3.nome, data: dt(3, 2), validade: dt(3, 17), itens: [{ nome: 'Harmonização facial', qtd: 1, valor: 2800 }, { nome: 'Toxina botulínica', qtd: 1, valor: 1200 }], desconto: 0, total: 4000, formaPagamento: 'Pix', condicoes: 'Entrada + 3x', obs: '', status: 'Aprovado', aprovadoEm: dt(3, 2), parcelas: 3, entrada: 1000, primeiroVencimento: dt(2, 10) };
+    var o5 = { id: 'o5', numero: 5, clienteId: 'c4', clienteNome: c4.nome, data: dt(5, 9), validade: dt(5, 24), itens: [{ nome: 'Bioestimuladores', qtd: 3, valor: 1500 }], desconto: 300, total: 4200, formaPagamento: 'Cartão de crédito', condicoes: 'Em 6x no cartão', obs: '', status: 'Aprovado', aprovadoEm: dt(5, 9), parcelas: 1, entrada: 0, primeiroVencimento: dt(5, 9) };
+    var o6 = { id: 'o6', numero: 6, clienteId: 'c4', clienteNome: c4.nome, data: dt(1, 15), validade: dt(1, 30), itens: [{ nome: 'Skinbooster', qtd: 3, valor: 700 }], desconto: 0, total: 2100, formaPagamento: 'Pix', condicoes: '3x no Pix', obs: '', status: 'Aprovado', aprovadoEm: dt(1, 15), parcelas: 3, entrada: 0, primeiroVencimento: dt(1, 15) };
+    pg.push({ id: 'g8', clienteId: 'c3', clienteNome: c3.nome, orcamentoId: 'o4', data: dt(3, 2), valor: 1000, forma: 'Pix', obs: 'Entrada' });
+    pg.push({ id: 'g9', clienteId: 'c3', clienteNome: c3.nome, orcamentoId: 'o4', data: dt(2, 12), valor: 1000, forma: 'Transferência', obs: '1/3' });
+    pg.push({ id: 'g10', clienteId: 'c4', clienteNome: c4.nome, orcamentoId: 'o5', data: dt(5, 9), valor: 4200, forma: 'Cartão de crédito', obs: '6x na maquininha' });
+    pg.push({ id: 'g11', clienteId: 'c4', clienteNome: c4.nome, orcamentoId: 'o6', data: dt(1, 15), valor: 700, forma: 'Pix', obs: '1/3' });
+    var av = [['Limpeza de pele', 150, 'Pix'], ['Peeling químico', 200, 'Cartão de débito'], ['Limpeza de pele', 150, 'Dinheiro'], ['Toxina botulínica', 1200, 'Cartão de crédito'], ['Microagulhamento', 300, 'Pix'], ['Mesoterapia capilar', 250, 'Pix'], ['Preenchimento', 1400, 'Cartão de crédito'], ['Limpeza de pele', 150, 'Cartão de débito']];
+    for (var k = 0; k < 11; k++) for (var q = 0; q < 2 + (k % 3); q++) { var a = av[(k * 3 + q) % av.length]; var cc = [c1, c2, c3, c4][(k + q) % 4]; pg.push({ id: 'ga' + k + '_' + q, clienteId: cc.id, clienteNome: cc.nome, orcamentoId: '', data: dt(k, 3 + q * 7), valor: a[1], forma: a[2], obs: a[0] }); }
+    ss.push({ id: 's4', clienteId: 'c3', clienteNome: c3.nome, orcamentoId: 'o4', data: dt(3, 3), procedimento: 'Harmonização facial', area: 'Face', produtos: 'Ácido hialurônico 3 mL', obs: '' });
+    var d0 = { clientes: [c1, c2, c3, c4], procedimentos: procs, orcamentos: [o1, o2, o3, o4, o5, o6], sessoes: ss, pagamentos: pg, arquivos: [],
       config: { nome: 'Débora Rodrigues', subtitulo: 'Estética Avançada', cidade: 'Tupã', telefone: '(14) 99745-0903', email: 'drdebora.rodrigueslima@gmail.com', endereco: 'R. Goitacazes, 1.000 - Instituto Drefahl - Centro, Tupã-SP', instagram: '@dra.deborarodrigues', documento: '', pix: '', validadeDias: '15', emailContador: '' } };
     return d0;
   },
@@ -439,6 +490,12 @@ function docFicha(cli, img) {
   return docBase('Ficha de anamnese', corpo);
 }
 
+function textoPlano(o) {
+  var n = Number(o.parcelas) || 0; if (!n) return '';
+  var t = num(o.total), e = Math.min(num(o.entrada), t), resto = t - e, v = resto / n;
+  var pv = o.primeiroVencimento || (e > 0 ? addMeses(o.aprovadoEm || o.data || hoje(), 1) : (o.aprovadoEm || o.data || hoje()));
+  return (e > 0 ? 'Entrada de ' + brl(e) + ' + ' : '') + (n === 1 ? (e > 0 ? 'saldo de ' + brl(resto) : 'Pagamento único de ' + brl(t)) : n + ' parcelas de ' + brl(v)) + ' · ' + (n === 1 ? 'vencimento ' : '1º vencimento ') + dataBR(pv) + (n > 1 ? ', depois todo dia ' + Number(String(pv).slice(8, 10)) : '') + '.';
+}
 function docOrcamento(o, cli, img) {
   cli = cli || {};
   var sub = 0;
@@ -449,7 +506,7 @@ function docOrcamento(o, cli, img) {
     '<table class="tot" style="margin-top:8px"><tr><td class="n" style="width:75%">Subtotal</td><td class="n">' + brl(sub) + '</td></tr>' +
     (num(o.desconto) ? '<tr><td class="n">Desconto</td><td class="n">− ' + brl(o.desconto) + '</td></tr>' : '') +
     '<tr><td class="n g">Total</td><td class="n g">' + brl(o.total) + '</td></tr></table>' +
-    '<h2>Pagamento</h2>' + kv([['Forma de pagamento', o.formaPagamento], ['Condições', o.condicoes]]) +
+    '<h2>Pagamento</h2>' + kv([['Forma de pagamento', o.formaPagamento], ['Parcelamento', textoPlano(o) || undefined], ['Condições', o.condicoes]]) +
     (o.obs ? '<h2>Observações</h2><p>' + esc(o.obs).replace(/\n/g, '<br>') + '</p>' : '');
   if (img || o.status === 'Aprovado') corpo += blocoAssinatura(DECL_ORC, cli.nome || o.clienteNome, img, o.aprovadoEm || hoje());
   else corpo += '<div class="decl" style="font-weight:normal">Para aprovar, basta responder esta mensagem ou falar com a Débora. A assinatura é feita no dia do atendimento.</div>';
@@ -521,7 +578,7 @@ function ir(nome, p, semPilha) {
   window.scrollTo(0, 0);
 }
 function voltar() { var v = PILHA.pop(); if (v) ir(v.nome, v.p, true); else ir('painel', {}, true); }
-function recarregar() { ir(VIEW.nome, VIEW.p, true); }
+function recarregar() { var y = window.scrollY; ir(VIEW.nome, VIEW.p, true); window.scrollTo(0, y); }
 function ligarLinks(raiz) {
   raiz.querySelectorAll('[data-abrir]').forEach(function (el) {
     el.onclick = function (e) { if (e.target.closest('a,button:not([data-abrir])') && e.target.closest('[data-abrir]') !== e.target.closest('a,button')) return; var a = el.dataset.abrir.split(':'); ir(a[0], { id: a[1], clienteId: a[2] }); };
@@ -627,7 +684,7 @@ VIEWS.painel = function () {
     '<div class="card kpi"><div class="rot">Recebido em ' + mesNome(ym, true) + '</div><div class="val">' + brl(recMes) + '</div><div class="det">' + DB.pagamentos.filter(function (p) { return String(p.data).slice(0, 7) === ym; }).length + ' pagamentos</div></div>' +
     '<div class="card kpi"><div class="rot">Fechado em ' + mesNome(ym, true) + '</div><div class="val">' + brl(combMes) + '</div><div class="det">orçamentos aprovados no mês</div></div>' +
     '<div class="card kpi"><div class="rot">A receber</div><div class="val">' + brl(aReceberTotal()) + '</div><div class="det">dos orçamentos aprovados</div></div>' +
-    '<div class="card kpi"><div class="rot">Clientes</div><div class="val">' + DB.clientes.length + '</div><div class="det">' + pend.length + ' orçamento(s) aguardando</div></div></div>';
+    (function () { var ca = clientesEmAtraso(), v = ca.reduce(function (s, c) { return s + c.valor; }, 0); return '<div class="card kpi ' + (v > 0 ? 'ruim' : '') + '" data-ir="financeiro" style="cursor:pointer"><div class="rot">Em atraso</div><div class="val">' + brl(v) + '</div><div class="det">' + (ca.length ? ca.length + ' cliente(s) · ver no Financeiro' : 'ninguém em atraso 🎉') + '</div></div>'; })() + '</div>';
   h += '<div class="grid g2" style="margin-bottom:16px"><div class="card"><h2>Últimos 6 meses</h2><div class="barras">' +
     serie.map(function (s) { return '<div class="col"><div class="par"><div class="b b1" style="height:' + (s.c / max * 100) + '%" title="Fechado ' + brl(s.c) + '"></div><div class="b b2" style="height:' + (s.r / max * 100) + '%" title="Recebido ' + brl(s.r) + '"></div></div><div class="m">' + mesNome(s.m, true) + '</div></div>'; }).join('') +
     '</div><div class="legenda"><span><i style="background:var(--rose-l)"></i>Fechado (orçamentos aprovados)</span><span><i style="background:var(--rose)"></i>Recebido</span></div></div>' +
@@ -636,7 +693,7 @@ VIEWS.painel = function () {
     '<div class="card"><h2>Aniversariantes de ' + mesNome(ym).split(' ')[0].toLowerCase() + '</h2>' + (aniver.length ? '<div class="lista-simples">' + aniver.map(function (c) { return '<div><span><b>' + esc(c.nome) + '</b><br><span class="small mute">dia ' + String(c.nascimento).slice(8, 10) + '</span></span>' + (c.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(c.telefone, 'Feliz aniversário, ' + c.nome.split(' ')[0] + '! 🎉 Um carinho da ' + cfg('nome', 'Débora') + '.')) + '">' + ICON.zap + ' Parabéns</a>' : '') + '</div>'; }).join('') + '</div>' : '<div class="vazio">Nenhuma aniversariante este mês.</div>') + '</div></div>';
   return h;
 };
-ACOES.painel = function (m) { m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); };
+ACOES.painel = function (m) { m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); m.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { ir(b.dataset.ir, {}); }; }); };
 
 /* ---------- Clientes ---------- */
 VIEWS.clientes = function () {
@@ -652,7 +709,7 @@ ACOES.clientes = function (m) {
       .sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); });
     m.querySelector('#lista').innerHTML = l.length ? l.map(function (c) {
       var comb = combinadoCliente(c.id), rec = recebidoCliente(c.id), al = alertasSaude(c);
-      return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><b>' + esc(c.nome) + '</b>' + (!c.assinaturaId ? '<br><span class="small" style="color:var(--warn)">Ficha sem assinatura</span>' : '') + '</td><td>' + esc(c.telefone) + '</td><td>' + (al.length ? '<span class="chip alerta">' + al.length + ' alerta(s)</span>' : '<span class="mute small">—</span>') + '</td><td class="num">' + brl(comb) + '</td><td class="num">' + brl(rec) + '</td><td class="num"><b>' + brl(Math.max(0, comb - rec)) + '</b></td></tr>';
+      return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><b>' + esc(c.nome) + '</b>' + (!c.assinaturaId ? '<br><span class="small" style="color:var(--warn)">Ficha sem assinatura</span>' : '') + '</td><td>' + esc(c.telefone) + '</td><td>' + (function () { var at = atrasoCliente(c.id), x = ''; if (at > 0.009) x += '<span class="chip alerta">Em atraso ' + brl(at) + '</span> '; if (al.length) x += '<span class="chip alerta">' + al.length + ' alerta(s)</span>'; return x || '<span class="mute small">—</span>'; })() + '</td><td class="num">' + brl(comb) + '</td><td class="num">' + brl(rec) + '</td><td class="num"><b>' + brl(Math.max(0, comb - rec)) + '</b></td></tr>';
     }).join('') : '<tr><td colspan="6" class="vazio">' + (q ? 'Nenhuma cliente encontrada.' : 'Nenhuma cliente cadastrada ainda. Toque em “Nova cliente”.') + '</td></tr>';
     ligarLinks(m);
   }
@@ -788,7 +845,7 @@ function seletorForma(nome, val) { return '<select name="' + nome + '"><option v
 function addDias(s, n) { var d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return d.getFullYear() + '-' + p2(d.getMonth() + 1) + '-' + p2(d.getDate()); }
 
 VIEWS.orcamentoForm = function (p) {
-  var o = p.id ? porId(DB.orcamentos, p.id) : { clienteId: p.clienteId, data: hoje(), validade: addDias(hoje(), Number(cfg('validadeDias', '15')) || 15), itens: [{ nome: '', qtd: 1, valor: '' }], desconto: 0, formaPagamento: '', condicoes: '', obs: '' };
+  var o = p.id ? porId(DB.orcamentos, p.id) : { clienteId: p.clienteId, data: hoje(), validade: addDias(hoje(), Number(cfg('validadeDias', '15')) || 15), itens: [{ nome: '', qtd: 1, valor: '' }], desconto: 0, formaPagamento: '', condicoes: '', obs: '', parcelas: 1, entrada: 0, primeiroVencimento: '' };
   var h = cabec(p.id ? 'Editar orçamento nº ' + nOrc(o.numero) : 'Novo orçamento', '', '', true);
   h += '<form id="f" class="stack" autocomplete="off"><div class="card"><div class="form-grid"><div class="campo c4"><label>Cliente *</label>' + seletorCliente(o.clienteId) + '</div>' +
     campo('data', 'Data', o.data, 'date', 'c1" style="grid-column:span 1') + campo('validade', 'Válido até', o.validade, 'date', 'c1" style="grid-column:span 1') + '</div>' +
@@ -796,7 +853,12 @@ VIEWS.orcamentoForm = function (p) {
   h += '<div class="card"><div class="secao-tit">Procedimentos</div><datalist id="procs">' + DB.procedimentos.filter(function (x) { return x.ativo !== 'não'; }).map(function (x) { return '<option value="' + esc(x.nome) + '">'; }).join('') + '</datalist><div class="itens-orc" id="itens"></div>' +
     '<button type="button" class="btn peq" id="addItem" style="margin-top:12px">' + ICON.mais + ' Adicionar procedimento</button>' +
     '<div class="total-box"><span>Subtotal: <span id="sub">R$ 0,00</span></span><span class="row" style="gap:6px">Desconto (R$): <input name="desconto" inputmode="decimal" value="' + esc(o.desconto || '') + '" style="width:110px;border:1px solid var(--line);border-radius:10px;padding:8px 10px"></span><span>Total: <b id="tot">R$ 0,00</b></span></div></div>';
-  h += '<div class="card"><div class="form-grid"><div class="campo c2"><label>Forma de pagamento</label>' + seletorForma('formaPagamento', o.formaPagamento) + '</div>' + campo('condicoes', 'Condições (ex.: 3x sem juros, entrada + parcelas)', o.condicoes, 'text', 'c4') + campo('obs', 'Observações', o.obs, 'area', 'c6') + '</div></div>';
+  var npar = o.parcelas === undefined ? '' : String(o.parcelas || '');
+  h += '<div class="card"><div class="secao-tit">Pagamento</div><div class="form-grid"><div class="campo c2"><label>Forma de pagamento</label>' + seletorForma('formaPagamento', o.formaPagamento) + '</div>' +
+    '<div class="campo c2"><label>Como será pago</label><select name="parcelas"><option value=""' + (npar === '' || npar === '0' ? ' selected' : '') + '>Por sessão (sem vencimento)</option>' + [1,2,3,4,5,6,7,8,9,10,11,12].map(function (n) { return '<option value="' + n + '"' + (npar === String(n) ? ' selected' : '') + '>' + (n === 1 ? 'À vista / parcela única' : n + ' parcelas mensais') + '</option>'; }).join('') + '</select></div>' +
+    campo('entrada', 'Entrada (R$)', o.entrada ? String(o.entrada).replace('.', ',') : '', 'text', 'c1" style="grid-column:span 1', 'inputmode="decimal" placeholder="0,00"') + campo('primeiroVencimento', '1º vencimento', o.primeiroVencimento, 'date', 'c1" style="grid-column:span 1') +
+    '<div class="campo c6"><div class="small mute" id="planoTxt"></div></div>' +
+    campo('condicoes', 'Condições (texto livre, aparece no PDF)', o.condicoes, 'text', 'c6') + campo('obs', 'Observações', o.obs, 'area', 'c6') + '</div></div>';
   h += '<div class="row" style="justify-content:flex-end"><button type="button" class="btn" id="previa">Pré-visualizar</button><button type="button" class="btn pri" id="salvar">Salvar orçamento</button></div></form>';
   return h;
 };
@@ -827,8 +889,11 @@ ACOES.orcamentoForm = function (m, p) {
   }
   function totais() { var s = itens.reduce(function (a, i) { return a + num(i.qtd) * num(i.valor); }, 0); m.querySelector('#sub').textContent = brl(s); m.querySelector('#tot').textContent = brl(Math.max(0, s - num(f.querySelector('[name=desconto]').value))); return s; }
   f.querySelector('[name=desconto]').oninput = totais;
+  function plano() { var d = lerForm(f), s = itens.reduce(function (a, i) { return a + num(i.qtd) * num(i.valor); }, 0); var t = Math.max(0, s - num(d.desconto)); m.querySelector('#planoTxt').textContent = textoPlano({ total: t, parcelas: d.parcelas, entrada: num(d.entrada), primeiroVencimento: d.primeiroVencimento, data: d.data }) || 'Sem parcelas: o valor é recebido conforme as sessões, sem controle de atraso.'; }
+  ['parcelas', 'entrada', 'primeiroVencimento', 'desconto'].forEach(function (k) { var el = f.querySelector('[name=' + k + ']'); el.addEventListener('input', plano); el.addEventListener('change', plano); });
+  cont.addEventListener('input', plano);
   m.querySelector('#addItem').onclick = function () { itens.push({ nome: '', qtd: 1, valor: '' }); desenharItens(); var u = cont.querySelectorAll('[data-c=nome]'); u[u.length - 1].focus(); };
-  desenharItens();
+  desenharItens(); plano();
   function montar() {
     var d = lerForm(f);
     if (!d.clienteId) { aviso('Escolha a cliente.', true); return null; }
@@ -839,6 +904,7 @@ ACOES.orcamentoForm = function (m, p) {
     r.clienteId = d.clienteId; r.clienteNome = porId(DB.clientes, d.clienteId).nome; r.data = d.data || hoje(); r.validade = d.validade;
     r.itens = lim; r.desconto = num(d.desconto); r.total = Math.max(0, sub - r.desconto);
     r.formaPagamento = d.formaPagamento; r.condicoes = d.condicoes; r.obs = d.obs;
+    r.parcelas = Number(d.parcelas) || 0; r.entrada = num(d.entrada); r.primeiroVencimento = r.parcelas ? (d.primeiroVencimento || '') : '';
     return r;
   }
   m.querySelector('#previa').onclick = function () { var r = montar(); if (r) previa(docOrcamento(r, porId(DB.clientes, r.clienteId)), 'Pré-visualização'); };
@@ -864,13 +930,16 @@ VIEWS.orcamentoDet = function (p) {
   if (o.pdfId && EM_GOOGLE) h += '<button class="btn" id="ver">Ver PDF no Drive</button>';
   if (o.status !== 'Aprovado') h += '<button class="btn" id="papelOrc">Anexar assinado em papel</button>';
   if (o.status !== 'Aprovado') h += '<button class="btn" id="editar">Editar</button>';
+  if (o.status === 'Aprovado') h += '<button class="btn" id="editPlano">Plano de pagamento</button>';
   h += '</div>' + (o.status === 'Aprovado' ? '<p class="small mute" style="margin:12px 0 0">Aprovado e assinado em ' + dataBR(o.aprovadoEm) + '.</p>' : '<p class="small mute" style="margin:12px 0 0">Dica: no dia do atendimento, abra este orçamento no tablet e toque em “Cliente aprovou” para ela assinar.</p>') + '</div>';
   h += '<div class="grid g2"><div class="card"><h2>Procedimentos</h2><table class="tabela"><thead><tr><th>Procedimento</th><th class="num">Sessões</th><th class="num">Subtotal</th></tr></thead><tbody>' +
     (o.itens || []).map(function (i) { return '<tr><td>' + esc(i.nome) + '<br><span class="small mute">' + brl(i.valor) + ' por sessão</span></td><td class="num">' + esc(i.qtd) + '</td><td class="num">' + brl(num(i.qtd) * num(i.valor)) + '</td></tr>'; }).join('') +
     (num(o.desconto) ? '<tr><td colspan="2">Desconto</td><td class="num">− ' + brl(o.desconto) + '</td></tr>' : '') + '<tr><td colspan="2"><b>Total</b></td><td class="num"><b>' + brl(o.total) + '</b></td></tr></tbody></table>' +
-    '<dl class="dl" style="margin-top:16px"><dt>Pagamento</dt><dd>' + esc(o.formaPagamento || '—') + (o.condicoes ? ' · ' + esc(o.condicoes) : '') + '</dd><dt>Válido até</dt><dd>' + (o.validade ? dataBR(o.validade) : '—') + '</dd>' + (o.obs ? '<dt>Observações</dt><dd>' + esc(o.obs) + '</dd>' : '') + '</dl></div>';
+    '<dl class="dl" style="margin-top:16px"><dt>Pagamento</dt><dd>' + esc(o.formaPagamento || '—') + (o.condicoes ? ' · ' + esc(o.condicoes) : '') + (textoPlano(o) ? '<br><span class="small mute">' + esc(textoPlano(o)) + '</span>' : '') + '</dd><dt>Válido até</dt><dd>' + (o.validade ? dataBR(o.validade) : '—') + '</dd>' + (o.obs ? '<dt>Observações</dt><dd>' + esc(o.obs) + '</dd>' : '') + '</dl></div>';
   h += '<div class="stack"><div class="card"><h2>Financeiro deste orçamento</h2><div class="grid g3"><div class="kpi"><div class="rot">Combinado</div><div class="val" style="font-size:20px">' + brl(o.status === 'Aprovado' ? o.total : 0) + '</div></div><div class="kpi"><div class="rot">Recebido</div><div class="val" style="font-size:20px">' + brl(rec) + '</div></div><div class="kpi"><div class="rot">Falta</div><div class="val" style="font-size:20px">' + brl(o.status === 'Aprovado' ? Math.max(0, o.total - rec) : 0) + '</div></div></div>' +
     (o.status === 'Aprovado' ? '<div style="margin-top:14px"><button class="btn peq" id="pag">' + ICON.mais + ' Registrar pagamento</button></div>' : '') + '</div>' +
+    (function () { var sp = situacaoOrc(o); if (!sp.length) return Number(o.parcelas) ? '' : (o.status === 'Aprovado' ? '<div class="card"><h2>Parcelas e vencimentos</h2><p class="small mute" style="margin:0">Pagamento por sessão, sem vencimentos. Para controlar atrasos, edite o plano de pagamento.</p></div>' : '');
+      return '<div class="card parcelas"><h2>Parcelas e vencimentos</h2><table class="tabela"><thead><tr><th>Parcela</th><th>Vencimento</th><th class="num">Valor</th><th class="num">Situação</th></tr></thead><tbody>' + sp.map(function (x) { var cls = { 'Paga': 's-Aprovado', 'Em atraso': 's-Recusado', 'Parcial': 's-Enviado', 'A vencer': 's-Rascunho' }[x.status]; return '<tr><td>' + x.rot + '</td><td>' + dataBR(x.venc) + '</td><td class="num">' + brl(x.valor) + (x.pago > 0 && x.falta > 0.009 ? '<br><span class="small mute">falta ' + brl(x.falta) + '</span>' : '') + '</td><td class="num"><span class="selo ' + cls + '">' + x.status + (x.status === 'Em atraso' ? ' · ' + x.dias + 'd' : '') + '</span></td></tr>'; }).join('') + '</tbody></table></div>'; })() +
     '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="margin:0">Atendimentos</h2>' + (o.status === 'Aprovado' ? '<button class="btn peq" id="sessao">' + ICON.caneta + ' Novo atendimento</button>' : '') + '</div>' + progressoOrc(o, sess) + '</div></div></div>';
   if (o.status !== 'Aprovado') h += '<div class="row" style="margin-top:16px;justify-content:flex-end">' + (o.status !== 'Recusado' ? '<button class="btn peq" id="recusar">Marcar como recusado</button>' : '') + '<button class="btn peq perigo" id="excluir">Excluir orçamento</button></div>';
   return h;
@@ -895,6 +964,16 @@ ACOES.orcamentoDet = function (m, p) {
   var o = porId(DB.orcamentos, p.id); if (!o) return;
   var c = porId(DB.clientes, o.clienteId) || {};
   function $(s) { return m.querySelector(s); }
+  if ($('#editPlano')) $('#editPlano').onclick = function () {
+    var np = String(Number(o.parcelas) || '');
+    var mm = modal('<h2>Plano de pagamento</h2><p class="small mute" style="margin-top:0">Total do orçamento: <b>' + brl(o.total) + '</b>. O sistema usa as datas para avisar quando houver atraso.</p><div class="form-grid" id="fpl"><div class="campo c6"><label>Como será pago</label><select name="parcelas"><option value="">Por sessão (sem vencimento)</option>' + [1,2,3,4,5,6,7,8,9,10,11,12].map(function (n) { return '<option value="' + n + '"' + (np === String(n) ? ' selected' : '') + '>' + (n === 1 ? 'À vista / parcela única' : n + ' parcelas mensais') + '</option>'; }).join('') + '</select></div>' +
+      campo('entrada', 'Entrada (R$)', o.entrada ? String(o.entrada).replace('.', ',') : '', 'text', 'c3', 'inputmode="decimal" placeholder="0,00"') + campo('primeiroVencimento', '1º vencimento', o.primeiroVencimento, 'date', 'c3') + '<div class="campo c6"><div class="small mute" id="txtPl"></div></div></div><div class="acoes"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="ok">Salvar</button></div>');
+    var fpl = mm.querySelector('#fpl');
+    function atual() { var d = lerForm(fpl); mm.querySelector('#txtPl').textContent = textoPlano({ total: o.total, parcelas: d.parcelas, entrada: num(d.entrada), primeiroVencimento: d.primeiroVencimento, aprovadoEm: o.aprovadoEm, data: o.data }) || 'Sem vencimentos: não entra no controle de atraso.'; }
+    fpl.addEventListener('input', atual); fpl.addEventListener('change', atual); atual();
+    mm.querySelector('#ok').onclick = function () { var d = lerForm(fpl); var n = Number(d.parcelas) || 0; mm.fechar();
+      tarefa('Salvando…', chamar('salvar', { tabela: 'orcamentos', registro: { id: o.id, parcelas: n, entrada: num(d.entrada), primeiroVencimento: n ? (d.primeiroVencimento || '') : '' } })).then(function (x) { substituir('orcamentos', x); aviso('Plano de pagamento salvo.'); recarregar(); }); };
+  };
   if ($('#editar')) $('#editar').onclick = function () { ir('orcamentoForm', { id: o.id }); };
   if ($('#ver')) $('#ver').onclick = function () { verDocumento('orcamento', o); };
   $('#imprimir').onclick = function () { previa(docOrcamento(o, c, o._assinatura || null), 'Orçamento nº ' + nOrc(o.numero)); };
@@ -1063,26 +1142,136 @@ function formPagamento(pg) {
   var ex = mm.querySelector('#exc'); if (ex) ex.onclick = function () { mm.fechar(); confirmar('Excluir este pagamento de ' + brl(pg.valor) + '?', 'Excluir').then(function () { tarefa('Excluindo…', chamar('excluir', { tabela: 'pagamentos', id: pg.id })).then(function () { DB.pagamentos = DB.pagamentos.filter(function (x) { return x.id !== pg.id; }); recarregar(); }); }); };
 }
 
+/* ---------- Financeiro: parcelas, vencimentos e atrasos ---------- */
+function addMeses(s, n) { var a = String(s).slice(0, 10).split('-'), y = Number(a[0]), m = Number(a[1]) - 1 + n, d = Number(a[2]); var x = new Date(y, m, 1); var ult = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate(); return x.getFullYear() + '-' + p2(x.getMonth() + 1) + '-' + p2(Math.min(d, ult)); }
+function diasEntre(a, b) { return Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 86400000); }
+function r2(v) { return Math.round(v * 100) / 100; }
+// Gera as parcelas previstas de um orçamento aprovado. parcelas vazio/0 = "por sessão" (sem vencimento controlado)
+function planoOrc(o) {
+  if (!o || o.status !== 'Aprovado') return [];
+  var n = Number(o.parcelas) || 0; if (n < 1) return [];
+  var total = num(o.total), ent = Math.min(num(o.entrada), total), base = String(o.aprovadoEm || o.data || hoje()).slice(0, 10);
+  var pv = o.primeiroVencimento || (ent > 0 ? addMeses(base, 1) : base);
+  var r = []; if (ent > 0) r.push({ rot: 'Entrada', venc: base, valor: r2(ent) });
+  var resto = r2(total - ent), v = r2(resto / n);
+  for (var i = 0; i < n; i++) r.push({ rot: n > 1 ? 'Parcela ' + (i + 1) + '/' + n : 'Parcela única', venc: addMeses(pv, i), valor: i === n - 1 ? r2(resto - v * (n - 1)) : v });
+  return r.filter(function (x) { return x.valor > 0.009; });
+}
+// Distribui o que já foi pago entre as parcelas, da mais antiga para a mais nova
+function situacaoOrc(o) {
+  var pl = planoOrc(o), pago = recebidoOrc(o.id), h = hoje();
+  pl.forEach(function (x) { var usa = Math.min(pago, x.valor); x.pago = r2(usa); pago = r2(pago - usa); x.falta = r2(x.valor - usa);
+    x.status = x.falta <= 0.009 ? 'Paga' : x.venc < h ? 'Em atraso' : x.pago > 0 ? 'Parcial' : 'A vencer';
+    x.dias = x.status === 'Em atraso' ? diasEntre(x.venc, h) : diasEntre(h, x.venc); x.o = o; });
+  return pl;
+}
+function todasParcelas() { var r = []; aprovados().forEach(function (o) { r = r.concat(situacaoOrc(o)); }); return r; }
+function atrasos() { return todasParcelas().filter(function (x) { return x.status === 'Em atraso'; }); }
+function atrasoCliente(id) { return atrasos().filter(function (x) { return x.o.clienteId === id; }).reduce(function (s, x) { return s + x.falta; }, 0); }
+function clientesEmAtraso() {
+  var g = {}; atrasos().forEach(function (x) { var k = x.o.clienteId; if (!g[k]) g[k] = { id: k, nome: x.o.clienteNome, valor: 0, n: 0, desde: x.venc, orcs: {} }; g[k].valor = r2(g[k].valor + x.falta); g[k].n++; if (x.venc < g[k].desde) g[k].desde = x.venc; g[k].orcs[x.o.id] = x.o; });
+  return Object.keys(g).map(function (k) { var c = g[k]; c.dias = diasEntre(c.desde, hoje()); return c; }).sort(function (a, b) { return b.dias - a.dias; });
+}
+function textoCobranca(c) {
+  var cli = porId(DB.clientes, c.id) || {};
+  return 'Olá, ' + String(c.nome).replace(/\s*\(exemplo\)/, '').split(' ')[0] + '! Tudo bem? Passando para lembrar, com carinho, que consta em aberto o valor de ' + brl(c.valor) + ' referente ao seu tratamento (vencido desde ' + dataBR(c.desde) + ').' + (cfg('pix') ? ' Chave Pix: ' + cfg('pix') + '.' : '') + ' Qualquer dúvida estou à disposição. ' + cfg('nome', 'Débora');
+}
+
+/* Cores e grupos das formas de pagamento */
+var COR_FORMA = { 'Pix': '#b5707c', 'Cartão de crédito': '#c9a063', 'Cartão de débito': '#e3c995', 'Dinheiro': '#7f9f86', 'Transferência': '#8c80ad', 'Boleto': '#9aa3ad', 'Não informado': '#d9cfd1' };
+function formaDe(p) { return p.forma || 'Não informado'; }
+function periodo(per) {
+  var h = hoje(), y = h.slice(0, 4);
+  if (!per || per === 'mes') per = 'm:' + h.slice(0, 7);
+  if (per === 'tri') return { ini: addMeses(h.slice(0, 7) + '-01', -2), fim: h, rot: 'Últimos 3 meses', ant: { ini: addMeses(h.slice(0, 7) + '-01', -5), fim: addMeses(h.slice(0, 7) + '-01', -2) } };
+  if (per.indexOf('a:') === 0) { var a = per.slice(2); return { ini: a + '-01-01', fim: a + '-12-31', rot: 'Ano de ' + a, ant: { ini: (a - 1) + '-01-01', fim: (a - 1) + '-12-31' } }; }
+  var ym = per.slice(2), ini = ym + '-01', fim = addMeses(ini, 1);
+  return { ini: ini, fim: addDias(fim, -1), rot: mesNome(ym), ant: { ini: addMeses(ini, -1), fim: addDias(ini, -1) } };
+}
+function noPeriodo(d, P) { d = String(d || '').slice(0, 10); return d >= P.ini && d <= P.fim; }
+function donut(partes, total) {
+  if (!total) return '<div class="vazio">Sem entradas no período.</div>';
+  var R = 54, C = 2 * Math.PI * R, ac = 0;
+  var arcos = partes.map(function (p) { var len = p.v / total * C, s = '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + p.cor + '" stroke-width="22" stroke-dasharray="' + len + ' ' + (C - len) + '" stroke-dashoffset="' + (-ac) + '"><title>' + esc(p.k) + ': ' + brl(p.v) + '</title></circle>'; ac += len; return s; }).join('');
+  return '<svg viewBox="0 0 140 140" class="donut"><g transform="rotate(-90 70 70)">' + arcos + '</g><text x="70" y="66" text-anchor="middle" class="d1">Total</text><text x="70" y="84" text-anchor="middle" class="d2">' + brl(total).replace('R$', '').trim() + '</text></svg>';
+}
+function variacao(atual, ant) {
+  if (!ant) return atual ? '<span class="var up">novo</span>' : '';
+  var p = (atual - ant) / ant * 100; return '<span class="var ' + (p >= 0 ? 'up' : 'down') + '">' + (p >= 0 ? '▲ ' : '▼ ') + Math.abs(p).toFixed(0) + '%</span> <span class="mute">vs período anterior</span>';
+}
+// Quanto de cada pagamento vai para cada procedimento (proporcional aos itens do orçamento)
+function receitaPorProcedimento(pags) {
+  var r = {};
+  pags.forEach(function (p) {
+    var o = p.orcamentoId ? porId(DB.orcamentos, p.orcamentoId) : null;
+    if (o && o.itens && o.itens.length) { var tot = o.itens.reduce(function (s, i) { return s + num(i.qtd) * num(i.valor); }, 0) || 1; o.itens.forEach(function (i) { r[i.nome] = (r[i.nome] || 0) + num(p.valor) * (num(i.qtd) * num(i.valor)) / tot; }); }
+    else { var s = p.sessaoId ? porId(DB.sessoes, p.sessaoId) : null, ob = String(p.obs || '').trim().toLowerCase(); var pr = DB.procedimentos.filter(function (x) { return x.nome.toLowerCase() === ob; })[0]; var k = s ? s.procedimento : pr ? pr.nome : 'Avulso / outros'; r[k] = (r[k] || 0) + num(p.valor); }
+  });
+  return Object.keys(r).map(function (k) { return { k: k, v: r[k] }; }).sort(function (a, b) { return b.v - a.v; });
+}
+
 VIEWS.financeiro = function (p) {
-  var ym = p.mes || hoje().slice(0, 7);
-  var pagsMes = DB.pagamentos.filter(function (x) { return String(x.data).slice(0, 7) === ym; }).sort(porData);
-  var rec = pagsMes.reduce(function (s, x) { return s + num(x.valor); }, 0);
-  var comb = somaMes(aprovados(), 'aprovadoEm', 'total', ym);
-  var porForma = {}; pagsMes.forEach(function (x) { var k = x.forma || 'Não informado'; porForma[k] = (porForma[k] || 0) + num(x.valor); });
-  var meses = {}; DB.pagamentos.concat(DB.orcamentos).forEach(function (x) { var d = String(x.data || '').slice(0, 7); if (d) meses[d] = 1; }); meses[hoje().slice(0, 7)] = 1; meses[ym] = 1;
-  var listaMeses = Object.keys(meses).sort().reverse();
-  var abertos = aprovados().map(function (o) { return { o: o, falta: Math.max(0, o.total - recebidoOrc(o.id)) }; }).filter(function (x) { return x.falta > 0.009; }).sort(function (a, b) { return b.falta - a.falta; });
-  var h = cabec('Financeiro', 'Combinado × recebido', '<button class="btn" id="relat">' + ICON.doc + ' Relatório para o escritório</button><select id="mes" class="btn" style="font-weight:500">' + listaMeses.map(function (m) { return '<option value="' + m + '"' + (m === ym ? ' selected' : '') + '>' + mesNome(m) + '</option>'; }).join('') + '</select><button class="btn pri" id="novo">' + ICON.mais + ' Registrar pagamento</button>');
-  h += '<div class="grid g4" style="margin-bottom:16px"><div class="card kpi"><div class="rot">Recebido no mês</div><div class="val">' + brl(rec) + '</div><div class="det">' + pagsMes.length + ' pagamento(s)</div></div><div class="card kpi"><div class="rot">Fechado no mês</div><div class="val">' + brl(comb) + '</div><div class="det">orçamentos aprovados</div></div><div class="card kpi"><div class="rot">A receber (total)</div><div class="val">' + brl(aReceberTotal()) + '</div><div class="det">' + abertos.length + ' orçamento(s) em aberto</div></div><div class="card kpi"><div class="rot">Ticket médio no mês</div><div class="val">' + brl(pagsMes.length ? rec / pagsMes.length : 0) + '</div><div class="det">por pagamento</div></div></div>';
-  h += '<div class="grid g2" style="margin-bottom:16px"><div class="card"><h2>Em aberto (combinado e ainda não recebido)</h2>' + (abertos.length ? '<div class="lista-simples">' + abertos.map(function (x) { return '<div data-abrir="orcamentoDet:' + x.o.id + '" style="cursor:pointer"><span><b>' + esc(x.o.clienteNome) + '</b><br><span class="small mute">nº ' + nOrc(x.o.numero) + ' · combinado ' + brl(x.o.total) + ' · recebido ' + brl(recebidoOrc(x.o.id)) + '</span></span><b style="color:var(--rose-d)">' + brl(x.falta) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Nada em aberto. 🎉</div>') + '</div>' +
-    '<div class="card"><h2>Recebido por forma de pagamento</h2>' + (Object.keys(porForma).length ? '<div class="lista-simples">' + Object.keys(porForma).sort(function (a, b) { return porForma[b] - porForma[a]; }).map(function (k) { return '<div><span>' + esc(k) + '</span><b>' + brl(porForma[k]) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Sem pagamentos neste mês.</div>') + '</div></div>';
-  h += '<div class="card"><h2>Pagamentos de ' + mesNome(ym).toLowerCase() + '</h2>' + tabelaPagamentos(pagsMes) + '</div>';
+  var P = periodo(p.per), h0 = hoje();
+  var pags = DB.pagamentos.filter(function (x) { return noPeriodo(x.data, P); }).sort(porData);
+  var pagsAnt = DB.pagamentos.filter(function (x) { return noPeriodo(x.data, P.ant); });
+  var rec = pags.reduce(function (s, x) { return s + num(x.valor); }, 0), recAnt = pagsAnt.reduce(function (s, x) { return s + num(x.valor); }, 0);
+  var fech = aprovados().filter(function (o) { return noPeriodo(o.aprovadoEm, P); }), fechV = fech.reduce(function (s, o) { return s + num(o.total); }, 0);
+  var parc = todasParcelas(), atr = parc.filter(function (x) { return x.status === 'Em atraso'; }), atrV = atr.reduce(function (s, x) { return s + x.falta; }, 0);
+  var prox = parc.filter(function (x) { return x.status !== 'Paga' && x.status !== 'Em atraso' && x.dias <= 30; }).sort(function (a, b) { return a.venc.localeCompare(b.venc); });
+  var proxV = prox.reduce(function (s, x) { return s + x.falta; }, 0);
+  var cliAtr = clientesEmAtraso();
+  var semPlano = aprovados().filter(function (o) { return !planoOrc(o).length; }).map(function (o) { return { o: o, falta: Math.max(0, o.total - recebidoOrc(o.id)) }; }).filter(function (x) { return x.falta > 0.009; });
+  var formas = {}; pags.forEach(function (x) { var k = formaDe(x); formas[k] = formas[k] || { v: 0, n: 0 }; formas[k].v += num(x.valor); formas[k].n++; });
+  var ordemF = FORMAS.concat(['Não informado']).filter(function (k) { return formas[k]; });
+  var cartao = (formas['Cartão de crédito'] || { v: 0 }).v + (formas['Cartão de débito'] || { v: 0 }).v;
+  // Seletor de período
+  var meses = {}; DB.pagamentos.concat(DB.orcamentos).forEach(function (x) { var d = String(x.data || '').slice(0, 7); if (d) meses[d] = 1; }); meses[h0.slice(0, 7)] = 1;
+  var anos = {}; Object.keys(meses).forEach(function (m) { anos[m.slice(0, 4)] = 1; });
+  var perAtual = p.per || 'm:' + h0.slice(0, 7);
+  var opts = Object.keys(meses).sort().reverse().map(function (m) { return ['m:' + m, mesNome(m)]; }).concat([['tri', 'Últimos 3 meses']]).concat(Object.keys(anos).sort().reverse().map(function (a) { return ['a:' + a, 'Ano de ' + a]; }));
+  var h = cabec('Financeiro', P.rot + ' · entradas, formas de pagamento, vencimentos e atrasos',
+    '<select id="per" class="btn" style="font-weight:500">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === perAtual ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select><button class="btn" id="relat">' + ICON.doc + ' Relatório para o escritório</button><button class="btn pri" id="novo">' + ICON.mais + ' Registrar pagamento</button>');
+  if (cliAtr.length) h += '<div class="faixa-atraso" id="irAtraso">' + ICON.alerta + '<span><b>' + cliAtr.length + ' cliente(s) em atraso</b>, somando <b>' + brl(atrV) + '</b>. Veja a lista abaixo e envie um lembrete pelo WhatsApp.</span></div>';
+  // KPIs
+  h += '<div class="grid g4 kpis-fin">' +
+    '<div class="card kpi destaque"><div class="rot">Recebido no período</div><div class="val">' + brl(rec) + '</div><div class="det">' + pags.length + ' pagamento(s) · ' + variacao(rec, recAnt) + '</div></div>' +
+    '<div class="card kpi"><div class="rot">Fechado (orçamentos aprovados)</div><div class="val">' + brl(fechV) + '</div><div class="det">' + fech.length + ' orçamento(s) · ticket médio ' + brl(fech.length ? fechV / fech.length : 0) + '</div></div>' +
+    '<div class="card kpi ' + (atrV > 0 ? 'ruim' : '') + '"><div class="rot">Em atraso</div><div class="val">' + brl(atrV) + '</div><div class="det">' + atr.length + ' parcela(s) · ' + cliAtr.length + ' cliente(s)</div></div>' +
+    '<div class="card kpi"><div class="rot">A vencer nos próximos 30 dias</div><div class="val">' + brl(proxV) + '</div><div class="det">' + prox.length + ' parcela(s)</div></div></div>';
+  // Por forma
+  h += '<div class="grid fin-formas"><div class="card"><h2>Entradas por forma de pagamento</h2><div class="formas-wrap">' + donut(ordemF.map(function (k) { return { k: k, v: formas[k].v, cor: COR_FORMA[k] || '#ccc' }; }), rec) +
+    '<div class="formas-lista">' + (ordemF.length ? ordemF.map(function (k) { var f = formas[k]; return '<div class="fl"><i style="background:' + (COR_FORMA[k] || '#ccc') + '"></i><span class="fk">' + esc(k) + '<small>' + f.n + ' pagamento(s)</small></span><span class="fv">' + brl(f.v) + '<small>' + (rec ? (f.v / rec * 100).toFixed(0) : 0) + '%</small></span></div>'; }).join('') : '<div class="vazio">Nenhum pagamento no período.</div>') + '</div></div></div>' +
+    '<div class="stack"><div class="card mini"><div class="rot">' + ICON.pix + ' Pix</div><div class="val">' + brl((formas['Pix'] || { v: 0 }).v) + '</div></div><div class="card mini"><div class="rot">' + ICON.cartao + ' Cartão (crédito + débito)</div><div class="val">' + brl(cartao) + '</div><div class="det">crédito ' + brl((formas['Cartão de crédito'] || { v: 0 }).v) + ' · débito ' + brl((formas['Cartão de débito'] || { v: 0 }).v) + '</div></div><div class="card mini"><div class="rot">' + ICON.dinheiro + ' Dinheiro</div><div class="val">' + brl((formas['Dinheiro'] || { v: 0 }).v) + '</div></div></div></div>';
+  // Gráfico 12 meses empilhado por forma
+  var m12 = ultimosMeses(12), grupos = ['Pix', 'Cartão de crédito', 'Cartão de débito', 'Dinheiro', 'Outros'], corG = { 'Outros': '#9aa3ad' };
+  var serie = m12.map(function (m) { var o = { m: m, t: 0 }; grupos.forEach(function (g) { o[g] = 0; }); DB.pagamentos.forEach(function (x) { if (String(x.data).slice(0, 7) !== m) return; var g = grupos.indexOf(formaDe(x)) >= 0 ? formaDe(x) : 'Outros'; o[g] += num(x.valor); o.t += num(x.valor); }); return o; });
+  var mx = Math.max.apply(null, serie.map(function (s) { return s.t; }).concat([1]));
+  h += '<div class="card" style="margin-bottom:16px"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Entradas nos últimos 12 meses</h2><div class="legenda" style="margin:0">' + grupos.map(function (g) { return '<span><i style="background:' + (COR_FORMA[g] || corG[g]) + '"></i>' + g + '</span>'; }).join('') + '</div></div><div class="pilhas">' +
+    serie.map(function (s) { return '<div class="col" title="' + mesNome(s.m) + ': ' + brl(s.t) + '"><div class="vt">' + (s.t ? brl(s.t).replace('R$', '').replace(/,\d\d$/, '').trim() : '') + '</div><div class="pilha" style="height:' + (s.t / mx * 100) + '%">' + grupos.map(function (g) { return s[g] ? '<div style="flex:' + s[g] + ';background:' + (COR_FORMA[g] || corG[g]) + '" title="' + g + ': ' + brl(s[g]) + '"></div>' : ''; }).join('') + '</div><div class="m">' + mesNome(s.m, true) + '</div></div>'; }).join('') + '</div></div>';
+  // Atrasos e vencimentos
+  h += '<div class="grid g2 fin-atraso" style="margin-bottom:16px" id="secAtraso"><div class="card"><h2>Clientes em atraso</h2>' + (cliAtr.length ? '<div class="rolagem"><table class="tabela"><thead><tr><th>Cliente</th><th>Vencido desde</th><th class="num">Dias</th><th class="num">Valor</th><th></th></tr></thead><tbody>' +
+    cliAtr.map(function (c) { var cli = porId(DB.clientes, c.id) || {}; return '<tr class="click" data-abrir="clienteDet:' + c.id + '"><td><b>' + esc(c.nome) + '</b><br><span class="small mute">' + c.n + ' parcela(s) vencida(s)</span></td><td>' + dataBR(c.desde) + '</td><td class="num"><span class="selo ' + (c.dias > 30 ? 's-Recusado' : 's-Enviado') + '">' + c.dias + ' dias</span></td><td class="num"><b style="color:var(--bad)">' + brl(c.valor) + '</b></td><td class="num">' + (cli.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(cli.telefone, textoCobranca(c))) + '">' + ICON.zap + ' Lembrar</a>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '<div class="vazio">Nenhuma cliente em atraso. 🎉</div>') + '</div>' +
+    '<div class="card"><h2>Próximos vencimentos (30 dias)</h2>' + (prox.length ? '<div class="lista-simples">' + prox.slice(0, 8).map(function (x) { return '<div data-abrir="orcamentoDet:' + x.o.id + '" style="cursor:pointer"><span><b>' + esc(x.o.clienteNome) + '</b><br><span class="small mute">' + x.rot + ' · orçamento nº ' + nOrc(x.o.numero) + '</span></span><span style="text-align:right"><b>' + brl(x.falta) + '</b><br><span class="small mute">' + (x.dias === 0 ? 'vence hoje' : 'em ' + x.dias + ' dia(s) · ' + dataBR(x.venc)) + '</span></span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhum vencimento nos próximos 30 dias.</div>') +
+    (semPlano.length ? '<p class="small mute" style="margin:14px 0 0">Além disso, ' + brl(semPlano.reduce(function (s, x) { return s + x.falta; }, 0)) + ' a receber em ' + semPlano.length + ' orçamento(s) pagos por sessão (sem data de vencimento).</p>' : '') + '</div></div>';
+  // Procedimentos e melhores clientes
+  var porProc = receitaPorProcedimento(pags), mxp = porProc.length ? porProc[0].v : 1;
+  var porCli = {}; pags.forEach(function (x) { porCli[x.clienteId] = porCli[x.clienteId] || { nome: x.clienteNome, v: 0, n: 0 }; porCli[x.clienteId].v += num(x.valor); porCli[x.clienteId].n++; });
+  var top = Object.keys(porCli).map(function (k) { porCli[k].id = k; return porCli[k]; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 6);
+  h += '<div class="grid g2" style="margin-bottom:16px"><div class="card"><h2>Receita por procedimento</h2>' + (porProc.length ? '<div class="hbar">' + porProc.slice(0, 8).map(function (x) { return '<div class="hb"><span class="hk">' + esc(x.k) + '</span><span class="ht"><i style="width:' + (x.v / mxp * 100) + '%"></i></span><b>' + brl(x.v) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Sem entradas no período.</div>') + '</div>' +
+    '<div class="card"><h2>Clientes que mais investiram</h2>' + (top.length ? '<div class="lista-simples">' + top.map(function (c, i) { return '<div data-abrir="clienteDet:' + c.id + '" style="cursor:pointer"><span><span class="pos">' + (i + 1) + '</span><b>' + esc(c.nome) + '</b><span class="small mute"> · ' + c.n + ' pagamento(s)</span></span><b>' + brl(c.v) + '</b></div>'; }).join('') + '</div>' : '<div class="vazio">Sem entradas no período.</div>') + '</div></div>';
+  // Pagamentos com filtro
+  var fil = p.forma || '';
+  var lista = fil ? pags.filter(function (x) { return formaDe(x) === fil || (fil === 'Cartão' && /^Cartão/.test(formaDe(x))); }) : pags;
+  h += '<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">Pagamentos — ' + P.rot.toLowerCase() + '</h2><div class="filtros">' + [['', 'Todos'], ['Pix', 'Pix'], ['Cartão', 'Cartão'], ['Dinheiro', 'Dinheiro'], ['Transferência', 'Transferência'], ['Boleto', 'Boleto']].map(function (f) { return '<button class="filtro' + (f[0] === fil ? ' ativo' : '') + '" data-forma="' + f[0] + '">' + f[1] + '</button>'; }).join('') + '</div></div>' +
+    tabelaPagamentos(lista) + (lista.length ? '<div class="total-lista">' + lista.length + ' pagamento(s) · total <b>' + brl(lista.reduce(function (s, x) { return s + num(x.valor); }, 0)) + '</b></div>' : '') + '</div>';
   return h;
 };
 ACOES.financeiro = function (m, p) {
-  m.querySelector('#mes').onchange = function (e) { p.mes = e.target.value; recarregar(); };
+  m.querySelector('#per').onchange = function (e) { p.per = e.target.value; recarregar(); };
   m.querySelector('#novo').onclick = function () { formPagamento({}); };
-  m.querySelector('#relat').onclick = function () { formRelatorio(p.mes || hoje().slice(0, 7)); };
+  m.querySelector('#relat').onclick = function () { var P = periodo(p.per); formRelatorio(P.ini.slice(0, 7)); };
+  m.querySelectorAll('[data-forma]').forEach(function (b) { b.onclick = function () { p.forma = b.dataset.forma; recarregar(); }; });
+  var ia = m.querySelector('#irAtraso'); if (ia) ia.onclick = function () { m.querySelector('#secAtraso').scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   ligarPagamentos(m);
 };
 
