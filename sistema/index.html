@@ -242,6 +242,7 @@ iframe.previa{width:100%;height:70vh;border:1px solid var(--line);border-radius:
 .tp-c{flex:1;min-width:0}.tp-l{display:flex;justify-content:space-between;gap:8px;font-size:13px;margin-bottom:4px}.tp-l b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tp-bar{height:7px;background:var(--rose-ll);border-radius:99px;overflow:hidden}.tp-bar i{display:block;height:100%;background:linear-gradient(90deg,#b5707c,#c9a063);border-radius:99px}
 .acomp-card{background:linear-gradient(180deg,#fff,#fbf6f0)}.ac-big{display:flex;flex-direction:column;margin-bottom:8px}.ac-big b{font-size:32px;color:var(--ok);letter-spacing:-.02em}.ac-big span{font-size:12px;color:var(--mute)}
 @media (max-width:640px){.hero{padding:22px 18px}.hero-nome{font-size:46px}.mini-donut{flex-direction:column;align-items:stretch}.mini-donut .donut{margin:0 auto}}
+.pac-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}.pac{border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;background:linear-gradient(180deg,#fff,#fbf7f2);transition:transform .15s,box-shadow .15s}.pac:hover{transform:translateY(-2px);box-shadow:0 10px 24px -18px #94525e}.pac-top{display:flex;gap:12px;align-items:center}.pac-num{display:flex;justify-content:space-between;align-items:flex-end;margin:14px 0 10px}.pac-num b{font-size:26px;letter-spacing:-.02em;display:block}.pac-num span{font-size:12px;color:var(--mute)}.pac-num .spk{width:45%;max-width:220px;height:44px}.pac-bar{position:relative;height:8px;background:var(--rose-ll);border-radius:99px}.pac-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#a9c7b1,#5f8f6c)}.pac-bar em{position:absolute;top:-2px;width:2px;height:12px;background:#fff}.pac-marcos{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin-top:4px}.pac-marcos .ok{color:var(--ok);font-weight:700}.pac-info{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-top:12px}.pac-info b{color:var(--ink)}.pac-prox{margin-top:12px;font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;background:#f4efe9;color:#8a6d3b}.pac-prox.hj{background:var(--rose);color:#fff}.pac-prox.atr{background:#fbe5e5;color:var(--bad)}
 /* Acompanhamento: coluna academia / ocorrências */
 .td-ocorr{min-width:210px}.oc-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.oc{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:3px 9px;border-radius:99px;white-space:nowrap;line-height:1.4}.oc.gym{background:#eef6f0;color:#3f7a52}.oc.int{background:#fbe5e5;color:var(--bad);white-space:normal;max-width:240px;border-radius:10px;align-items:flex-start}.tabela td.num{white-space:nowrap}
 </style>
@@ -719,9 +720,9 @@ function opcoesDesmarcaveis(raiz) {
 var VIEWS = {}, ACOES = {};
 
 /* ---------- Painel ---------- */
-function sparkLinha(vals, cor) {
-  var mx = Math.max.apply(null, vals.concat([1])), W = 110, H = 34, n = vals.length;
-  var pts = vals.map(function (v, i) { return (i * W / (n - 1)).toFixed(1) + ',' + (H - 3 - v / mx * (H - 8)).toFixed(1); });
+function sparkLinha(vals, cor, rel) {
+  var mx = Math.max.apply(null, vals.concat(rel ? [] : [1])), mn = rel ? Math.min.apply(null, vals) : 0, W = 110, H = 34, n = vals.length; if (mx - mn < 0.01) mx = mn + 1;
+  var pts = vals.map(function (v, i) { return (i * W / (n - 1)).toFixed(1) + ',' + (H - 3 - (v - mn) / (mx - mn) * (H - 8)).toFixed(1); });
   return '<svg class="spk" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none"><path d="M' + pts.join(' L') + ' L' + W + ',' + H + ' L0,' + H + ' Z" fill="' + cor + '" opacity=".12"/><path d="M' + pts.join(' L') + '" fill="none" stroke="' + cor + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="' + pts[n - 1].split(',')[0] + '" cy="' + pts[n - 1].split(',')[1] + '" r="3" fill="' + cor + '"/></svg>';
 }
 function quandoTxt(d) { var n = diasEntre(hoje(), d); return n === 0 ? 'hoje' : n === 1 ? 'amanhã' : n === -1 ? 'ontem' : n > 1 ? 'em ' + n + ' dias' : 'há ' + (-n) + ' dias'; }
@@ -777,10 +778,25 @@ VIEWS.painel = function () {
   var partes = Object.keys(porForma).map(function (k) { return { k: k, v: porForma[k], cor: COR_FORMA[k] || '#ccc' }; }).sort(function (a, b) { return b.v - a.v; });
   var dem = demandaProc(P, pagsMes).slice(0, 4), mxd = Math.max.apply(null, dem.map(function (x) { return x.atend; }).concat([1]));
   var pacs = Object.keys(ultAc).map(function (k) { return resumoAcomp(k); }).filter(Boolean), kgTot = pacs.reduce(function (s, r) { return s + Math.max(0, r.perdido); }, 0);
-  h += '<div class="grid g3" style="margin-bottom:16px">' +
+  h += '<div class="grid g2" style="margin-bottom:16px">' +
     '<div class="card"><h2>Como entrou em ' + mesNome(ym, true) + '</h2>' + (partes.length ? '<div class="mini-donut">' + donut(partes, recMes) + '<div class="md-leg">' + partes.map(function (p) { return '<div><i style="background:' + p.cor + '"></i><span>' + esc(p.k.replace('Cartão de ', '')) + '</span><b>' + Math.round(p.v / recMes * 100) + '%</b></div>'; }).join('') + '</div></div>' : '<div class="vazio">Sem entradas este mês.</div>') + '</div>' +
     '<div class="card"><h2>Mais procurados no mês</h2>' + (dem.length ? '<div class="top-proc">' + dem.map(function (x, i) { return '<div class="tp"><span class="tp-n">' + (i + 1) + '</span><div class="tp-c"><div class="tp-l"><b>' + esc(x.k) + '</b><span class="small mute">' + x.atend + '</span></div><div class="tp-bar"><i style="width:' + Math.max(6, x.atend / mxd * 100) + '%"></i></div></div></div>'; }).join('') + '</div>' : '<div class="vazio">Sem atendimentos este mês.</div>') + '<button class="btn peq" data-ir="financeiro" style="margin-top:12px">Ver ranking completo</button></div>' +
-    '<div class="card acomp-card"><h2>Acompanhamento de emagrecimento</h2>' + (pacs.length ? '<div class="ac-big"><b>' + f1(kgTot) + ' kg</b><span>eliminados pelas pacientes em acompanhamento</span></div><div class="ac-lista">' + pacs.sort(function (a, b) { return b.perdido - a.perdido; }).slice(0, 3).map(function (r) { var c = porId(DB.clientes, r.ult.clienteId); return '<div class="tf" data-abrir="clienteDet:' + r.ult.clienteId + ':acomp">' + avatar(c || { nome: r.ult.clienteNome }, 32) + '<span class="tf-t"><b>' + esc(r.ult.clienteNome) + '</b><span class="small mute">' + r.n + ' semana(s)</span></span><span class="tf-q ok">−' + f1(r.perdido) + ' kg</span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhuma paciente em acompanhamento.</div>') + '</div></div>';
+    '</div>';
+  // Pacientes em acompanhamento: evolução individual
+  if (pacs.length) {
+    pacs.sort(function (x, y) { return String(y.ult.data).localeCompare(String(x.ult.data)); });
+    h += '<div class="card" style="margin-bottom:16px"><div class="row" style="justify-content:space-between;margin-bottom:12px"><h2 style="margin:0">Pacientes em acompanhamento</h2><button class="btn peq" data-ir="acompanhamentos">Ver todas</button></div><div class="pac-grid">' +
+      pacs.slice(0, 4).map(function (r) {
+        var c = porId(DB.clientes, r.ult.clienteId), l = acompsDe(r.ult.clienteId), lp = l.filter(function (x) { return num(x.peso); });
+        var pen = lp.length > 1 ? num(lp[lp.length - 1].peso) - num(lp[lp.length - 2].peso) : 0, pct = Math.max(0, r.pct), larg = Math.min(100, pct / 15 * 100);
+        var px = r.ult.proxima ? diasEntre(H0, r.ult.proxima) : null;
+        return '<div class="pac" data-abrir="clienteDet:' + r.ult.clienteId + ':acomp"><div class="pac-top">' + avatar(c || { nome: r.ult.clienteNome }, 42) + '<span class="tf-t"><b>' + esc(r.ult.clienteNome) + '</b><span class="small mute">' + esc(String(r.ult.medicamento || '').replace(/\s*\(.*\)/, '')) + (r.ult.dose ? ' ' + f1(r.ult.dose, 1) + ' mg' : '') + ' · ' + r.n + 'ª semana</span></span></div>' +
+          '<div class="pac-num"><div><b class="vbom">−' + f1(Math.max(0, r.perdido)) + ' kg</b><span>' + f1(pct) + '% do peso inicial</span></div>' + sparkLinha(lp.map(function (x) { return num(x.peso); }), '#7f9f86', true) + '</div>' +
+          '<div class="pac-meta"><div class="pac-bar"><i style="width:' + larg + '%"></i><em style="left:33.3%"></em><em style="left:66.6%"></em></div><div class="pac-marcos"><span>0%</span><span class="' + (pct >= 5 ? 'ok' : '') + '">5%</span><span class="' + (pct >= 10 ? 'ok' : '') + '">10%</span><span>15%</span></div></div>' +
+          '<div class="pac-info"><span>' + f1(num(lp[0].peso)) + ' → <b>' + f1(num(r.ult.peso)) + ' kg</b></span><span>IMC <b>' + (r.imc ? f1(r.imc) : '—') + '</b></span><span>última semana <b class="' + (pen <= 0 ? 'vbom' : 'vruim') + '">' + (pen <= 0 ? '−' : '+') + f1(Math.abs(pen)) + '</b></span></div>' +
+          (px !== null ? '<div class="pac-prox ' + (px < 0 ? 'atr' : px <= 1 ? 'hj' : '') + '">Próxima aplicação ' + quandoTxt(r.ult.proxima) + ' · ' + dataBR(r.ult.proxima) + '</div>' : '') + '</div>';
+      }).join('') + '</div></div>';
+  }
 
   // Últimos atendimentos + aniversariantes
   h += '<div class="grid g2"><div class="card"><h2>Últimos atendimentos</h2>' + (ultimas.length ? '<div class="tarefas">' + ultimas.map(function (s) { var c = porId(DB.clientes, s.clienteId); return '<div class="tf" data-abrir="sessaoDet:' + s.id + '">' + avatar(c || { nome: s.clienteNome }, 36) + '<span class="tf-t"><b>' + esc(s.clienteNome) + '</b><span class="small mute">' + esc(s.procedimento) + '</span></span><span class="small mute">' + dataBR(s.data) + '</span></div>'; }).join('') + '</div>' : '<div class="vazio">Nenhum atendimento registrado ainda.</div>') + '</div>' +
