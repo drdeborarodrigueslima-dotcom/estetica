@@ -259,6 +259,16 @@ iframe.previa{width:100%;height:70vh;border:1px solid var(--line);border-radius:
 .at-tab tr.grupo td{background:var(--rose-ll);color:var(--rose-d);font-weight:700;font-size:13px;padding-top:10px;padding-bottom:10px}.at-tab tr.grupo td span{font-weight:500;color:var(--mute);font-size:12px;margin-left:8px}
 .at-tab .feito{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chip-proc{display:inline-block;background:#f6ecee;color:var(--rose-d);border-radius:99px;padding:3px 10px;font-size:13px;white-space:nowrap}
 @media (max-width:640px){.fsel{flex:1 1 45%}.fsel select{min-width:0;width:100%}}
+/* Agenda do iPhone */
+.agenda-ip h2 svg{width:20px;height:20px;vertical-align:-3px;color:var(--rose)}
+.ag-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}@media (max-width:900px){.ag-cols{grid-template-columns:1fr}}
+.ag-tit{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rose-d);margin-bottom:8px}.ag-tit span{font-weight:500;letter-spacing:0;text-transform:none;color:var(--mute);margin-left:6px}
+.ag-lista{display:flex;flex-direction:column}.ag-it{display:flex;align-items:center;gap:12px;padding:8px 6px;border-radius:10px;border-bottom:1px solid var(--line)}.ag-it:last-child{border-bottom:0}.ag-it[data-abrir]{cursor:pointer}.ag-it[data-abrir]:hover{background:var(--rose-ll)}
+.ag-it.passou{opacity:.5}.ag-it.agora{background:var(--rose-ll);box-shadow:inset 3px 0 0 var(--rose)}
+.ag-h{width:48px;flex:none;font-weight:700;font-size:15px;line-height:1.1;text-align:right}.ag-h small{display:block;font-weight:500;font-size:11px;color:var(--mute)}
+.ag-ic{width:34px;height:34px;border-radius:50%;background:#f4efe9;color:#8a6d3b;display:grid;place-items:center;flex:none}.ag-ic svg{width:16px;height:16px}
+.ag-dia{margin-bottom:10px}.ag-dia-t{font-size:13px;font-weight:700;margin:4px 0 2px}.ag-dia-t span{display:inline-block;background:var(--rose-l);color:var(--rose-d);border-radius:99px;font-size:11px;padding:0 7px;margin-left:4px}
+.ag-vazio{padding:14px;border-radius:10px;background:var(--rose-ll);font-size:14px;color:var(--mute)}
 /* Mapa de aplicação */
 .mapa-vazio{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;max-width:560px;min-height:420px;margin:0 auto;padding:30px;border:2px dashed var(--rose-l);border-radius:14px;background:var(--rose-ll);cursor:pointer;color:var(--rose-d)}.mapa-vazio svg{width:44px;height:44px}.mapa-vazio b{font-size:18px}.mapa-vazio span{color:var(--mute);font-size:14px;max-width:340px}
 .mapa-wrap{display:grid;grid-template-columns:minmax(0,3fr) minmax(300px,2fr);gap:16px;align-items:start}@media (max-width:1000px){.mapa-wrap{grid-template-columns:1fr}}
@@ -436,6 +446,11 @@ var Demo = {
       this.gravar(d); return { ok: true, dados: resp };
     }
     if (acao === 'relatorio') { return { ok: true, dados: { demo: true, enviado: !!p.para } }; }
+    if (acao === 'agenda') {
+      var H = hoje(), ag = [[0, '08:30', '09:30', 'Ana Paula Souza - Toxina botulínica'], [0, '10:00', '11:00', 'Avaliação - Carla Menezes'], [0, '14:00', '14:30', 'Sandra Oliveira - aplicação Mounjaro'], [0, '16:00', '17:00', 'Mariana Lima - Mesoterapia corporal'],
+        [1, '09:00', '10:00', 'Juliana Castro - Retorno harmonização'], [1, '15:30', '16:30', 'Fernanda Rocha - Bioestimulador'], [2, '10:00', '10:30', 'Patrícia Mendes - aplicação Ozempic'], [2, '13:30', '14:30', 'Avaliação - Renata Alves'], [3, '09:00', '10:30', 'Ana Paula Souza - Microagulhamento'], [4, '11:00', '12:00', 'Mariana Lima - Mesoterapia corporal'], [5, '09:30', '10:30', 'Curso de atualização em toxina']];
+      return { ok: true, dados: { demo: true, atualizadoEm: new Date().toTimeString().slice(0, 5), eventos: ag.map(function (e) { var d = addDias(H, e[0]); return { ini: d + ' ' + e[1], fim: d + ' ' + e[2], diaTodo: false, titulo: e[3], local: '' }; }) } };
+    }
     return { ok: false, erro: 'Ação desconhecida' };
   },
   zerar: function () { try { localStorage.removeItem(this.chave); } catch (e) {} this._mem = null; }
@@ -792,6 +807,7 @@ VIEWS.painel = function () {
     kpi(ICON.sessoes, '#7f9f86', 'A receber', brl(aReceberTotal()), 'dos orçamentos aprovados', '') +
     kpi(ICON.alerta, vAtr > 0 ? '#b84a4a' : '#7f9f86', 'Em atraso', brl(vAtr), ca.length ? ca.length + ' cliente(s) · ver no Financeiro →' : 'ninguém em atraso 🎉', '', (vAtr > 0 ? ' ruim' : '') + '" data-ir="financeiro" style="cursor:pointer') + '</div>';
 
+  h += '<div class="card agenda-ip" id="agIp" style="margin-bottom:16px"><div class="row" style="justify-content:space-between;margin-bottom:10px"><h2 style="margin:0">' + ICON.sessoes + ' Agenda do iPhone</h2><span class="row"><span class="small mute" id="agAt"></span><button class="btn peq" id="agAtu">Atualizar</button></span></div><div id="agCorpo"><div class="vazio" style="padding:18px">Carregando a agenda…</div></div></div>';
   // Gráfico + Próximos cuidados
   h += '<div class="grid g-32" style="margin-bottom:16px"><div class="card"><div class="row" style="justify-content:space-between;margin-bottom:4px"><h2 style="margin:0">Últimos 6 meses</h2><span class="small mute">' + atendMes + ' atend. em ' + mesNome(ym, true) + ' ' + (atendAnt ? (atendMes >= atendAnt ? '<span class="var up">▲</span>' : '<span class="var down">▼</span>') : '') + '</span></div><div class="barras barras2">' +
     serie.map(function (s) { var at = s.m === ym; return '<div class="col' + (at ? ' atual' : '') + '"><div class="topv">' + (s.r ? brl(s.r).replace(/,\d\d$/, '') : '') + '</div><div class="par"><div class="b b1" style="height:' + (s.c / max * 100) + '%" title="Fechado ' + brl(s.c) + '"></div><div class="b b2" style="height:' + (s.r / max * 100) + '%" title="Recebido ' + brl(s.r) + '"></div></div><div class="m">' + mesNome(s.m, true) + '</div></div>'; }).join('') +
@@ -841,7 +857,34 @@ VIEWS.painel = function () {
     '<div class="card"><h2>🎂 Aniversariantes de ' + mesNome(ym).split(' ')[0].toLowerCase() + '</h2>' + (aniver.length ? '<div class="tarefas">' + aniver.map(function (c) { var dia = String(c.nascimento).slice(8, 10), n = diasEntre(H0, ym + '-' + dia); return '<div class="tf">' + avatar(c, 36) + '<span class="tf-t"><b>' + esc(c.nome) + '</b><span class="small mute">dia ' + dia + ' · ' + (n === 0 ? '<b style="color:var(--rose-d)">é hoje!</b>' : n > 0 ? 'faltam ' + n + ' dia(s)' : 'já passou') + '</span></span>' + (c.telefone ? '<a class="btn peq" target="_blank" href="' + esc(waLink(c.telefone, 'Feliz aniversário, ' + c.nome.split(' ')[0] + '! 🎉 Um carinho da ' + cfg('nome', 'Débora') + '.')) + '">' + ICON.zap + ' Parabéns</a>' : '') + '</div>'; }).join('') + '</div>' : '<div class="vazio">Nenhuma aniversariante este mês.</div>') + '</div></div>';
   return h;
 };
-ACOES.painel = function (m) { m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); m.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { ir(b.dataset.ir, {}); }; }); ligarLinks(m); };
+function clienteDoEvento(t) {
+  var n = String(t || '').toLowerCase();
+  return DB.clientes.filter(function (c) { var p = String(c.nome).replace(/\s*\(.*\)/, '').toLowerCase().split(/\s+/).filter(function (x) { return x.length > 2; }); return p.length >= 2 ? n.indexOf(p[0]) >= 0 && n.indexOf(p[p.length - 1]) >= 0 : p.length === 1 && n.indexOf(p[0]) >= 0; })[0] || null;
+}
+function desenharAgenda(m, r) {
+  var corpo = m.querySelector('#agCorpo'); if (!corpo) return;
+  if (r.semLink) { corpo.innerHTML = '<div class="ag-vazio">Cole o link da agenda do iPhone em <a href="#" data-ir="config">Configurações</a> para ver aqui os atendimentos do dia. O link fica guardado só no sistema, ninguém de fora vê.</div>'; m.querySelectorAll('#agCorpo [data-ir]').forEach(function (b) { b.onclick = function (e) { e.preventDefault(); ir('config', {}); }; }); return; }
+  m.querySelector('#agAt').textContent = r.atualizadoEm ? 'atualizada às ' + r.atualizadoEm : '';
+  var H = hoje(), agora = new Date(), hm = p2(agora.getHours()) + ':' + p2(agora.getMinutes());
+  var dHoje = r.eventos.filter(function (e) { return e.ini.slice(0, 10) <= H && e.fim.slice(0, 10) >= H; });
+  var prox = r.eventos.filter(function (e) { return e.ini.slice(0, 10) > H; });
+  function item(e, comData) {
+    var c = clienteDoEvento(e.titulo), passou = e.ini.slice(0, 10) === H && e.fim.slice(11) <= hm && !e.diaTodo, agoraE = e.ini.slice(0, 10) === H && e.ini.slice(11) <= hm && e.fim.slice(11) > hm;
+    return '<div class="ag-it' + (passou ? ' passou' : '') + (agoraE ? ' agora' : '') + (c ? '" data-abrir="clienteDet:' + c.id : '') + '"><span class="ag-h">' + (e.diaTodo ? 'dia todo' : e.ini.slice(11) + '<small>' + e.fim.slice(11) + '</small>') + '</span>' + (c ? avatar(c, 34) : '<span class="ag-ic">' + ICON.sessoes + '</span>') + '<span class="tf-t"><b>' + esc(e.titulo) + '</b><span class="small mute">' + (agoraE ? '<b style="color:var(--rose-d)">acontecendo agora</b>' : c ? 'abrir a pasta da cliente' : esc(e.local || '')) + '</span></span></div>';
+  }
+  var dias = {}; prox.forEach(function (e) { var d = e.ini.slice(0, 10); (dias[d] = dias[d] || []).push(e); });
+  var DS = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  function rotDia(d) { var x = new Date(d + 'T12:00:00'), n = diasEntre(H, d); return (n === 1 ? 'Amanhã' : DS[x.getDay()].charAt(0).toUpperCase() + DS[x.getDay()].slice(1)) + ' · ' + dataBR(d).slice(0, 5); }
+  corpo.innerHTML = '<div class="ag-cols"><div><div class="ag-tit">Hoje · ' + dataBR(H).slice(0, 5) + ' <span>' + dHoje.length + ' compromisso(s)</span></div>' + (dHoje.length ? '<div class="ag-lista">' + dHoje.map(function (e) { return item(e); }).join('') + '</div>' : '<div class="ag-vazio">Nada marcado para hoje.</div>') + '</div>' +
+    '<div><div class="ag-tit">Próximos dias</div>' + (Object.keys(dias).length ? Object.keys(dias).slice(0, 5).map(function (d) { return '<div class="ag-dia"><div class="ag-dia-t">' + rotDia(d) + ' <span>' + dias[d].length + '</span></div><div class="ag-lista">' + dias[d].slice(0, 4).map(function (e) { return item(e); }).join('') + (dias[d].length > 4 ? '<div class="small mute" style="padding:4px 0 0 60px">+ ' + (dias[d].length - 4) + ' compromisso(s)</div>' : '') + '</div></div>'; }).join('') : '<div class="ag-vazio">Nada marcado nos próximos dias.</div>') + '</div></div>';
+  ligarLinks(m);
+}
+function carregarAgenda(m, forcar) {
+  var corpo = m.querySelector('#agCorpo'); if (!corpo) return;
+  if (forcar) corpo.style.opacity = '.5';
+  chamar('agenda', { dias: 8, forcar: !!forcar }).then(function (r) { corpo.style.opacity = ''; desenharAgenda(m, r); }, function (e) { corpo.style.opacity = ''; corpo.innerHTML = '<div class="ag-vazio" style="color:var(--bad)">' + esc(e.message) + '</div>'; });
+}
+ACOES.painel = function (m) { carregarAgenda(m); var agb = m.querySelector('#agAtu'); if (agb) agb.onclick = function () { carregarAgenda(m, true); }; m.querySelectorAll('[data-novo]').forEach(function (b) { b.onclick = function () { ir(b.dataset.novo, {}); }; }); m.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { ir(b.dataset.ir, {}); }; }); ligarLinks(m); };
 
 /* ---------- Fidelidade: Ouro, Prata, Bronze ---------- */
 var NIVEIS = {
@@ -1934,7 +1977,7 @@ VIEWS.config = function () {
   h += '<div class="card" style="margin-bottom:16px"><h2>Dados da profissional</h2><div class="form-grid" id="fc">' + campo('nome', 'Nome', c.nome || 'Débora Rodrigues', 'text', 'c3') + campo('subtitulo', 'Subtítulo', c.subtitulo || 'Estética', 'text', 'c3') +
     campo('telefone', 'Telefone / WhatsApp', c.telefone, 'text', 'c2') + campo('email', 'E-mail', c.email, 'text', 'c2') + campo('instagram', 'Instagram', c.instagram, 'text', 'c2') +
     campo('endereco', 'Endereço', c.endereco, 'text', 'c4') + campo('cidade', 'Cidade (aparece na data das assinaturas)', c.cidade || 'Tupã', 'text', 'c2') +
-    campo('documento', 'CPF/CNPJ', c.documento, 'text', 'c2') + campo('pix', 'Chave Pix', c.pix, 'text', 'c2') + campo('validadeDias', 'Validade padrão do orçamento (dias)', c.validadeDias || '15', 'number', 'c2') + campo('emailContador', 'E-mail do escritório de contabilidade', c.emailContador, 'email', 'c3') +
+    campo('documento', 'CPF/CNPJ', c.documento, 'text', 'c2') + campo('pix', 'Chave Pix', c.pix, 'text', 'c2') + campo('validadeDias', 'Validade padrão do orçamento (dias)', c.validadeDias || '15', 'number', 'c2') + campo('emailContador', 'E-mail do escritório de contabilidade', c.emailContador, 'email', 'c3') + campo('agendaIcal', 'Link da agenda do iPhone (iCloud) — aparece só aqui no sistema', c.agendaIcal, 'text', 'c6', 'placeholder="webcal://p00-caldav.icloud.com/published/2/…" autocomplete="off"') +
     '</div><div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn pri" id="salvarCfg">Salvar dados</button></div></div>';
   h += '<div class="card" style="margin-bottom:16px"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0">Procedimentos e preços sugeridos</h2><button class="btn peq" id="novoProc">' + ICON.mais + ' Adicionar</button></div><div class="lista-simples">' +
     DB.procedimentos.slice().sort(function (a, b) { return a.nome.localeCompare(b.nome, 'pt-BR'); }).map(function (x) { return '<div><span>' + esc(x.nome) + '</span><span class="row"><b>' + brl(x.preco) + '</b><button class="btn peq" data-proc="' + x.id + '">Editar</button></span></div>'; }).join('') + '</div></div>';
